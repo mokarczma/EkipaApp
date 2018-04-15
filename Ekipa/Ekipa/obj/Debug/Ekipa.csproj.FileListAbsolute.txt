@@ -1,0 +1,105 @@
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\ApplicationInsights.config
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Ekipa.dll.config
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Ekipa.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Ekipa.pdb
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Antlr3.Runtime.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\EntityFramework.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\EntityFramework.SqlServer.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.Web.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.ApplicationInsights.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Newtonsoft.Json.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Helpers.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Mvc.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Optimization.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Razor.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.WebPages.Deployment.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.WebPages.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.WebPages.Razor.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\WebGrease.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\EntityFramework.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\EntityFramework.SqlServer.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Helpers.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Mvc.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Optimization.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.Razor.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.WebPages.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.WebPages.Deployment.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\System.Web.WebPages.Razor.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Antlr3.Runtime.pdb
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Newtonsoft.Json.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.ApplicationInsights.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\bin\Microsoft.AI.Web.xml
+C:\Users\monia\source\repos\Ekipa\Ekipa\obj\Debug\Ekipa.csprojResolveAssemblyReference.cache
+C:\Users\monia\source\repos\Ekipa\Ekipa\obj\Debug\Ekipa.csproj.CoreCompileInputs.cache
+C:\Users\monia\source\repos\Ekipa\Ekipa\obj\Debug\Ekipa.dll
+C:\Users\monia\source\repos\Ekipa\Ekipa\obj\Debug\Ekipa.pdb
+C:\Users\monia\source\repos\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.InitMigration.resources
+C:\Users\monia\source\repos\Ekipa\Ekipa\obj\Debug\Ekipa.csproj.GenerateResource.Cache
+C:\Users\monia\source\repos\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.EditCompanyColumnName.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.InitMigration.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.EditCompanyColumnName.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.csproj.GenerateResource.Cache
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.csproj.CoreCompileInputs.cache
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.pdb
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\ApplicationInsights.config
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Ekipa.dll.config
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Ekipa.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Ekipa.pdb
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Antlr3.Runtime.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\EntityFramework.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\EntityFramework.SqlServer.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.Agent.Intercept.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.DependencyCollector.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.Web.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.WindowsServer.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.ApplicationInsights.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.Web.Infrastructure.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Newtonsoft.Json.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Helpers.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Mvc.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Optimization.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Razor.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.WebPages.Deployment.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.WebPages.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.WebPages.Razor.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\WebGrease.dll
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\EntityFramework.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\EntityFramework.SqlServer.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Helpers.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Mvc.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Optimization.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.Razor.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.WebPages.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.WebPages.Deployment.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\System.Web.WebPages.Razor.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Antlr3.Runtime.pdb
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Newtonsoft.Json.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.ApplicationInsights.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.DependencyCollector.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.WindowsServer.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\bin\Microsoft.AI.Web.xml
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.AddTag.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.EditRole.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.EditRole2.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.EditCompanyTerm.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.csprojResolveAssemblyReference.cache
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.AddCityModel.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.EditTagModel.resources
+D:\3 wersja inżynierka\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.deliTagModel.resources

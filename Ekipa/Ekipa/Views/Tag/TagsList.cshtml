@@ -1,0 +1,40 @@
+﻿@using Ekipa.Models.ViewModel
+@using Ekipa.Models.DB
+@model Ekipa.Models.ViewModel.Company.CompanyTagVM
+
+@{
+    ViewBag.Title = "TagsList";
+}
+
+<h2>Zarządzaj etykietami, aby ułatwić klientom wyszukanie Twojej firny</h2>
+
+<div>
+    <h4>Twoje etykiety</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+</div>
+
+<div class="row">
+
+
+        @foreach (Tag item in Model.CompanyTags)
+        {
+
+                <p id="eventName">@Html.DisplayFor(model => item.Name) @Html.ActionLink("Usuń", "DeliteCompanyTag") </p>
+        }
+
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.OtherTags, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(x => x.ChosenTags, Model.OtherTags, htmlAttributes: new { @class = "form-control" })
+                            @Html.ActionLink("Dodaj", "AddCompanyTag")
+
+                        </div>
+                    </div>
+                </div>
+    </div>
+                <p>
+                    @Html.ActionLink("Utórz nową etykietę", "CreateTag")
+                    @Html.ActionLink("Powrót", "IndexCompany")
+                </p>

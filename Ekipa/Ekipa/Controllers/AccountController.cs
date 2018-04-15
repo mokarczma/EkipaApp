@@ -1,0 +1,378 @@
+﻿using Ekipa.Models;
+using Ekipa.Models.ViewModel;
+using Ekipa.Models.ViewModel.Company;
+using Ekipa.Models.ViewModel.Customer;
+using Ekipa.Models.DB;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Security;
+
+namespace Ekipa.Controllers
+{
+    public class AccountController : Controller
+    {
+        //private ApplicationDbContext db;
+        //public AccountController()
+        //{
+        //    db = new ApplicationDbContext();
+        //}
+        [HttpGet]
+        [ActionName("Logout")]
+        public ActionResult Loginout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("LoginCustomer");
+        }
+
+        [HttpGet]
+        [ActionName("RegisterCustomer")]
+        public ActionResult RegisterCustomer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RegisterCustomer")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterCustomer(CustomerAccountVM _model)
+        {
+            ViewBag.PageNumber = 1;
+            if (ModelState.IsValid)
+            {
+
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var compEmail = db.Companies.FirstOrDefault(x => x.Email == _model.Email);
+                    var compLogin = db.Companies.FirstOrDefault(x => x.Login == _model.Login);
+                    var custEmail = db.Customers.FirstOrDefault(x => x.Email == _model.Email);
+                    var custLogin = db.Customers.FirstOrDefault(x => x.Login == _model.Login);
+                    if ((compEmail == null) && (compLogin == null) && (custEmail == null) && (custLogin == null))
+                    {
+                        Customer customer = new Customer();
+                        customer.Name = _model.Name;
+                        customer.Surname = _model.Surname;
+                        customer.Login = _model.Login;
+                        customer.PhoneNumber = _model.PhoneNumber;
+                        customer.Email = _model.Email;
+                        customer.Password = Security.sha512encrypt(_model.Password);
+                        customer.RoleId = 5;
+                        customer.IsDelete = false;
+                        db.Customers.Add(customer);
+                        db.SaveChanges();
+                        return RedirectToAction("LoginCustomer");
+                    }
+                    else if ((compEmail != null) || (custEmail != null))
+                    {
+                        ModelState.AddModelError("Email", "Użytkownik o podanym emailu już istnieje");
+                    }
+                    else if ((compLogin != null) || (custLogin != null))
+                    {
+                        ModelState.AddModelError("Login", "Użytkownik o podanym loginie już istnieje");
+                    }
+                }
+            }
+
+            return View(_model);
+        }
+
+        [HttpGet]
+        [ActionName("LoginCustomer")]
+        [Route("LoginCustomer")]
+        public ActionResult LoginCustomer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("LoginCustomer")]
+        public ActionResult LoginCustomer(CustomerAccountVM _model)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                bool validEmail = db.Customers.Any(x => x.Email == _model.Email);
+                bool validLogin = db.Customers.Any(x => x.Login == _model.Login);
+
+                if (!(validEmail || validLogin))
+                {
+                    ModelState.AddModelError("Password", "Niepoprawny login lub hasło");
+                    return View(_model);
+                }
+
+                _model.Password = Security.sha512encrypt(_model.Password);
+
+                Customer customer = db.Customers.FirstOrDefault(u => u.Password.Equals(_model.Password) && u.Password.Equals(_model.Password));
+
+                string authId = Guid.NewGuid().ToString();
+
+                Session["AuthID"] = authId;
+                var cookie = new HttpCookie("AuthID");
+                cookie.Value = authId;
+                Response.Cookies.Add(cookie);
+
+                if (customer != null)
+                {
+                    FormsAuthentication.SetAuthCookie(customer.Login, false);
+                    var authTicket = new FormsAuthenticationTicket(1, customer.Login, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(60), false, "");
+                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
+                    authCookie.Expires = DateTime.UtcNow.AddMinutes(60);
+                    Response.SetCookie(authCookie);
+                    return RedirectToAction("IndexCustomer", "Account");
+                }
+                return View(_model);
+
+            }
+
+        }
+
+        [HttpGet]
+        [ActionName("IndexCustomer")]
+        public ActionResult IndexCustomer()
+        {
+            var userCustomer = User as MPrincipal;
+            var login = userCustomer.UserDetails.Login;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                ViewBag.UserName = cust.Login;
+                ViewBag.IconNumber = 0;
+                ViewBag.Role = cust.RoleId;
+            }
+            return View();
+        }
+
+        [HttpGet]
+        [ActionName("EditCustomer")]
+        public ActionResult EditCustomer()
+        {
+            var userCustomer = User as MPrincipal;
+            var login = userCustomer.UserDetails.Login;
+            CustomerAccountEditVM customerVM = null;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                ViewBag.UserName = cust.Login;
+                ViewBag.Role = cust.RoleId;
+                customerVM = new CustomerAccountEditVM();
+                customerVM.Name = cust.Name;
+                customerVM.Surname = cust.Surname;
+                customerVM.PhoneNumber = cust.PhoneNumber;
+                customerVM.Email = cust.Email;
+            }
+
+            return View("EditCustomer", customerVM);
+        }
+
+        [HttpPost]
+        [ActionName("EditCustomer")]
+        public ActionResult EditCustomer(CustomerAccountEditVM model)
+        {
+            var userCustomer = User as MPrincipal;
+            var login = userCustomer.UserDetails.Login;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var baseCompEmail = db.Companies.FirstOrDefault(x => x.Email == model.Email);
+                var baseCustEmail = db.Customers.FirstOrDefault(x => x.Email == model.Email);
+
+
+                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                if (cust != null)
+                {
+                    // loginu nie można zmienić, więc tutaj tylko email nie może się powtórzyć z takim jaki jużjest w bazie
+                    if ((baseCompEmail == null && baseCustEmail == null) || model.Email == cust.Email)
+                    {
+                        cust.Name = model.Name ?? "";
+                        cust.Surname = model.Surname ?? "";
+                        cust.PhoneNumber = model.PhoneNumber ?? "";
+                        cust.Email = model.Email ?? "";
+                        if (!string.IsNullOrEmpty(model.Password) && model.Password == cust.Password)
+                        {
+                            cust.Password = model.NewPassword;
+                        }
+                        db.SaveChanges();
+                        return RedirectToAction("EditCustomer");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "Użytkownik o podanym emailu już istnieje");
+                    }
+                }
+            }
+
+            return RedirectToAction("EditCustomer");
+        }
+        [HttpGet]
+        [ActionName("RegisterCompany")]
+        public ActionResult RegisterCompany()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RegisterCompany")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterCompany(CompanyAccountVM _model)
+        {
+            ViewBag.PageNumber = 1;
+            if (ModelState.IsValid)
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var compEmail = db.Companies.FirstOrDefault(x => x.Email == _model.Email);
+                    var compLogin = db.Companies.FirstOrDefault(x => x.Login == _model.Login);
+                    var custEmail = db.Customers.FirstOrDefault(x => x.Email == _model.Email);
+                    var custLogin = db.Customers.FirstOrDefault(x => x.Login == _model.Login);
+                    if ((compEmail == null) && (compLogin == null) && (custEmail == null) && (custLogin == null))
+                    {
+                        Company company = new Company();
+                        company.CompanyName = _model.CompanyName;
+                        company.Login = _model.Login;
+                        company.PhoneNumer = _model.PhoneNumber;
+                        company.Email = _model.Email;
+                        company.Password = Security.sha512encrypt(_model.Password);
+                        company.RoleId = 6;
+                        company.IsDelete = false;
+                        company.CityId = 10;
+                        db.Companies.Add(company);
+                        db.SaveChanges();
+                        return RedirectToAction("LoginCompany");
+                    }
+                    else if ((compEmail != null) || (custEmail != null))
+                    {
+                        ModelState.AddModelError("Email", "Użytkownik o podanym emailu już istnieje");
+                    }
+                    else if ((compLogin != null) || (custLogin != null))
+                    {
+                        ModelState.AddModelError("Login", "Użytkownik o podanym loginie już istnieje");
+                    }
+                }
+            }
+
+            return View(_model);
+        }
+
+        [HttpGet]
+        [ActionName("LoginCompany")]
+        [Route("LoginCompany")]
+        public ActionResult LoginCompany()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("LoginCompany")]
+        public ActionResult LoginCompany(CompanyAccountVM _model)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                bool validEmail = db.Companies.Any(x => x.Email == _model.Email);
+                bool validLogin = db.Companies.Any(x => x.Login == _model.Login);
+
+                if (!(validEmail || validLogin))
+                {
+                    ModelState.AddModelError("Password", "Niepoprawny login lub hasło");
+                    return View(_model);
+                }
+
+                _model.Password = Security.sha512encrypt(_model.Password);
+                ViewBag.Title = "Logowanie klienta";
+
+                Company company = db.Companies.FirstOrDefault(u => u.Login.Equals(_model.Login) && u.Password.Equals(_model.Password));
+
+                string authId = Guid.NewGuid().ToString();
+
+                Session["AuthID"] = authId;
+                var cookie = new HttpCookie("AuthID");
+                cookie.Value = authId;
+                Response.Cookies.Add(cookie);
+
+                if (company != null)
+                {
+                    FormsAuthentication.SetAuthCookie(company.Login, false);
+                    var authTicket = new FormsAuthenticationTicket(1, company.Login, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(60), false, "");
+                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
+                    authCookie.Expires = DateTime.UtcNow.AddMinutes(60);
+                    Response.SetCookie(authCookie);
+                    return RedirectToAction("IndexCompany", "Account");
+                }
+                return View(_model);
+            }
+        }
+        [HttpGet]
+        [ActionName("IndexCompany")]
+        public ActionResult IndexCompany()
+        {
+            var userCustomer = User as MPrincipal;
+            var login = userCustomer.UserDetails.Login;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                ViewBag.UserName = cust.Login;
+                ViewBag.IconNumber = 0;
+                ViewBag.Role = cust.RoleId;
+            }
+            return View();
+        }
+
+        [HttpGet]
+        [ActionName("EditCompany")]
+        public ActionResult EditCompany()
+        {
+            var userCompany = User as MPrincipal;
+            var login = userCompany.UserDetails.Login;
+            CompanyAccountEditVM companyEditVM = null;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                ViewBag.UserName = comp.Login;
+                ViewBag.Role = comp.RoleId;
+                companyEditVM = new CompanyAccountEditVM();
+                companyEditVM.CompanyName = comp.CompanyName;
+                companyEditVM.PhoneNumber = comp.PhoneNumer;
+                companyEditVM.Email = comp.Email;
+            }
+
+            return View("EditCompany", companyEditVM);
+        }
+        [HttpPost]
+        [ActionName("EditCompany")]
+        public ActionResult EditCompany(CompanyAccountEditVM model)
+        {
+            var userCompany = User as MPrincipal;
+            var login = userCompany.UserDetails.Login;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var baseCompEmail = db.Companies.FirstOrDefault(x => x.Email == model.Email);
+                var baseCustEmail = db.Customers.FirstOrDefault(x => x.Email == model.Email);
+
+
+                var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                if (comp != null)
+                {
+                    // loginu nie można zmienić, więc tutaj tylko email nie może się powtórzyć z takim jaki jużjest w bazie
+                    if ((baseCompEmail == null && baseCustEmail == null) || model.Email == comp.Email)
+                    {
+                        comp.CompanyName = model.CompanyName ?? "";
+                        comp.PhoneNumer = model.PhoneNumber ?? "";
+                        comp.Email = model.Email ?? "";
+                        if (!string.IsNullOrEmpty(model.Password) && model.Password == comp.Password)
+                        {
+                            comp.Password = model.NewPassword;
+                        }
+                        db.SaveChanges();
+                        return RedirectToAction("EditCompany");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "Użytkownik o podanym emailu już istnieje");
+                    }
+                }
+            }
+            return RedirectToAction("EditCompany");
+        }
+    }
+}
