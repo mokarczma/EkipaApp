@@ -1,0 +1,19 @@
+﻿
+@model IEnumerable<Ekipa.Models.ViewModel.ImageVM>
+
+@{
+    ViewBag.Title = "CompanyImagesList";
+}
+
+@using (Html.BeginForm("CompanyImagesList", "Image", FormMethod.Post, new { id = "compareForm" }))
+{
+<div>
+    @Html.EditorForModel()
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+</div>
+}
+    

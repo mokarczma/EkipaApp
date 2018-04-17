@@ -9,7 +9,8 @@ namespace Ekipa.Models.DB
     {
         public int Id { get; set; }
         public string Link { get; set; }
-        public string CompanyId { get; set; }
+        public string Description { get; set; }
+        public int CompanyId { get; set; }
         public bool IsDelete { get; set; }
         public bool MainPicture { get; set; }
         public virtual ICollection<Company> Company { get; set; }

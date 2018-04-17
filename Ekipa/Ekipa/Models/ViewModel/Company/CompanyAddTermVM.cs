@@ -11,5 +11,6 @@ namespace Ekipa.Models.ViewModel.Company
         public int ID { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
+
     }
 }

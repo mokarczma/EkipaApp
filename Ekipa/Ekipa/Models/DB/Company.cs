@@ -19,8 +19,8 @@ namespace Ekipa.Models.DB
         public int RoleId { get; set; }
         public bool IsDelete { get; set; }
         public string PhoneNumer { get; set; }
-        
-        public virtual List<CompanyTag> Tags { get; set; }
+
+        public virtual ICollection<CompanyTag> Tags { get; set; }
         public virtual List<CompanyTerm> CompanyTerms { get; set; }
         public virtual List<Image> Images { get; set; }
 

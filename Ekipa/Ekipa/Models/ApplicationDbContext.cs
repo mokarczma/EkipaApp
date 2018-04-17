@@ -22,6 +22,8 @@ namespace Ekipa.Models
         public virtual DbSet<CompanyTerm> CompanyTerm { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -30,5 +32,6 @@ namespace Ekipa.Models
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
+        public System.Data.Entity.DbSet<Ekipa.Models.ViewModel.Company.CompanyImagesVM> CompanyImagesVMs { get; set; }
     }
 }

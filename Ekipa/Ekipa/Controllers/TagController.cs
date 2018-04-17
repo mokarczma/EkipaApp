@@ -15,7 +15,7 @@ namespace Ekipa.Controllers
         // GET: Tag
         public ActionResult TagsList()
         {
-            var userCompany= User as MPrincipal;
+            var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;
             CompanyTagVM model = null;
 
@@ -39,11 +39,11 @@ namespace Ekipa.Controllers
 
                 List<SelectListItem> allTags = new List<SelectListItem>();
                 allTags = (from t in db.Tags
-                         select new SelectListItem
-                         {
-                             Text = t.Name,
-                             Value = t.Id.ToString()
-                         }).ToList();
+                           select new SelectListItem
+                           {
+                               Text = t.Name,
+                               Value = t.Id.ToString()
+                           }).ToList();
 
                 List<SelectListItem> testtt = new List<SelectListItem>();
                 foreach (var item in allTags)
@@ -64,16 +64,16 @@ namespace Ekipa.Controllers
             return View("TagsList", model);
         }
 
-    [HttpGet]
+        [HttpGet]
         [ActionName("CreateTag")]
         public ActionResult CreateTag()
         {
             return View();
         }
 
-        // POST: Tag/Create
-        [HttpPost]
-        [ActionName("CreateTag")]
+        //POST: Tag/Create
+       [HttpPost]
+       [ActionName("CreateTag")]
         public ActionResult CreateTag(TagVM model)
 
         {
@@ -100,13 +100,13 @@ namespace Ekipa.Controllers
             return View(model);
 
         }
-        // GET: Tag/Delete/5
+        //GET: Tag/Delete/5
         public ActionResult TagDelete(int id)
         {
             return View();
         }
 
-        // POST: Tag/Delete/5
+        //POST: Tag/Delete/5
         [HttpPost]
         [ActionName("TagDelete")]
         public ActionResult TagDelete(TagVM model)
@@ -131,9 +131,9 @@ namespace Ekipa.Controllers
         [ActionName("AddCompanyTag")]
 
         public ActionResult AddCompanyTag(Tag tag)
-        { 
-              var userCompany = User as MPrincipal;
-              var login = userCompany.UserDetails.Login;
+        {
+            var userCompany = User as MPrincipal;
+            var login = userCompany.UserDetails.Login;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var company = db.Companies.SingleOrDefault(x => x.Login == login);
