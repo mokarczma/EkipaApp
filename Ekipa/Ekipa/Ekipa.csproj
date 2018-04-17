@@ -219,6 +219,7 @@
     <Compile Include="Models\ViewModel\Company\CompanyAccountEditVM.cs" />
     <Compile Include="Models\ViewModel\Company\CompanyDetailsVM.cs" />
     <Compile Include="Models\ViewModel\Company\CompanyImagesVM.cs" />
+    <Compile Include="Models\ViewModel\Company\CompanyInfo.cs" />
     <Compile Include="Models\ViewModel\Company\CompanyTagVM.cs" />
     <Compile Include="Models\ViewModel\Customer\CustomerAccountEditVM.cs" />
     <Compile Include="Models\ViewModel\Customer\CustomerAccountVM.cs" />

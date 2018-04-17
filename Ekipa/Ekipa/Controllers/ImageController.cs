@@ -61,6 +61,8 @@ namespace Ekipa.Controllers
         [HttpPost]
         public ActionResult CompanyImagesList33(CompanyImagesVM imagesModel)
         {
+            return RedirectToAction("CompanyImagesList33");
+
             var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;
 
@@ -82,7 +84,7 @@ namespace Ekipa.Controllers
                     db.Images.Add(img);
                     db.SaveChanges();
                 }
-                return RedirectToAction("CompanyImagesList");
+                return RedirectToAction("CompanyImagesList33");
             }
         }
         
