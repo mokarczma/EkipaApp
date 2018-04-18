@@ -25,36 +25,35 @@
                     <img class="img-responsive" src='@Url.Content("~/Content/images/ikon.png")' />
                 </a>
             </div>
-            <div class="row navbar-collapse collapse">
+           <div class="row navbar-collapse collapse">
 
-                <div class="offset1 col-lg-5 col-md-5 col-12">
-                    <div class="row">
-                        <div class="d-inline-block col-lg-6 col-"><input type="text" placeholder="Szukaj"></div>
-                        <div class="d-inline-block col-lg-6"><input type="text" placeholder="Miejscowość"></div>
-                    </div>
-                   
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-12">
-                    <ul class="nav navbar-nav">
-                        @if (ViewBag.UserName == null)
-                        {
-                            <li> @Html.ActionLink("Logowanie klient", "LoginCustomer", "Account")</li>
-                            <li> @Html.ActionLink("Logowanie firma", "LoginCompany", "Account")</li>
-                        }
-                        else
-                        {
-                            <li>@ViewBag.UserName</li>
-                            <li> @Html.ActionLink("Moje konto", "IndexCompany", "Account")</li>
-                            <li> @Html.ActionLink("Wyloguj", "Logout", "Account")</li>
-                        }
-                    </ul>
-                </div>
+        <div class="offset1 col-lg-5 col-md-5 col-12">
+            <div class="row">
+                <div class="d-inline-block col-lg-6 col-"><input type="text" placeholder="Szukaj"></div>
+                <div class="d-inline-block col-lg-6"><input type="text" placeholder="Miejscowość"></div>
             </div>
-                
 
-            </div>
         </div>
+
+        <div class="col-lg-6 col-md-6 col-12">
+            <ul class="nav navbar-nav">
+                @if (ViewBag.UserName == null)
+                {
+                    <li> @Html.ActionLink("Logowanie klient", "LoginCustomer", "Account")</li>
+                                <li> @Html.ActionLink("Logowanie firma", "LoginCompany", "Account")</li>
+                }
+                else
+                {
+                    <li>@ViewBag.UserName</li>
+                                <li> @Html.ActionLink("Moje konto", "IndexCompany", "Account")</li>
+                                <li> @Html.ActionLink("Wyloguj", "Logout", "Account")</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+        </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -68,9 +67,3 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-
-<style>
-    .d-inline-block{
-        display: inline-block;
-    }
-</style>

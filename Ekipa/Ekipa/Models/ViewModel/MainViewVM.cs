@@ -7,12 +7,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Ekipa.Models.ViewModel
 {
-    public class SearchVM
+    public class MainViewVM
     {
         [Display(Name = "Szukaj")]
         public string Name { get; set; }
 
         [Display(Name = "Miejscowość")]
         public string Place { get; set; }
+
+        public bool LogUser { get; set; }
+        public string UserName { get; set; }
     }
 }

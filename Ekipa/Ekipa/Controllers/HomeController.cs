@@ -1,4 +1,5 @@
 ﻿using Ekipa.Models;
+using Ekipa.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,18 @@ namespace Ekipa.Controllers
             }
             return View();
         }
-        public ActionResult Search()
+        [HttpGet]
+        public ActionResult MainView()
         {
+            MainViewVM model = new MainViewVM();
+            var user = User as MPrincipal;
+            model.LogUser = false;
+            if (user != null)
+            {
+                model.LogUser = true;
+                model.UserName = user.UserDetails.Login;
+
+            }
             return View();
         }
     }

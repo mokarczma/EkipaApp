@@ -234,7 +234,7 @@
     <Compile Include="Models\ViewModel\Customer\CustomerAccountVM.cs" />
     <Compile Include="Models\ViewModel\ImageVM.cs" />
     <Compile Include="Models\ViewModel\ImageCreateVM.cs" />
-    <Compile Include="Models\ViewModel\SearchVM.cs" />
+    <Compile Include="Models\ViewModel\MainViewVM.cs" />
     <Compile Include="Models\ViewModel\TagVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ViewModel\Company\CompanyAccountVM.cs" />
