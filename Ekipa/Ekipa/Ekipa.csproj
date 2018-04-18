@@ -299,11 +299,8 @@
     <Content Include="Views\Tag\DeleteCompanyTag.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Image\ImageAdd.cshtml" />
-    <Content Include="Views\Image\CompanyImagesList22.cshtml" />
-    <Content Include="Views\Image\CompanyImagesList33.cshtml" />
-    <Content Include="Views\Image\CompanyImagesList44.cshtml" />
-    <Content Include="Views\Image\EditorTemplates\ImageVM.cshtml" />
     <Content Include="Views\Image\CompanyImagesList.cshtml" />
+    <Content Include="Views\Image\EditorTemplates\ImageVM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppImages\" />

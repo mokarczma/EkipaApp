@@ -16,7 +16,7 @@ namespace Ekipa.Controllers
     {
         // GET: Image
         [HttpGet]
-        public ActionResult CompanyImagesList33()
+        public ActionResult CompanyImagesList()
         {
             var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;
@@ -46,22 +46,23 @@ namespace Ekipa.Controllers
 
                         if (item.MainPicture == true)
                         {
-                            mainPicture = item.Link;
+                            model.MainPicturePath = item.Link;
+                            model.MainPictureID = item.Id.ToString();
+
                         }
-                     }                    
+                    }                    
                 }
                 model.ImageList = imageList;
                 model.MainPicturePath = mainPicture;
             }
 
 
-            return View("CompanyImagesList33", model);
+            return View("CompanyImagesList", model);
 
         }
         [HttpPost]
-        public ActionResult CompanyImagesList33(CompanyImagesVM imagesModel)
+        public ActionResult CompanyImagesList(CompanyImagesVM imagesModel)
         {
-            return RedirectToAction("CompanyImagesList33");
 
             var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;
@@ -72,19 +73,27 @@ namespace Ekipa.Controllers
                 var dbImages = db.Images.Where(t => t.CompanyId == company.Id).ToList();
                 foreach (var item in imagesModel.ImageList)
                 {
-                    Image img = new Image
+                    foreach (var dbItem in dbImages)
                     {
-                        Id = item.Id,
-                        Link = item.Link,
-                        Description = item.Description,
-                        CompanyId = company.Id,
-                        IsDelete = item.IsDelete,
-                        MainPicture = item.MainPicture
-                    };
-                    db.Images.Add(img);
+                        if (dbItem.Id == item.Id)
+                        {
+                            dbItem.Link = item.Link;
+                            dbItem.Description = item.Description;
+                            dbItem.CompanyId = company.Id;
+                            dbItem.IsDelete = item.IsDelete;
+                            if (imagesModel.MainPictureID == dbItem.Id.ToString())
+                            {
+                                dbItem.MainPicture = true;
+                            }
+                            else
+                            {
+                                dbItem.MainPicture = false;
+                            }
+                        }
+                    }
                     db.SaveChanges();
                 }
-                return RedirectToAction("CompanyImagesList33");
+                return RedirectToAction("IndexCompany","Account");
             }
         }
         

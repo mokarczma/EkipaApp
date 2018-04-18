@@ -1,19 +1,47 @@
-﻿
-@model IEnumerable<Ekipa.Models.ViewModel.ImageVM>
+﻿@model Ekipa.Models.ViewModel.Company.CompanyImagesVM
 
 @{
     ViewBag.Title = "CompanyImagesList";
 }
 
-@using (Html.BeginForm("CompanyImagesList", "Image", FormMethod.Post, new { id = "compareForm" }))
-{
-<div>
-    @Html.EditorForModel()
-</div>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Save" class="btn btn-default" />
+<h2>Zarządzaj zdjęciami na profilu swojej firmy</h2>
+
+<div class="row">
+
+    @using (Html.BeginForm("CompanyImagesList", "Image", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        for (int i = 0; i < Model.ImageList.Count(); i++)
+        {
+
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <img class="img-responsive" src="@Url.Content(Model.ImageList[i].Link)" width="250" height="250" />
+
+                @Html.EditorFor(m => m.ImageList[i].Description, "", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.ImageList[i].Description, "", new { @class = "text-danger" })
+                @*<p> Ustaw jako zdjęcie głowne: @Html.RadioButton("mainPictures", Model.ImageList[i].MainPicture == true, new { htmlAttributes = new { @class = "radio-inline" } } )</p>*@
+
+                <p> Ustaw jako zdjęcie głowne: @Html.RadioButtonFor(m => m.MainPictureID, Model.ImageList[i].Id.ToString())
+
+
+
+                <p> Usuń: @Html.CheckBoxFor(m => m.ImageList[i].IsDelete, new { @checked = "checked" })</p>
+            </div>
+                            @Html.HiddenFor(model => model.ImageList[i].Id)
+                            @Html.HiddenFor(model => model.ImageList[i].Link)
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Zapisz" class="btn btn-default" />
+            </div>
+        </div>
+    }
     </div>
-</div>
-}
-    
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

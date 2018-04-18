@@ -17,8 +17,5 @@ namespace Ekipa.Models.ViewModel
         public string Link { get; set; }
         public bool IsDelete { get; set; }
         public bool MainPicture { get; set; }
-
-
-
     }
 }
