@@ -13,29 +13,39 @@ namespace Ekipa.Controllers
     public class TagController : Controller
     {
         // GET: Tag
-        public ActionResult TagsList()
+        [HttpGet]
+        public ActionResult CompanyTagsList()
         {
-            var userCompany = User as MPrincipal;
-            var login = userCompany.UserDetails.Login;
-            CompanyTagVM model = null;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+
+            CompanyTagsVM model = null;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var company = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
-                model = new CompanyTagVM();
-                //List<Tag> compTag = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
-                //List<SelectListItem> sli = new List<SelectListItem>();
+                model = new CompanyTagsVM();
+      
+                var dbCompanyTags = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
+                ViewBag.NoTags = false;
 
-                //foreach (var item in compTag)
-                //{
-                //    SelectListItem s = new SelectListItem()
-                //    {
-                //        Text = item.Name,
-                //        Value = item.Id.ToString()
-                //    };
-                //sli.Add(s);
-                //}
-                model.CompanyTags = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
+                if (dbCompanyTags == null)
+                {
+                    ViewBag.NoTags = true;
+                }
+                List<CompanyTagVM> ctVMList = new List<CompanyTagVM>();
+                for (int i = 0; i < dbCompanyTags.Count(); i++)
+                {
+                    CompanyTagVM ctVM = new CompanyTagVM()
+                    {
+                        Id = dbCompanyTags[i].Id,
+                        Name = dbCompanyTags[i].Name,
+                        DeleteFromCompany = dbCompanyTags[i].IsDelete
+                    };
+                    ctVMList.Add(ctVM);   
+                }
+                model.CompanyTags = ctVMList;
 
                 List<SelectListItem> allTags = new List<SelectListItem>();
                 allTags = (from t in db.Tags
@@ -45,23 +55,69 @@ namespace Ekipa.Controllers
                                Value = t.Id.ToString()
                            }).ToList();
 
-                List<SelectListItem> testtt = new List<SelectListItem>();
+                List<SelectListItem> otherTagsList = new List<SelectListItem>();
+            
                 foreach (var item in allTags)
                 {
-                    testtt.Add(item);
-                    foreach (var i in model.CompanyTags)
+                    otherTagsList.Add(item);
+                    if (model.CompanyTags != null)
                     {
-                        if (item.Value == i.Id.ToString())
+                        foreach (var i in model.CompanyTags)
                         {
-                            testtt.Remove(item);
+                            if (item.Value == i.Id.ToString())
+                            {
+                                otherTagsList.Remove(item);
+                            }
                         }
                     }
                 }
 
-                model.OtherTags = testtt;
-
+                model.OtherTags = otherTagsList;
             }
-            return View("TagsList", model);
+            return View("CompanyTagsList", model);
+        }
+        [HttpPost]
+        public ActionResult CompanyTagsList(CompanyTagsVM model)
+        {
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var company = db.Companies.SingleOrDefault(x => x.Login == login);
+                //usuwanie tagów z firmy
+                if (model.CompanyTags != null)
+                {
+                    foreach (var item in model.CompanyTags)
+                    {
+                        if (item.DeleteFromCompany)
+                        {
+                           var tagDel = db.CompanyTags.SingleOrDefault(x => x.CompanyId == company.Id && x.TagId == item.Id);
+                           db.CompanyTags.Remove(tagDel);
+                        }
+                    }
+                }
+
+                // dodawanie nowych tagów z listy wybieralnej
+
+                if (model.ChosenTags != null)
+                {
+                    foreach (var item in model.ChosenTags)
+                    {
+                        CompanyTag cTag = new CompanyTag()
+                        {
+                            CompanyId = company.Id,
+                            TagId = Convert.ToInt32(item.Value)
+
+                        };
+                        db.CompanyTags.Add(cTag);
+                    }
+                }
+
+                db.SaveChanges();
+            }
+            return RedirectToAction("IndexCompany","Account"); 
         }
 
         [HttpGet]
@@ -84,7 +140,7 @@ namespace Ekipa.Controllers
                     var nameTag = db.Tags.FirstOrDefault(x => x.Name == model.Name && x.IsDelete == false);
                     if (nameTag == null)
                     {
-                        Tag tag = new Tag();
+                        Models.DB.Tag tag = new Models.DB.Tag();
                         tag.Name = model.Name;
                         tag.IsDelete = false;
                         db.Tags.Add(tag);
@@ -113,7 +169,7 @@ namespace Ekipa.Controllers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                Tag tag = db.Tags.FirstOrDefault(t => t.Name == model.Name);
+                Models.DB.Tag tag = db.Tags.FirstOrDefault(t => t.Name == model.Name);
                 tag.IsDelete = true;
                 db.SaveChanges();
                 return RedirectToAction("TagsList");
@@ -130,7 +186,7 @@ namespace Ekipa.Controllers
         [HttpPost]
         [ActionName("AddCompanyTag")]
 
-        public ActionResult AddCompanyTag(Tag tag)
+        public ActionResult AddCompanyTag(Models.DB.Tag tag)
         {
             var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;
@@ -158,7 +214,7 @@ namespace Ekipa.Controllers
         [HttpDelete]
         [ActionName("DeleteCompanyTag")]
 
-        public ActionResult DeleteCompanyTag(Tag tag)
+        public ActionResult DeleteCompanyTag(Models.DB.Tag tag)
         {
             var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;

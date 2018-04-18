@@ -95,6 +95,7 @@ namespace Ekipa.Controllers
                 bool validEmail = db.Customers.Any(x => x.Email == _model.Email);
                 bool validLogin = db.Customers.Any(x => x.Login == _model.Login);
 
+
                 if (!(validEmail || validLogin))
                 {
                     ModelState.AddModelError("Password", "Niepoprawny login lub hasło");
@@ -133,6 +134,8 @@ namespace Ekipa.Controllers
         {
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
+            ViewBag.UserName = userCustomer.UserDetails.Login;
+
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
@@ -149,6 +152,7 @@ namespace Ekipa.Controllers
         {
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
+            ViewBag.UserName = userCustomer.UserDetails.Login;
             CustomerAccountEditVM customerVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -171,6 +175,8 @@ namespace Ekipa.Controllers
         {
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
+            ViewBag.UserName = userCustomer.UserDetails.Login;
+
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -305,8 +311,9 @@ namespace Ekipa.Controllers
         [ActionName("IndexCompany")]
         public ActionResult IndexCompany()
         {
-            var userCustomer = User as MPrincipal;
-            var login = userCustomer.UserDetails.Login;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
@@ -321,8 +328,9 @@ namespace Ekipa.Controllers
         [ActionName("EditCompany")]
         public ActionResult EditCompany()
         {
-            var userCompany = User as MPrincipal;
-            var login = userCompany.UserDetails.Login;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
             CompanyAccountEditVM companyEditVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -341,14 +349,14 @@ namespace Ekipa.Controllers
         [ActionName("EditCompany")]
         public ActionResult EditCompany(CompanyAccountEditVM model)
         {
-            var userCompany = User as MPrincipal;
-            var login = userCompany.UserDetails.Login;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var baseCompEmail = db.Companies.FirstOrDefault(x => x.Email == model.Email);
                 var baseCustEmail = db.Customers.FirstOrDefault(x => x.Email == model.Email);
-
 
                 var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
                 if (comp != null)

@@ -18,8 +18,10 @@ namespace Ekipa.Controllers
         [HttpGet]
         public ActionResult CompanyImagesList()
         {
-            var userCompany = User as MPrincipal;
-            var login = userCompany.UserDetails.Login;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+
             CompanyImagesVM model = null;
             List<ImageVM> imageList = new List<ImageVM>();
 
@@ -64,8 +66,9 @@ namespace Ekipa.Controllers
         public ActionResult CompanyImagesList(CompanyImagesVM imagesModel)
         {
 
-            var userCompany = User as MPrincipal;
-            var login = userCompany.UserDetails.Login;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -106,8 +109,9 @@ namespace Ekipa.Controllers
         public ActionResult ImageAdd(ImageCreateVM model)
         {
             var path = "";
-            var userCustomer = User as MPrincipal;
-            var login = userCustomer.UserDetails.Login;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
 
             if (model.File != null)
             {

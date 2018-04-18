@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ekipa.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,12 @@ namespace Ekipa.Controllers
     {
         public ActionResult Index()
         {
+            var user = User as MPrincipal;
+            if (user != null)
+            {
+                var login = user.UserDetails.Login;
+                ViewBag.UserName = user.UserDetails.Login;
+            }
             return View();
         }
         public ActionResult Search()

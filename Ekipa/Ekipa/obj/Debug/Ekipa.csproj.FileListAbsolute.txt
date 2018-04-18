@@ -162,3 +162,5 @@ D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.CreateImage_zmianyTag.resourc
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.CompanyTag_ponownie.resources
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.ImageDescription.resources
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.csprojResolveAssemblyReference.cache
+D:\EkipaApp\Ekipa\Ekipa\bin\BootstrapMvc.Core.dll
+D:\EkipaApp\Ekipa\Ekipa\bin\BootstrapMvc.Mvc5.dll
