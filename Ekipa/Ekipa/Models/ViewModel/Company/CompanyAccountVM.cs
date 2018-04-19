@@ -48,5 +48,10 @@ namespace Ekipa.Models.ViewModel.Company
         [Display(Name = "Potwierdż hasło")]
 
         public string ConfirmPassword { get; set; }
-   }
+
+        public CompanyAccountVM() : base()
+        {
+
+        }
+    }
 }

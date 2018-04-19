@@ -10,8 +10,28 @@ namespace Ekipa.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+
+        private static List<SelectListItem> CitiesQuery()
         {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                items = (from li in db.Cities
+                         select new SelectListItem
+                         {
+                             Text = li.Name,
+                             Value = li.ID.ToString()
+                         }).ToList();
+            }
+            return items;
+        }
+        public ActionResult Index()
+
+        {
+            var cos = new MainViewVM();
+            var m = cos.Miasta;
+            ViewBag.CityList = m;
             var user = User as MPrincipal;
             if (user != null)
             {
@@ -24,15 +44,15 @@ namespace Ekipa.Controllers
         public ActionResult MainView()
         {
             MainViewVM model = new MainViewVM();
-            var user = User as MPrincipal;
-            model.LogUser = false;
-            if (user != null)
-            {
-                model.LogUser = true;
-                model.UserName = user.UserDetails.Login;
+         
+            return View(model);
+        }
 
-            }
+        [HttpPost]
+        public ActionResult MainView(MainViewVM mainViewVM)
+        {
             return View();
         }
+
     }
 }

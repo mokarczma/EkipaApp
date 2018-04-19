@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Ekipa.Models.ViewModel.Company
 {
@@ -41,10 +42,16 @@ namespace Ekipa.Models.ViewModel.Company
         [RegularExpression(@"^[A-Z-a-z0-9_\@]{8,16}$", ErrorMessage = "Nowe hasło niepoprawne, co najmniej 8 znaków")]
         public string NewPassword { get; set; }
 
-        [Compare("password")]
+        //[Compare("password")]
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdż hasło")]
         public string ConfirmPassword { get; set; }
 
+        public CompanyAccountEditVM() : base()
+        {
+
+        }
+
     }
+
 }

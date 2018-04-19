@@ -16,6 +16,7 @@ namespace Ekipa.Controllers
         // GET: Company
         public ActionResult Index()
         {
+            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -65,6 +66,7 @@ namespace Ekipa.Controllers
         [HttpGet]
         public ActionResult AddCompanyTerm()
         {
+            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -102,6 +104,7 @@ namespace Ekipa.Controllers
         [ActionName("CompanyDetails")]
         public ActionResult CompanyDetails()
         {
+            ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
@@ -126,6 +129,7 @@ namespace Ekipa.Controllers
         [ActionName("EditCompanyDetails")]
         public ActionResult EditCompanyDetails()
         {
+            ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
@@ -185,6 +189,7 @@ namespace Ekipa.Controllers
         [ActionName("EditCompanyDetails")]
         public ActionResult EditCompanyDetails(CompanyDetailsVM model)
         {
+            ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;

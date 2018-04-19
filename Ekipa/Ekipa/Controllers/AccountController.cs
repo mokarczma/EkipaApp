@@ -14,15 +14,11 @@ namespace Ekipa.Controllers
 {
     public class AccountController : Controller
     {
-        //private ApplicationDbContext db;
-        //public AccountController()
-        //{
-        //    db = new ApplicationDbContext();
-        //}
         [HttpGet]
         [ActionName("Logout")]
         public ActionResult Loginout()
         {
+            ViewBag.CityList = CitiesQuery();
             FormsAuthentication.SignOut();
             return RedirectToAction("LoginCustomer");
         }
@@ -31,6 +27,7 @@ namespace Ekipa.Controllers
         [ActionName("RegisterCustomer")]
         public ActionResult RegisterCustomer()
         {
+            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -83,6 +80,7 @@ namespace Ekipa.Controllers
         [Route("LoginCustomer")]
         public ActionResult LoginCustomer()
         {
+            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -132,6 +130,7 @@ namespace Ekipa.Controllers
         [ActionName("IndexCustomer")]
         public ActionResult IndexCustomer()
         {
+            ViewBag.CityList = CitiesQuery();
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
@@ -150,6 +149,7 @@ namespace Ekipa.Controllers
         [ActionName("EditCustomer")]
         public ActionResult EditCustomer()
         {
+            ViewBag.CityList = CitiesQuery();
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
@@ -214,6 +214,7 @@ namespace Ekipa.Controllers
         [ActionName("RegisterCompany")]
         public ActionResult RegisterCompany()
         {
+            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -265,6 +266,7 @@ namespace Ekipa.Controllers
         [Route("LoginCompany")]
         public ActionResult LoginCompany()
         {
+            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -311,6 +313,7 @@ namespace Ekipa.Controllers
         [ActionName("IndexCompany")]
         public ActionResult IndexCompany()
         {
+            ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
@@ -328,6 +331,7 @@ namespace Ekipa.Controllers
         [ActionName("EditCompany")]
         public ActionResult EditCompany()
         {
+            ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
@@ -381,6 +385,21 @@ namespace Ekipa.Controllers
                 }
             }
             return RedirectToAction("EditCompany");
+        }
+        private static List<SelectListItem> CitiesQuery()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                items = (from li in db.Cities
+                         select new SelectListItem
+                         {
+                             Text = li.Name,
+                             Value = li.ID.ToString()
+                         }).ToList();
+            }
+            return items;
         }
     }
 }
