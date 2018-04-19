@@ -1,57 +1,53 @@
 ﻿@using Ekipa.Models.ViewModel
 @using Ekipa.Models.DB
 @model Ekipa.Models.ViewModel.Company.CompanyTagsVM
-
 @{
-    ViewBag.Title = "TagsList";
+	ViewBag.Title = "TagsList";
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM)
 }
-
 <h2>Zarządzaj etykietami, aby ułatwić klientom wyszukanie Twojej firny</h2>
-
 <div>
-    <h4>Twoje etykiety</h4>
-    <hr />
-    <dl class="dl-horizontal"></dl>
+	<h4>Twoje etykiety</h4>
+	<hr />
+	<dl class="dl-horizontal"></dl>
 </div>
-
 <div class="row">
+	@using (Html.BeginForm("CompanyTagsList", "Tag", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-@using (Html.BeginForm("CompanyTagsList", "Tag", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		if (ViewBag.NoTags == false)
+		{
 
-    if (ViewBag.NoTags == false)
-    {
+			for (int i = 0; i < Model.CompanyTags.Count(); i++)
+			{
 
-        for (int i = 0; i < Model.CompanyTags.Count(); i++)
-        {
+				<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+					@Html.EditorFor(m => m.CompanyTags[i].Name, "", new { htmlAttributes = new { @class = "form-control" } })
+					<p> Usuń: @Html.CheckBoxFor(m => m.CompanyTags[i].DeleteFromCompany, new { @checked = "checked" })</p>
+				</div>
+				@Html.HiddenFor(model => model.CompanyTags[i].Id)
 
-        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            @Html.EditorFor(m => m.CompanyTags[i].Name, "", new { htmlAttributes = new { @class = "form-control" } })
-            <p> Usuń: @Html.CheckBoxFor(m => m.CompanyTags[i].DeleteFromCompany, new { @checked = "checked" })</p>
-        </div>
-            @Html.HiddenFor(model => model.CompanyTags[i].Id)
-
-        }
-    }
-    <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.OtherTags, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(x => x.ChosenTags, Model.OtherTags, htmlAttributes: new { @class = "form-control" })
-                        </div>
-                    </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Zapisz" class="btn btn-default" />
-        </div>
-    </div>
-}
- </div>
-
-                <p>
-                    @Html.ActionLink("Utórz nową etykietę", "CreateTag")
-                    @Html.ActionLink("Powrót", "IndexCompany")
-                </p>
+			}
+		}
+		<div class="form-group">
+			<div>
+				@Html.LabelFor(model => model.OtherTags, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownListFor(x => x.ChosenTags, Model.OtherTags, htmlAttributes: new { @class = "form-control" })
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Zapisz" class="btn btn-default" />
+			</div>
+		</div>
+	}
+</div>
+<p>
+	@Html.ActionLink("Utórz nową etykietę", "CreateTag")
+	@Html.ActionLink("Powrót", "IndexCompany")
+</p>

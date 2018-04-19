@@ -48,12 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BootstrapMvc.Core, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BootstrapMvc.Core.2.3.0\lib\net451\BootstrapMvc.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="BootstrapMvc.Mvc5, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BootstrapMvc.Mvc5.2.2.0\lib\net451\BootstrapMvc.Mvc5.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -242,11 +236,8 @@
     <Compile Include="Models\Security.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-1.1.0.css" />
-    <Content Include="Content\bootstrap-1.1.0.min.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -267,7 +258,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
-    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -338,7 +328,6 @@
     <Content Include="Views\Account\LoginCustomer.cshtml" />
     <Content Include="Views\Account\IndexCustomer.cshtml" />
     <Content Include="Views\Account\EditCustomer.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Company\AddCompanyTerm.cshtml" />
     <Content Include="Views\Company\EditCompanyDetails.cshtml" />
     <Content Include="Views\Company\CompanyDetails.cshtml" />
@@ -361,6 +350,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\MainView.cshtml" />
+    <Content Include="Views\Partial\_MainView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppImages\" />

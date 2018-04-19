@@ -32,7 +32,7 @@ namespace Ekipa
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/datepicker").Include(
-                "~/Content/style/jquery-ui.min.css",
+                "~/Content/style/jquery-ui.css",
                 "~/Content/style/datepicker.css"
                       ));
         }

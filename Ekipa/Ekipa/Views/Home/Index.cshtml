@@ -1,24 +1,25 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home Page";
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM)
 }
-
-    <img class="img-responsive"  src="~/Content/images/Tlo.png" />
-
+<img class="img-responsive" src="~/Content/images/Tlo.png" />
 <div class="row">
-    <div class="col-md-4">
-        <h2>Budujesz dom?</h2>
-        <p> Potrzebujesz sprawdzonej ekipy budowlanej?
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Szukaj &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Remontujesz mieszkanie?</h2>
-        <p> Potrzebujesz ekipy remontowej polecanej przez innych zadowolonych klientów? </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Sprawdź &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Urządzasz salon?</h2>
-        <p> Potrzebujesz projektanata wnętrz?</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Zobacz więcej &raquo;</a></p>
-    </div>
+	<div class="col-md-4">
+		<h2>Budujesz dom?</h2>
+		<p>
+			Potrzebujesz sprawdzonej ekipy budowlanej?
+		</p>
+		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Szukaj &raquo;</a></p>
+	</div>
+	<div class="col-md-4">
+		<h2>Remontujesz mieszkanie?</h2>
+		<p> Potrzebujesz ekipy remontowej polecanej przez innych zadowolonych klientów? </p>
+		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Sprawdź &raquo;</a></p>
+	</div>
+	<div class="col-md-4">
+		<h2>Urządzasz salon?</h2>
+		<p> Potrzebujesz projektanata wnętrz?</p>
+		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Zobacz więcej &raquo;</a></p>
+	</div>
 </div>

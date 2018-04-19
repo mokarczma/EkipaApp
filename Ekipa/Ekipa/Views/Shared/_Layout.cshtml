@@ -1,78 +1,32 @@
-﻿@{
-    var cityList = new Ekipa.Models.ViewModel.MainViewVM().Miasta;
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link rel="shortcut icon" href="~/Content/images/ikon.png" />
-    @Styles.Render("~/ Content/datepicker")
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/style/StyleSheet.css")
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	<link rel="shortcut icon" href="~/Content/images/ikon.png" />
+	@Styles.Render("~/ Content/datepicker")
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/style/StyleSheet.css")
 
-    @Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href='@Url.Action("ZnajdźEkipę", "Home/index",FormMethod.Get)'>
-                    <img class="img-responsive" src='@Url.Content("~/Content/images/ikon.png")' />
-                </a>
-            </div>
-          
-<div class="row navbar-collapse collapse">
-                        @using (Html.BeginForm("MainView", "Home", FormMethod.Post))
-                        {
-                            <div class="offset1 col-lg-5 col-md-5 col-12">
-                                <div class="row">
-                                    <input id="szukaj" type="text" placeholder="Szukaj"/>
-                                    <input  id="msc"type="text" placeholder="Miejscowość/">
-                                </div>
-                            </div>
-                            <input type="image" name="submit" src="~/Content/images/icons8-szukaj-50.png" class="btn btn-default" />
-                        }
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <ul class="nav navbar-nav">
-                                @if (ViewBag.UserName == null)
-                                {
-                                    <li> @Html.ActionLink("Logowanie klient", "LoginCustomer", "Account")</li>
-                                    <li> @Html.ActionLink("Logowanie firma", "LoginCompany", "Account")</li>
-                                }
-                                else
-                                {
-                                    <li>@ViewBag.UserName</li>
-                                    <li> @Html.ActionLink("Moje konto", "IndexCompany", "Account")</li>
-                                    <li> @Html.ActionLink("Wyloguj", "Logout", "Account")</li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-            <form action="MainView" method="POST">
-                <input type="text" name="valueINeed">
-                <input type="submit" value="View Report">
-            </form>
-                </div>
-            </div>
-            <div class="container body-content">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - Monika</p>
-                </footer>
-            </div>
-   
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/datepisker-js")
-            @Scripts.Render("~/bundles/bootstrap")
-            @Scripts.Render("~/bundles/site-scripts")
-            @RenderSection("scripts", required: false)
-        </body>
-    </html>
+	      @*@Html.Partial("~/Views/Shared/_MainView.cshtml")*@
+
+
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - Monika</p>
+		</footer>
+	</div>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/datepisker-js")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/site-scripts")
+	@RenderSection("scripts", required: false)
+</body>
+</html>

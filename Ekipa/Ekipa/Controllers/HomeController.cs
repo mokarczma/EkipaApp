@@ -44,12 +44,15 @@ namespace Ekipa.Controllers
         public ActionResult MainView()
         {
             MainViewVM model = new MainViewVM();
+            string szukaj = "";
+            string msc = "";
          
-            return View(model);
+            return View(szukaj,msc);
         }
 
         [HttpPost]
-        public ActionResult MainView(string valueINeed)
+        public ActionResult MainView(MainViewVM model)
+
         {
             return View();
         }

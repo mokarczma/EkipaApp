@@ -1,42 +1,38 @@
 ﻿@model Ekipa.Models.ViewModel.Company.CompanyImagesVM
-
 @{
-    ViewBag.Title = "CompanyImagesList";
+	ViewBag.Title = "CompanyImagesList";
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM);
 }
-
 <h2>Zarządzaj zdjęciami na profilu swojej firmy</h2>
-
 <div class="row">
+	@using (Html.BeginForm("CompanyImagesList", "Image", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.ID)
 
-    @using (Html.BeginForm("CompanyImagesList", "Image", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+		for (int i = 0; i < Model.ImageList.Count(); i++)
+		{
 
-        for (int i = 0; i < Model.ImageList.Count(); i++)
-        {
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+				<img class="img-responsive" src="@Url.Content(Model.ImageList[i].Link)" width="250" height="250" />
+				@Html.EditorFor(m => m.ImageList[i].Description, "", new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(m => m.ImageList[i].Description, "", new { @class = "text-danger" })
+				<p> Ustaw jako zdjęcie głowne: @Html.RadioButtonFor(m => m.MainPictureID, Model.ImageList[i].Id.ToString())
+				<p> Usuń: @Html.CheckBoxFor(m => m.ImageList[i].IsDelete, new { @checked = "checked" })</p>
+			</div>
+			@Html.HiddenFor(model => model.ImageList[i].Id)
+			@Html.HiddenFor(model => model.ImageList[i].Link)
+		}
 
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <img class="img-responsive" src="@Url.Content(Model.ImageList[i].Link)" width="250" height="250" />
-
-                @Html.EditorFor(m => m.ImageList[i].Description, "", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(m => m.ImageList[i].Description, "", new { @class = "text-danger" })
-                <p> Ustaw jako zdjęcie głowne: @Html.RadioButtonFor(m => m.MainPictureID, Model.ImageList[i].Id.ToString())
-                <p> Usuń: @Html.CheckBoxFor(m => m.ImageList[i].IsDelete, new { @checked = "checked" })</p>
-            </div>
-                            @Html.HiddenFor(model => model.ImageList[i].Id)
-                            @Html.HiddenFor(model => model.ImageList[i].Link)
-        }
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-default" />
-            </div>
-        </div>
-    }
-    </div>
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Zapisz" class="btn btn-default" />
+			</div>
+		</div>
+	}
+</div>
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>
