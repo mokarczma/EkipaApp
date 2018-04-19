@@ -259,6 +259,7 @@
     <Content Include="Content\images\home-zalogowany65.png" />
     <Content Include="Content\images\ikon.png" />
     <Content Include="Content\images\Tlo.png" />
+    <Content Include="Content\style\datepicker.css" />
     <Content Include="Content\style\jquery-ui.min.css" />
     <Content Include="Content\style\StyleSheet.css" />
     <Content Include="favicon.ico" />
@@ -274,6 +275,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom\custom.js" />
+    <Content Include="Scripts\dataPicker.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />

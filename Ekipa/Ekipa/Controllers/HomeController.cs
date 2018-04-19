@@ -49,7 +49,7 @@ namespace Ekipa.Controllers
         }
 
         [HttpPost]
-        public ActionResult MainView(MainViewVM mainViewVM)
+        public ActionResult MainView(string valueINeed)
         {
             return View();
         }
