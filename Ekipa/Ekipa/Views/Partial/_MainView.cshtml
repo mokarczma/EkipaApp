@@ -14,7 +14,7 @@
 				<div class="row navbar-collapse collapse">
 					@using (Html.BeginForm("MainView", "Home", FormMethod.Post))
 					{
-						<div class="offset1 col-lg-5 col-md-5 col-12">
+						<div class="offset1 col-lg-8 col-md-8 col-12">
 							<div class="row">
 								<div class="d-inline-block col-lg-6">@Html.EditorFor(m => m.NameSearch, "", new { htmlAttributes = new { @class = "form-control", placeholder = "Szukaj" } })</div>
 								<div class="d-inline-block col-lg-6">@Html.DropDownListFor(x => x.PlaceSearch, Model.Miasta, htmlAttributes: new { @class = "form-control" })</div>

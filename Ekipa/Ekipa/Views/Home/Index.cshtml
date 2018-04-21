@@ -3,23 +3,60 @@
 	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
 	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM)
 }
-<img class="img-responsive" src="~/Content/images/Tlo.png" />
 <div class="row">
-	<div class="col-md-4">
+	<div class="home-img col-12">
+		<img class="mw-100" src="~/Content/images/Tlo.png"/>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4 position-relative padding-column">
 		<h2>Budujesz dom?</h2>
 		<p>
 			Potrzebujesz sprawdzonej ekipy budowlanej?
 		</p>
-		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Szukaj &raquo;</a></p>
+		<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865"><div class="color-green home-action-button">Szukaj &raquo;</div></a>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 position-relative padding-column">
 		<h2>Remontujesz mieszkanie?</h2>
 		<p> Potrzebujesz ekipy remontowej polecanej przez innych zadowolonych klientów? </p>
-		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Sprawdź &raquo;</a></p>
+		<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866"><div class="color-yellow home-action-button">Sprawdź &raquo;</div></a>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 position-relative padding-column">
 		<h2>Urządzasz salon?</h2>
 		<p> Potrzebujesz projektanata wnętrz?</p>
-		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Zobacz więcej &raquo;</a></p>
+		<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867"><div class="color-red home-action-button">Zobacz więcej &raquo;</div></a>
 	</div>
 </div>
+
+<style>
+	.home-action-button {
+		background: gray;
+		cursor: pointer;
+		cursor: pointer;
+		padding: 10px 30px;
+		color: #fff;
+		text-transform: uppercase;
+		font-size: 14px;
+		position: absolute;
+		bottom: 0;
+		left: 20px;
+		right: 20px;
+	}
+
+	.color-green {
+		background-color: #76af24;
+	}
+
+	.color-yellow {
+		background-color: #f19f17;
+	}
+
+	.color-red {
+		background-color: #ae281c;
+	}
+
+	.padding-column {
+		padding: 0 20px;
+	}
+</style>

@@ -387,7 +387,7 @@
   <ItemGroup>
     <Folder Include="AppImages\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\test\" />
+    <Folder Include="Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
