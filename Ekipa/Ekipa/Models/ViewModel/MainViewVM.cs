@@ -14,7 +14,7 @@ namespace Ekipa.Models.ViewModel
        public string NameSearch { get; set; } 
 
        [Display(Name = "Miejscowość")]
-       public string PlaceSearch { get; set; }
+       public int PlaceSearch { get; set; }
 
         public List<SelectListItem> Miasta { get; set; }
         public MainViewVM()

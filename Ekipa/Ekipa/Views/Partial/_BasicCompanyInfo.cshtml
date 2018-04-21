@@ -1,0 +1,41 @@
+﻿@model Ekipa.Models.ViewModel.Company.BasicCompanyInfoVM
+
+<div>
+	<h2>
+		@Html.DisplayFor(model => model.CompanyName)
+	</h2>
+	<hr />
+	<h4>
+		@Html.DisplayFor(model => model.CityName)
+	</h4>
+	<hr />
+
+	<dl class="dl-horizontal">
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Speciality)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Speciality)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Services)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Services)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.AverageRating)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.AverageRating)
+		</dd>
+
+	</dl>
+</div>
+

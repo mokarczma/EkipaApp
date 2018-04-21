@@ -26,42 +26,16 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            var company = new Company();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-
-                var company = db.Companies.SingleOrDefault(x => x.Login == login);
-
-                if (company == null)
-                {
-                    return View();
-                }
-                List<Tag> tagList = new List<Tag>();
-                tagList = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
-
-                List<CompanyTerm> termList = new List<CompanyTerm>();
-                termList = db.CompanyTerm.Where(t => t.CompanyId == company.Id).ToList();
-
-                List<Image> imageList = new List<Image>();
-                imageList = db.Images.Where(t => t.CompanyId == company.Id).ToList();
-                CompanyInfoVM companyInfoVM = new CompanyInfoVM()
-                {
-                    Id = company.Id,
-                    CityName = company.City.Name,
-                    CompanyName = company.CompanyName,
-                    Speciality = company.Speciality,
-                    Services = company.Services,
-                    Pricing = company.Pricing,
-                    PhoneNumer = company.PhoneNumer,
-                    CompanyTagList = tagList,
-                    CompanyTermList = termList,
-                    CompanyImageList = imageList
-                };
-
-                return View(companyInfoVM);
+               company = db.Companies.SingleOrDefault(x => x.Login == login);
             }
+
+            CompanyInfoVM companyInfoVM = Controllers.CompanyForCustomerController.CompanyInfo(company.Id);
+
+            return View(companyInfoVM);        
         }
-
-
 
         [HttpGet]
         public ActionResult AddCompanyTerm()

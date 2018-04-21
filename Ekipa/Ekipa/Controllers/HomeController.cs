@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Sql;
+using Ekipa.Models.DB;
+using Ekipa.Models.ViewModel.Company;
 
 namespace Ekipa.Controllers
 {
     public class HomeController : Controller
     {
-
         private static List<SelectListItem> CitiesQuery()
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -40,22 +42,7 @@ namespace Ekipa.Controllers
             }
             return View();
         }
-        [HttpGet]
-        public ActionResult MainView()
-        {
-            MainViewVM model = new MainViewVM();
-            string szukaj = "";
-            string msc = "";
-         
-            return View(szukaj,msc);
-        }
-
-        [HttpPost]
-        public ActionResult MainView(MainViewVM model)
-
-        {
-            return View();
-        }
+        
 
     }
 }

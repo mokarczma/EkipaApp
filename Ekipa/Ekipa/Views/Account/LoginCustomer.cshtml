@@ -1,40 +1,37 @@
 ﻿@model Ekipa.Models.ViewModel.Customer.CustomerAccountVM
-
 @{
-    ViewBag.Title = "LoginCustomer";
+	ViewBag.Title = "LoginCustomer";
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM);
 }
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Podaj swój login lub email oraz hasło</h4>
+	@Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zaloguj" class="btn btn-default" />
-            </div>
-        </div>
-
-        <div>
-            @Html.ActionLink("Zarejestuj", "RegisterCustomer")
-        </div>
-    </div>
+	<div class="form-horizontal">
+		<h4>Podaj swój login lub email oraz hasło</h4>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Zaloguj" class="btn btn-default" />
+			</div>
+		</div>
+		<div>
+			@Html.ActionLink("Zarejestuj", "RegisterCustomer")
+		</div>
+	</div>
 }

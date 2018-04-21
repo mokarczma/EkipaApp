@@ -1,17 +1,17 @@
 ﻿
 @{
-    ViewBag.Title = "IndexCustomer";
+	ViewBag.Title = "IndexCustomer";
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM);
 }
 
+<div>
+	Siemanko @ViewBag.UserName
+</div>
 
-    <div>
-        Siemanko @ViewBag.UserName
-    </div>
-   
-    <div>
-        @Html.ActionLink("Edytuj dane", "EditCustomer")
-
-    </div>
-    <div>
-        @Html.ActionLink("Wyloguj", "Logout")
-    </div>
+<div>
+	@Html.ActionLink("Edytuj dane", "EditCustomer")
+</div>
+<div>
+	@Html.ActionLink("Wyloguj", "Logout")
+</div>

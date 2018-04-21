@@ -1,33 +1,33 @@
 ﻿
 @{
-    ViewBag.Title = "IndexCompany";
+	ViewBag.Title = "IndexCompany";
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM);
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>IndexCompany</title>
+	<meta name="viewport" content="width=device-width" />
+	<title>IndexCompany</title>
 </head>
 <body>
-    <div>
-        Siemanko firmo: @ViewBag.UserName
-    </div>
-    <div>
-        @Html.ActionLink("Edytuj dane konta", "EditCompany")
-    </div>
-    <div>
-        @Html.ActionLink("Zobacz informacje o firmie", "CompanyDetails","Company")
-    </div>
-    <div>
-        @Html.ActionLink("Dodaj termin","AddCompanyTerm", "Company")
-    </div>
-    <div>
-        @Html.ActionLink("Zdjęcia", "CompanyImagesList", "Image")
-    </div>
-    <div>
-        @Html.ActionLink("Wyloguj", "Logout")
-    </div>
+	<div>
+		Siemanko firmo: @ViewBag.UserName
+	</div>
+	<div>
+		@Html.ActionLink("Edytuj dane konta", "EditCompany")
+	</div>
+	<div>
+		@Html.ActionLink("Zobacz informacje o firmie", "CompanyDetails", "Company")
+	</div>
+	<div>
+		@Html.ActionLink("Dodaj termin", "AddCompanyTerm", "Company")
+	</div>
+	<div>
+		@Html.ActionLink("Zdjęcia", "CompanyImagesList", "Image")
+	</div>
+	<div>
+		@Html.ActionLink("Wyloguj", "Logout")
+	</div>
 </body>
 </html>
