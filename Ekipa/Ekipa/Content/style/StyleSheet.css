@@ -1,5 +1,13 @@
-﻿body {
+﻿@font-face {
+	font-family: FontRegural;
+	src: url(/Fonts/Irregularis.ttf);
 }
+
+body {
+	font-family: FontRegural;
+	background-color:aqua;
+}
+
 img {
     max-width: 100%;
     height: auto;

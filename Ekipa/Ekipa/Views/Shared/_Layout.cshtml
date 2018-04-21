@@ -6,8 +6,9 @@
 	<title>@ViewBag.Title - My ASP.NET Application</title>
 	<link rel="shortcut icon" href="~/Content/images/ikon.png" />
 
+	@Styles.Render("~/Content/style")
+
 	@Styles.Render("~/Content/css")
-	@*@Styles.Render("~/Content/style/StyleSheet.css")*@
 
 	@Scripts.Render("~/bundles/modernizr")
 </head>
@@ -22,6 +23,5 @@
 
 	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
-	@RenderSection("scripts", required: false)
 </body>
 </html>
