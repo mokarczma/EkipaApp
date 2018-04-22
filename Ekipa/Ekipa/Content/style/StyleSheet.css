@@ -4,11 +4,39 @@
 }
 
 body {
-	font-family: FontRegural;
-	background-color:aqua;
+	font-family: Irregularis;
 }
 
 img {
     max-width: 100%;
     height: auto;
 }
+.search-box {
+	width: 50%;
+}
+
+	.search-box input {
+		width: 98% !important;
+		max-width: 98% !important;
+	}
+
+.choose-box {
+	width: 20%;
+}
+
+	.choose-box select {
+		width: 92% !important;
+		max-width: 92% !important;
+	}
+
+.search-button {
+	color: #76af24;
+	background: transparent;
+	border: 1px solid #76af24;
+	text-transform: uppercase;
+}
+
+	.search-button:hover {
+		background: #76af24;
+		color: #fff;
+	}

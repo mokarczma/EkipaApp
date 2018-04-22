@@ -7,80 +7,60 @@
 <h2>@Html.DisplayFor(model => model.CompanyName)</h2>
 
 <di>
-    <h4> @Html.DisplayFor(model => model.CityName)</h4>
+	<h4> @Html.DisplayFor(model => model.CityName)</h4>
+	<h8> Tel: @Html.DisplayFor(model => model.PhoneNumer)</h8>
+	<hr />
 
-    <h8> Tel: @Html.DisplayFor(model => model.PhoneNumer)</h8>
-    <hr />
+	<div class="row">
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.Id)
+		<div class="row text-center">
+			@for (int i = 0; i < Model.CompanyTagList.Count(); i++)
+			{
+				<div class="tag-box col-lg-2 col-md-2 col-xs-4 thumb col-xs-6 thumb text-center">
+					@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+				</div>
+			}
+		</div>
+		<div class="row row-margin">
+			@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
+		</div>
+		
+		<h6>Wolne terminy</h6>
+		@for (int i = 0; i < Model.CompanyTermList.Count(); i++)
+		{
 
+			<div class="col-lg-3 col-md-4 col-xs-6 col-xs-12 thumb">
+				@Html.DisplayFor(m => m.CompanyTermList[i].DateFrom)
+				@Html.DisplayFor(m => m.CompanyTermList[i].DateTo)
+			</div>
+		}
+		<hr />
 
+		<p>
+			Specjalność: @Html.DisplayFor(model => model.Speciality)
+		</p>
 
-<div class="row">
+		<p>
+			Zakres usług: @Html.DisplayFor(model => model.Services)
+		</p>
+		<p>
+			Wyceny:  @Html.DisplayFor(model => model.Pricing)
+		</p>
+	</div>
+	<style>
 
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+		.row-margin {
+			margin-top: 20px;
+		}
 
-    <div class="row text-center">
-        @for (int i = 0; i < Model.CompanyTagList.Count(); i++)
-        {
-            <div class="tag-box col-lg-2 col-md-2 col-xs-4 thumb col-xs-6 thumb text-center">
-                @Html.DisplayFor(m => m.CompanyTagList[i].Name)
-            </div>
-        }
-    </div>
+		.tag-box {
+			background-color: lightblue;
+			border-radius: 6px;
+			padding: 4px;
+			box-sizing: border-box;
+			margin: 0 10px;
+		}
+	</style>
 
-    <div class="row row-margin">
-        @for (int i = 0; i < Model.CompanyImageList.Count(); i++)
-            {
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <img class="img-responsive w-100" src="@Url.Content(Model.CompanyImageList[i].Link)" />
-                @Html.DisplayFor(m => m.CompanyImageList[i].Description)
-            </div>
-        }
-    </div>
-
-      
-
-        <h6>Wolne terminy</h6>
-
-        @for (int i = 0; i < Model.CompanyTermList.Count(); i++)
-            {
-
-            <div class="col-lg-3 col-md-4 col-xs-6 col-xs-12 thumb">
-                @Html.DisplayFor(m => m.CompanyTermList[i].DateFrom)
-                @Html.DisplayFor(m => m.CompanyTermList[i].DateTo)
-            </div>
-        }
-        <hr />
-
-
-        <p>
-            Specjalność: @Html.DisplayFor(model => model.Speciality)
-        </p>
-
-
-
-        <p>
-            Zakres usług: @Html.DisplayFor(model => model.Services)
-        </p>
-
-        <p>
-            Wyceny:  @Html.DisplayFor(model => model.Pricing)
-        </p>
-
-    </div>
-
-<style>
-    .row-margin{
-        margin-top: 20px;
-    }
-
-    .tag-box {
-        background-color: lightblue;
-        border-radius: 6px;
-        padding: 4px;
-        box-sizing: border-box;
-        margin: 0 10px;
-    }
-
-</style>
