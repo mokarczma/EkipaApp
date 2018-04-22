@@ -14,6 +14,17 @@ namespace Ekipa.Controllers
 {
     public class AccountController : Controller
     {
+        //public static LogedUserVM LogedUser ()
+        //{
+        //    var userCustomer = System.Security.Principal. as MPrincipal;
+        //    var login = userCustomer.UserDetails.Login;
+
+        //    using (ApplicationDbContext db = new ApplicationDbContext())
+        //    {
+        //        var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+        //    }
+
+
         [HttpGet]
         [ActionName("Logout")]
         public ActionResult Loginout()

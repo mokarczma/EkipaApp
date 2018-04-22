@@ -1,49 +1,60 @@
 ﻿@model Ekipa.Models.ViewModel.MainViewVM
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a href='@Url.Action("ZnajdźEkipę", "Home/index",FormMethod.Get)'>
-				<img class="img-responsive" src='@Url.Content("~/Content/images/ikon.png")' />
-			</a>
-		</div>
-		<div class="navbar-collapse collapse">
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					@Html.EditorFor(m => m.NameSearch, "", new { htmlAttributes = new { @class = "form-control", placeholder = "Szukaj" } })
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<a class="navbar-brand mr-sm-auto" href="@Url.Action("ZnajdźEkipę", "Home/index",FormMethod.Get)">
+		<img class="img-responsive" src='@Url.Content("~/Content/images/ikon.png")' />
+	</a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<form class="form-inline my-2 my-lg-0 col">
+			<div class="search-box">@Html.EditorFor(m => m.NameSearch, "", new { htmlAttributes = new { @class = "form-control mr-sm-2", placeholder = "Szukaj" } })</div>
+			<div class="choose-box">@Html.DropDownListFor(x => x.PlaceSearch, Model.CitiesDB, htmlAttributes: new { @class = "form-control mr-sm-2" })</div>
+			<button class="search-button btn my-2 my-sm-0" type="submit">Szukaj</button>
+		</form>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Zaloguj/@Html.DisplayFor(model => model.UserName)
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="#">Moje konto</a>
+					<a class="dropdown-item" href="#">Moje terminy</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Wyloguj</a>
 				</div>
-				<div class="form-group">
-					@Html.DropDownListFor(x => x.PlaceSearch, Model.Miasta, htmlAttributes: new { @class = "form-control" })
-				</div>
-				<button type="submit" style="border: 0; background: transparent"> <img class="ikon" src="~/Content/images/icons8-szukaj-50.png" /></button>
-			</form>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Link</a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rozwijana lista <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Akcja</a></li>
-						<li><a href="#">Inna akcja</a></li>
-						<li><a href="#">Coś jeszcze innego</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Oddzielone linki</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Jeszcze jeden oddzielony link</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+			</li>
+		</ul>
 	</div>
-</div>
+</nav>
 
 <style>
-
-	.ikon {
-		width:30px;
-		height: 30px;
+	.search-box {
+		width: 50%;
 	}
-	</style>
+		.search-box input {
+			width: 98% !important;
+			max-width: 98% !important;
+		}
+
+	.choose-box {
+		width: 20%;
+	}
+		.choose-box select {
+			width: 92% !important;
+			max-width: 92% !important;
+		}
+
+	.search-button {
+		color: #76af24;
+		background: transparent;
+		border: 1px solid #76af24;
+		text-transform: uppercase;
+	}
+	.search-button:hover {
+		background: #76af24;
+		color: #fff;
+	}
+</style>

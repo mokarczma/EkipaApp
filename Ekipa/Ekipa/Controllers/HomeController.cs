@@ -31,15 +31,6 @@ namespace Ekipa.Controllers
         public ActionResult Index()
 
         {
-            var cos = new MainViewVM();
-            var m = cos.Miasta;
-            ViewBag.CityList = m;
-            var user = User as MPrincipal;
-            if (user != null)
-            {
-                var login = user.UserDetails.Login;
-                ViewBag.UserName = user.UserDetails.Login;
-            }
             return View();
         }
         
