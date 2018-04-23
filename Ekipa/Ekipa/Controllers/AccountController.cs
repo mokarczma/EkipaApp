@@ -69,7 +69,6 @@ namespace Ekipa.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegisterCustomer(CustomerAccountVM _model)
         {
-            ViewBag.PageNumber = 1;
             if (ModelState.IsValid)
             {
 
@@ -163,11 +162,10 @@ namespace Ekipa.Controllers
         [ActionName("IndexCustomer")]
         public ActionResult IndexCustomer()
         {
-            ViewBag.CityList = CitiesQuery();
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
-
+            ViewBag.UserRole =5;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
@@ -186,12 +184,12 @@ namespace Ekipa.Controllers
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
+            ViewBag.UserRole = 5;
             CustomerAccountEditVM customerVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-                ViewBag.UserName = cust.Login;
-                ViewBag.Role = cust.RoleId;
+              
                 customerVM = new CustomerAccountEditVM();
                 customerVM.Name = cust.Name;
                 customerVM.Surname = cust.Surname;
@@ -209,6 +207,7 @@ namespace Ekipa.Controllers
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
+            ViewBag.UserRole = 5;
 
 
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -247,7 +246,7 @@ namespace Ekipa.Controllers
         [ActionName("RegisterCompany")]
         public ActionResult RegisterCompany()
         {
-            ViewBag.CityList = CitiesQuery();
+           
             return View();
         }
 
@@ -256,7 +255,6 @@ namespace Ekipa.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegisterCompany(CompanyAccountVM _model)
         {
-            ViewBag.PageNumber = 1;
             if (ModelState.IsValid)
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
@@ -299,7 +297,6 @@ namespace Ekipa.Controllers
         [Route("LoginCompany")]
         public ActionResult LoginCompany()
         {
-            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -346,10 +343,11 @@ namespace Ekipa.Controllers
         [ActionName("IndexCompany")]
         public ActionResult IndexCompany()
         {
-            ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 6;
+
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
@@ -368,6 +366,9 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 6;
+
+
             CompanyAccountEditVM companyEditVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -389,6 +390,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 6;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

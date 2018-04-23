@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Ekipa.Models.ViewModel.Company.BasicCompanyInfoVM>
+
+@{
+	ViewBag.Title = "MainView";
+}
+
+<table class="table">
+
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.CityName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CompanyName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Speciality)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Services)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.AverageRating)
+			</td>
+			<td>
+				@using (Html.BeginForm("InfoAboutCompany", "CompanyForCustomer", FormMethod.Post))
+	{
+			@Html.HiddenFor(modelItem => item.IdCompany)
+
+			<div class="col-md-offset-2 col-md-10">
+				<button class="search-button btn my-2 my-sm-0" type="submit">Zobacz wiecej</button>
+			</div>
+}
+				@Html.ActionLink("Zobacz", "InfoAboutCompany", new { /* id = Model.PrimaryKey */ }) 
+				@Html.ActionLink("Zobacz", "InfoAboutCompany", new { id = item.IdCompany }) |
+
+
+			</td>
+		</tr>
+	}
+
+</table>

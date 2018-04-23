@@ -31,9 +31,26 @@ namespace Ekipa.Controllers
         public ActionResult Index()
 
         {
+            var user = User as MPrincipal;
+            if (user != null)
+            {
+                var login = user.UserDetails.Login;
+                ViewBag.UserName = user.UserDetails.Login;
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                    var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                    if (comp != null)
+                    {
+                        ViewBag.UserRole = 6;
+                    }
+                    else
+                    {
+                        ViewBag.UserRole = 5;
+                    }
+                }
+            }        
             return View();
-        }
-        
-
+        }     
     }
 }

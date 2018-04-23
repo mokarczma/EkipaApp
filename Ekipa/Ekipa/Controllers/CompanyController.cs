@@ -26,6 +26,8 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 6;
+
             var company = new Company();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -40,7 +42,6 @@ namespace Ekipa.Controllers
         [HttpGet]
         public ActionResult AddCompanyTerm()
         {
-            ViewBag.CityList = CitiesQuery();
             return View();
         }
 
@@ -50,28 +51,33 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 6;
 
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            if (ModelState.IsValid)
             {
-
-                var company = db.Companies.SingleOrDefault(x => x.Login == login);
-
-                if (company == null)
+                using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return View(model);
+
+                    var company = db.Companies.SingleOrDefault(x => x.Login == login);
+
+                    if (company == null)
+                    {
+                        return View(model);
+                    }
+
+                    var companyTerms = new CompanyTerm()
+                    {
+                        CompanyId = company.Id,
+                        DateFrom = model.DateFrom,
+                        DateTo = model.DateTo,
+                    };
+
+                    company.CompanyTerms.Add(companyTerms);
+
+                    db.SaveChanges();
                 }
-
-                var companyTerms = new CompanyTerm()
-                {
-                    CompanyId = company.Id,
-                    DateFrom = model.DateFrom,
-                    DateTo = model.DateTo,
-                };
-
-                company.CompanyTerms.Add(companyTerms);
-
-                db.SaveChanges();
             }
+      
             return View("");
         }
         [HttpGet]
@@ -82,6 +88,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 6;
 
             CompanyDetailsVM compDetVM = null;
 
@@ -106,7 +113,9 @@ namespace Ekipa.Controllers
             ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
+
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 6;
 
             CompanyDetailsVM compDetVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -167,7 +176,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-
+            ViewBag.UserRole = 6;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

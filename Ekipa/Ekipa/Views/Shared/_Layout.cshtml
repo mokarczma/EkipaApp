@@ -6,13 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@ViewBag.Title — ZnajdzEkipe.pl</title>
 	@Styles.Render("~/Content/css")
-	@Styles.Render("~/Content/style/slick-slider-style");
+	@Styles.Render("~/Content/style/slick-slider-style")
 
 
-	@Styles.Render("~/Content/style");
+	@Styles.Render("~/Content/style")
 	@Scripts.Render("~/bundles/modernizr")
 </head>
+@{
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+}
 <body>
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM)
+
 	<div class="container body-content">
 		@RenderBody()
 		<hr />
@@ -25,7 +30,7 @@
 	@Scripts.Render("~/bundles/bootstrap")
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	@Scripts.Render("~/bundles/slick-slider");
+	@Scripts.Render("~/bundles/slick-slider")
 	<script src="~/Scripts/custom/custom.js"></script>
 	@RenderSection("scripts", required: false)
 </body>

@@ -1,8 +1,7 @@
 ﻿@model Ekipa.Models.ViewModel.Company.CompanyInfoVM
 @{
 	ViewBag.Title = "InfoAboutCompany";
-	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
-	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM)
+	
 }
 <h2>@Html.DisplayFor(model => model.CompanyName)</h2>
 <di>
@@ -17,43 +16,50 @@
 		<div class="row text-center">
 			@for (int i = 0; i < Model.CompanyTagList.Count(); i++)
 			{
-				<div class="tag-box col-lg-2 col-md-2 col-xs-4 thumb col-xs-6 thumb text-center">
-					@Html.DisplayFor(m => m.CompanyTagList[i].Name)
-				</div>
+				if (i % 2 == 0)
+				{
+					<div class="color-yellow tag-box">
+						@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+					</div>
+				}
+				else if (i == 3 || i == 7 || i == 9)
+				{
+					<div class="color-red tag-box">
+						@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+					</div>
+				}
+				else
+				{
+					<div class="color-green tag-box">
+						@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+					</div>
+				}
 			}
 		</div>
 		<div class="row row-margin">
-			@for (int i = 0; i < Model.CompanyImageList.Count(); i++)
-			{
-				<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-					<img class="img-responsive w-100" src="@Url.Content(Model.CompanyImageList[i].Link)" />
-					@Html.DisplayFor(m => m.CompanyImageList[i].Description)
-				</div>
-			}
+			@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
 		</div>
 
 		<h6>Wolne terminy</h6>
-		@for (int i = 0; i < Model.CompanyTermList.Count(); i++)
-		{
+		<div class="row row-margin">
+			@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTerms)
+		</div>
 
-			<div class="col-lg-3 col-md-4 col-xs-6 col-xs-12 thumb">
-				@Html.DisplayFor(m => m.CompanyTermList[i].DateFrom)
-				@Html.DisplayFor(m => m.CompanyTermList[i].DateTo)
-			</div>
-		}
-		<hr />
 
-		<p>
-			Specjalność: @Html.DisplayFor(model => model.Speciality)
-		</p>
-
-		<p>
-			Zakres usług: @Html.DisplayFor(model => model.Services)
-		</p>
-		<p>
-			Wyceny:  @Html.DisplayFor(model => model.Pricing)
-		</p>
 	</div>
+
+	<p>
+		Specjalność: @Html.DisplayFor(model => model.Speciality)
+	</p>
+
+	<p>
+		Zakres usług: @Html.DisplayFor(model => model.Services)
+	</p>
+	<p>
+		Wyceny:  @Html.DisplayFor(model => model.Pricing)
+	</p>
+	</div>
+
 	<style>
 
 		.row-margin {
@@ -61,10 +67,10 @@
 		}
 
 		.tag-box {
-			background-color: lightblue;
 			border-radius: 6px;
 			padding: 4px;
 			box-sizing: border-box;
 			margin: 0 10px;
 		}
 	</style>
+

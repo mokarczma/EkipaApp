@@ -19,6 +19,8 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.Role = 6;
+
 
             CompanyTagsVM model = null;
 
@@ -82,7 +84,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-
+            ViewBag.Role = 6;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var company = db.Companies.SingleOrDefault(x => x.Login == login);
@@ -124,6 +126,10 @@ namespace Ekipa.Controllers
         [ActionName("CreateTag")]
         public ActionResult CreateTag()
         {
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.Role = 6;
             return View();
         }
 

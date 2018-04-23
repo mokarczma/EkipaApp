@@ -29,17 +29,17 @@ namespace Ekipa.Models.ViewModel
             LogedUserVM logedUser = new LogedUserVM();
 
 
-            using (Controllers.AccountController accCon = new Controllers.AccountController())
-            {
-                logedUser = accCon.LogedUser();
-            }
-            if (logedUser != null)
-            {
-                Loged = logedUser.Loged;
-                UserId = logedUser.UserId;
-                UserName = logedUser.UserName;
-                UserRole = logedUser.UserRole;
-            }
+            //using (Controllers.AccountController accCon = new Controllers.AccountController())
+            //{
+            //    logedUser = accCon.LogedUser();
+            //}
+            //if (logedUser != null)
+            //{
+            //    Loged = logedUser.Loged;
+            //    UserId = logedUser.UserId;
+            //    UserName = logedUser.UserName;
+            //    UserRole = logedUser.UserRole;
+            //}
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

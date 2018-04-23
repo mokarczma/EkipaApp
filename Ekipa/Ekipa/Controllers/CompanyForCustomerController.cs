@@ -24,6 +24,7 @@ namespace Ekipa.Controllers
                 List<CompanyTerm> termList = new List<CompanyTerm>();
                 termList = db.CompanyTerm.Where(t => t.CompanyId == company.Id).ToList();
                 CompanyTermsVM companyTerms = new CompanyTermsVM();
+                List<CompanyAddTermVM> compTermsList = new List<CompanyAddTermVM>();
 
                 foreach (var item in termList)
                 {
@@ -41,9 +42,9 @@ namespace Ekipa.Controllers
                         MonthTo = item.DateTo.Month.ToString(),
                         DayTo = item.DateTo.Day,
                       };
-                    companyTerms.CompanyTermsList.Add(TermVM);
+                    compTermsList.Add(TermVM);
                 }
-
+                companyTerms.CompanyTermsList = compTermsList;
 
                 List<Image> imageList = new List<Image>();
                 imageList = db.Images.Where(t => t.CompanyId == company.Id).ToList();
@@ -63,18 +64,36 @@ namespace Ekipa.Controllers
                 return companyInfoVM;
             };
         }
-        [HttpGet]
-        public ActionResult InfoAboutCompany(int companyId)
+        [HttpPost]
+        public ActionResult InfoAboutCompany(int CompanyID)
         {
             var user = User as MPrincipal;
-            var login = user.UserDetails.Login;
-            ViewBag.UserName = user.UserDetails.Login;
-            CompanyInfoVM companyInfoVM = Controllers.CompanyForCustomerController.CompanyInfo(companyId);
+            if (user != null)
+            {
+                var login = user.UserDetails.Login;
+                ViewBag.UserName = user.UserDetails.Login;
+
+
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                    var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                    if (comp != null)
+                    {
+                        ViewBag.UserRole = 6;
+                    }
+                    else
+                    {
+                        ViewBag.UserRole = 5;
+                    }
+                }
+            }
+            CompanyInfoVM companyInfoVM = CompanyInfo(CompanyID);
             return View(companyInfoVM);
 
         }
         [HttpGet]
-        public ActionResult MainView()
+        public ActionResult SearchView()
         {
             MainViewVM model = new MainViewVM();
             string szukaj = "";
@@ -84,11 +103,13 @@ namespace Ekipa.Controllers
         }
 
         [HttpPost]
-        public ActionResult MainView(MainViewVM model)
+        public ActionResult SearchView(MainViewVM model)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var dbCompany = db.Companies.Where(t => t.CityId == model.PlaceSearch && t.CompanyName.Contains(model.NameSearch)).ToList<Company>();
+
+                List<BasicCompanyInfoVM> basicCompanyInfoList = new List<BasicCompanyInfoVM>();
                 foreach (var item in dbCompany)
                 {
                     CompanyInfoVM company = CompanyInfo(item.Id);
@@ -103,12 +124,11 @@ namespace Ekipa.Controllers
                         Services = company.Services,
                         Speciality = company.Speciality
                     };
-
+                    basicCompanyInfoList.Add(basicInfo);
                 }
-
-
-                return RedirectToAction("InfoAboutCompany", "CompanyForCustomerController");
+                return View(basicCompanyInfoList);
             }
         }
+
     }
 }

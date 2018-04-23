@@ -259,7 +259,7 @@
     <Content Include="Content\images\home-niezalogowany30.png" />
     <Content Include="Content\images\home-niezalogowany65.png" />
     <Content Include="Content\images\home-zalogowany65.png" />
-    <Content Include="Content\images\ikon.png" />
+    <Content Include="Content\images\ikonZE.png" />
     <Content Include="Content\images\Tlo.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style\datepicker.css" />
@@ -304,6 +304,8 @@
     <Content Include="Scripts\vendor\jquery.fitvids.js" />
     <Content Include="Views\Partial\_Slider.cshtml" />
     <Content Include="Views\Partial\_TermReservation.cshtml" />
+    <Content Include="Views\CompanyForCustomer\SearchView.cshtml" />
+    <Content Include="Views\CompanyForCustomer\View.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
