@@ -21,7 +21,7 @@ namespace Ekipa.Controllers
                 List<Tag> tagList = new List<Tag>();
                 tagList = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
 
-                List<CompanyTerm> termList = new List<CompanyTerm>();
+                List<Term> termList = new List<Term>();
                 termList = db.CompanyTerm.Where(t => t.CompanyId == company.Id).ToList();
                 CompanyTermsVM companyTerms = new CompanyTermsVM();
                 List<CompanyAddTermVM> compTermsList = new List<CompanyAddTermVM>();
@@ -93,33 +93,6 @@ namespace Ekipa.Controllers
             CompanyInfoVM companyInfoVM = CompanyInfo(id);
             return View(companyInfoVM);
         }
-        //[HttpPost]
-        //public ActionResult InfoAboutCompany(BasicCompanyInfoVM model)
-        //{
-        //    var user = User as MPrincipal;
-        //    if (user != null)
-        //    {
-        //        var login = user.UserDetails.Login;
-        //        ViewBag.UserName = user.UserDetails.Login;
-
-
-        //        using (ApplicationDbContext db = new ApplicationDbContext())
-        //        {
-        //            var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
-        //            var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
-        //            if (comp != null)
-        //            {
-        //                ViewBag.UserRole = 6;
-        //            }
-        //            else
-        //            {
-        //                ViewBag.UserRole = 5;
-        //            }
-        //        }
-        //    }
-        //    CompanyInfoVM companyInfoVM = CompanyInfo(model.IdCompany);
-        //    return View(companyInfoVM);
-        //}
         [HttpGet]
         public ActionResult SearchView()
         {          return View();

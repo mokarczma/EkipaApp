@@ -162,6 +162,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\RezervationController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -220,9 +221,11 @@
     <Compile Include="Models\DB\City.cs" />
     <Compile Include="Models\DB\Company.cs" />
     <Compile Include="Models\DB\CompanyTag.cs" />
-    <Compile Include="Models\DB\CompanyTerm.cs" />
+    <Compile Include="Models\DB\Opinion.cs" />
+    <Compile Include="Models\DB\Term.cs" />
     <Compile Include="Models\DB\Customer.cs" />
     <Compile Include="Models\DB\Image.cs" />
+    <Compile Include="Models\DB\Reservation.cs" />
     <Compile Include="Models\Principal.cs" />
     <Compile Include="Models\DB\Tag.cs" />
     <Compile Include="Models\DB\Role.cs" />
@@ -306,7 +309,6 @@
     <Content Include="Views\Partial\_Slider.cshtml" />
     <Content Include="Views\Partial\_TermReservation.cshtml" />
     <Content Include="Views\PublicCompany\View.cshtml" />
-    <Content Include="Views\Partial\_BasicCompanyInfo.cshtml" />
     <Content Include="Views\PublicCompany\SearchView.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
@@ -399,6 +401,7 @@
   <ItemGroup>
     <Folder Include="AppImages\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Rezervation\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

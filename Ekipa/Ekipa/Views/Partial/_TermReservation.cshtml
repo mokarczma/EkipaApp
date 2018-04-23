@@ -1,15 +1,10 @@
 ﻿@model Ekipa.Models.ViewModel.Company.CompanyTermsVM
 
-
-@foreach (var item in Model.CompanyTermsList)
+@for (int i = 0; i < Model.CompanyTermsList.Count(); i++)
 {
-	@*@using (Html.BeginForm("MainView", "Home", FormMethod.Post))
-	{*@
-		<div class="term-box">
-			@Html.DisplayFor(m => item.DateFrom)
-			@Html.DisplayFor(m => item.DateTo)
-			<div class="search-button btn my-2 my-sm-0">Rezerwuj</div>
-		</div>
-	@*  *@}
-
+<div class="term-box">
+	@Html.DisplayFor(model => model.CompanyTermsList[i].DateFrom)
+	@Html.DisplayFor(model => model.CompanyTermsList[i].DateTo)
+	@Html.ActionLink("Zarezerwuj", "InfoAboutCompany", new { id = Model.CompanyTermsList[i].ID })
+</div>
 }

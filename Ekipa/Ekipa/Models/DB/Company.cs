@@ -21,8 +21,10 @@ namespace Ekipa.Models.DB
         public string PhoneNumer { get; set; }
 
         public virtual ICollection<CompanyTag> Tags { get; set; }
-        public virtual List<CompanyTerm> CompanyTerms { get; set; }
+        public virtual List<Term> CompanyTerms { get; set; }
         public virtual List<Image> Images { get; set; }
+        public virtual List<Reservation> Rezervations { get; set; }
+
 
         public virtual Role Role { get; set; }
         public virtual City City { get; set; }

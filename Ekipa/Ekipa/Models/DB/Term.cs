@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Ekipa.Models.DB
 { 
-    public class CompanyTerm
+    public class Term
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }

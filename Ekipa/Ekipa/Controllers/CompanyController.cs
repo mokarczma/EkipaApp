@@ -65,7 +65,7 @@ namespace Ekipa.Controllers
                         return View(model);
                     }
 
-                    var companyTerms = new CompanyTerm()
+                    var companyTerms = new Term()
                     {
                         CompanyId = company.Id,
                         DateFrom = model.DateFrom,
