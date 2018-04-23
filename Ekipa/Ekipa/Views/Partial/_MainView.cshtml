@@ -9,7 +9,7 @@
 	</button>
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		@using (Html.BeginForm("SearchView", "CompanyForCustomer", FormMethod.Post))
+		@using (Html.BeginForm("SearchView", "PublicCompany", FormMethod.Post))
 		{
 		<div class="form-inline my-2 my-lg-0 col">
 			<div class="search-box">@Html.EditorFor(m => m.NameSearch, "", new { htmlAttributes = new { @class = "form-control mr-sm-2", placeholder = "Szukaj" } })</div>

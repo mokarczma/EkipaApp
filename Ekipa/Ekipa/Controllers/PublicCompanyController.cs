@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Ekipa.Controllers
 {
-    public class CompanyForCustomerController : Controller
+    public class PublicCompanyController : Controller
     {
         public static CompanyInfoVM CompanyInfo(int companyId)
         {
@@ -64,8 +64,10 @@ namespace Ekipa.Controllers
                 return companyInfoVM;
             };
         }
-        [HttpPost]
-        public ActionResult InfoAboutCompany(int CompanyID)
+     
+     
+        [HttpGet]
+        public ActionResult InfoAboutCompany(int id)
         {
             var user = User as MPrincipal;
             if (user != null)
@@ -88,18 +90,39 @@ namespace Ekipa.Controllers
                     }
                 }
             }
-            CompanyInfoVM companyInfoVM = CompanyInfo(CompanyID);
+            CompanyInfoVM companyInfoVM = CompanyInfo(id);
             return View(companyInfoVM);
-
         }
+        //[HttpPost]
+        //public ActionResult InfoAboutCompany(BasicCompanyInfoVM model)
+        //{
+        //    var user = User as MPrincipal;
+        //    if (user != null)
+        //    {
+        //        var login = user.UserDetails.Login;
+        //        ViewBag.UserName = user.UserDetails.Login;
+
+
+        //        using (ApplicationDbContext db = new ApplicationDbContext())
+        //        {
+        //            var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+        //            var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+        //            if (comp != null)
+        //            {
+        //                ViewBag.UserRole = 6;
+        //            }
+        //            else
+        //            {
+        //                ViewBag.UserRole = 5;
+        //            }
+        //        }
+        //    }
+        //    CompanyInfoVM companyInfoVM = CompanyInfo(model.IdCompany);
+        //    return View(companyInfoVM);
+        //}
         [HttpGet]
         public ActionResult SearchView()
-        {
-            MainViewVM model = new MainViewVM();
-            string szukaj = "";
-            string msc = "";
-
-            return View(szukaj, msc);
+        {          return View();
         }
 
         [HttpPost]
@@ -126,9 +149,11 @@ namespace Ekipa.Controllers
                     };
                     basicCompanyInfoList.Add(basicInfo);
                 }
-                return View(basicCompanyInfoList);
+                BasicCompanyInfoListVM searched = new BasicCompanyInfoListVM();
+                searched.basicCompanyInfoVMlist = basicCompanyInfoList;
+
+                return View(searched);
             }
         }
-
     }
 }

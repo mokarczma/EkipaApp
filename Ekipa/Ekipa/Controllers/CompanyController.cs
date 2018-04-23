@@ -34,7 +34,7 @@ namespace Ekipa.Controllers
                company = db.Companies.SingleOrDefault(x => x.Login == login);
             }
 
-            CompanyInfoVM companyInfoVM = Controllers.CompanyForCustomerController.CompanyInfo(company.Id);
+            CompanyInfoVM companyInfoVM = Controllers.PublicCompanyController.CompanyInfo(company.Id);
 
             return View(companyInfoVM);        
         }
