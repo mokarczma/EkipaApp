@@ -1,0 +1,15 @@
+﻿@model Ekipa.Models.ViewModel.Company.CompanyTermsVM
+
+
+@foreach (var item in Model.CompanyTermsList)
+{
+	@*@using (Html.BeginForm("MainView", "Home", FormMethod.Post))
+	{*@
+		<div class="term-box">
+			@Html.DisplayFor(m => item.DateFrom)
+			@Html.DisplayFor(m => item.DateTo)
+			<div class="search-button btn my-2 my-sm-0">Rezerwuj</div>
+		</div>
+	@*  *@}
+
+}

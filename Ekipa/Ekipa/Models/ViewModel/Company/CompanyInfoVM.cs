@@ -19,7 +19,7 @@ namespace Ekipa.Models.ViewModel.Company
         public string Pricing { get; set; }
         public string PhoneNumer { get; set; }
         public List<Tag> CompanyTagList { get; set; }
-        public List<CompanyTerm> CompanyTermList { get; set; }
+        public CompanyTermsVM CompanyTerms { get; set; }
         public List<Image> CompanyImageList { get; set; }
         // Tutaj dodamy jeszcze rezerwacje i opinie
         

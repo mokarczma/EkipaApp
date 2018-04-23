@@ -23,6 +23,27 @@ namespace Ekipa.Controllers
 
                 List<CompanyTerm> termList = new List<CompanyTerm>();
                 termList = db.CompanyTerm.Where(t => t.CompanyId == company.Id).ToList();
+                CompanyTermsVM companyTerms = new CompanyTermsVM();
+
+                foreach (var item in termList)
+                {
+                    CompanyAddTermVM TermVM = new CompanyAddTermVM
+                    {
+                        ID = item.Id,
+
+                        DateFrom = item.DateFrom,
+                        YearFrom = item.DateFrom.Year,
+                        MonthFrom = item.DateFrom.Month.ToString(),
+                        DayFrom = item.DateFrom.Day,
+
+                        DateTo = item.DateTo,
+                        YearTo = item.DateTo.Year,
+                        MonthTo = item.DateTo.Month.ToString(),
+                        DayTo = item.DateTo.Day,
+                      };
+                    companyTerms.CompanyTermsList.Add(TermVM);
+                }
+
 
                 List<Image> imageList = new List<Image>();
                 imageList = db.Images.Where(t => t.CompanyId == company.Id).ToList();
@@ -36,7 +57,7 @@ namespace Ekipa.Controllers
                     Pricing = company.Pricing,
                     PhoneNumer = company.PhoneNumer,
                     CompanyTagList = tagList,
-                    CompanyTermList = termList,
+                    CompanyTerms = companyTerms,
                     CompanyImageList = imageList
                 };
                 return companyInfoVM;

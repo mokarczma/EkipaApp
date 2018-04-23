@@ -14,15 +14,37 @@ namespace Ekipa.Controllers
 {
     public class AccountController : Controller
     {
-        //public static LogedUserVM LogedUser ()
-        //{
-        //    var userCustomer = System.Security.Principal. as MPrincipal;
-        //    var login = userCustomer.UserDetails.Login;
+        public LogedUserVM LogedUser()
+        {
+            var userLogged = User as MPrincipal;
+            LogedUserVM logedUserVM = new LogedUserVM() { Loged = false };
 
-        //    using (ApplicationDbContext db = new ApplicationDbContext())
-        //    {
-        //        var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-        //    }
+            if (userLogged != null)
+            {
+                var login = userLogged.UserDetails.Login;
+
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                    if (cust != null)
+                    {
+                        logedUserVM.UserId = cust.ID;
+                        logedUserVM.UserName = cust.Login;
+                        logedUserVM.UserRole = cust.RoleId;
+                        logedUserVM.Loged = true;
+                    }
+                    var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                    if (comp != null)
+                    {
+                        logedUserVM.UserId = comp.Id;
+                        logedUserVM.UserName = comp.Login;
+                        logedUserVM.UserRole = comp.RoleId;
+                        logedUserVM.Loged = true;
+                    }
+                }
+            }           
+                return logedUserVM;
+        }
 
 
         [HttpGet]

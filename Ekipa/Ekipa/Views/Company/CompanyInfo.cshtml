@@ -1,11 +1,10 @@
 ﻿@model Ekipa.Models.ViewModel.Company.CompanyInfoVM
-
 @{
-    ViewBag.Title = "CompanyInfo";
+	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
+	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM);
+	ViewBag.Title = "CompanyInfo";
 }
-
 <h2>@Html.DisplayFor(model => model.CompanyName)</h2>
-
 <di>
 	<h4> @Html.DisplayFor(model => model.CityName)</h4>
 	<h8> Tel: @Html.DisplayFor(model => model.PhoneNumer)</h8>
@@ -17,26 +16,38 @@
 		@Html.HiddenFor(model => model.Id)
 		<div class="row text-center">
 			@for (int i = 0; i < Model.CompanyTagList.Count(); i++)
+		{
+			if (i % 2 == 0)
 			{
-				<div class="tag-box col-lg-2 col-md-2 col-xs-4 thumb col-xs-6 thumb text-center">
+				<div class="color-yellow tag-box">
 					@Html.DisplayFor(m => m.CompanyTagList[i].Name)
 				</div>
-			}
+		}
+		else if (i == 3 || i == 7 || i == 9)
+		{
+			<div class="color-red tag-box">
+				@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+			</div>
+	}
+	else
+	{
+		<div class="color-green tag-box">
+			@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+		</div>
+}
+}
 		</div>
 		<div class="row row-margin">
 			@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
 		</div>
-		
-		<h6>Wolne terminy</h6>
-		@for (int i = 0; i < Model.CompanyTermList.Count(); i++)
-		{
 
-			<div class="col-lg-3 col-md-4 col-xs-6 col-xs-12 thumb">
-				@Html.DisplayFor(m => m.CompanyTermList[i].DateFrom)
-				@Html.DisplayFor(m => m.CompanyTermList[i].DateTo)
-			</div>
-		}
-		<hr />
+		<h6>Wolne terminy</h6>
+		<div class="row row-margin">
+			@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTerms)
+		</div>
+
+
+	</div>
 
 		<p>
 			Specjalność: @Html.DisplayFor(model => model.Speciality)
@@ -49,14 +60,14 @@
 			Wyceny:  @Html.DisplayFor(model => model.Pricing)
 		</p>
 	</div>
-	<style>
+
+=	<style>
 
 		.row-margin {
 			margin-top: 20px;
 		}
 
 		.tag-box {
-			background-color: lightblue;
 			border-radius: 6px;
 			padding: 4px;
 			box-sizing: border-box;

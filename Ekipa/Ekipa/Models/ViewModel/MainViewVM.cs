@@ -16,21 +16,30 @@ namespace Ekipa.Models.ViewModel
        [Display(Name = "Miejscowość")]
        public int PlaceSearch { get; set; }
 
-        public string UserName;
-        public int UserRole;
-
+        public bool Loged { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public int UserRole { get; set; }
         public List<SelectListItem> CitiesDB { get; set; }
+
+
         public MainViewVM()
         {
             List<SelectListItem> items = new List<SelectListItem>();
+            LogedUserVM logedUser = new LogedUserVM();
 
-            //using (Controllers.AccountController accCon = new Controllers.AccountController())
-            //{
-            //    if (accCon.User.Identity.Name != null)
-            //    {
-            //        UserName = accCon.User.Identity.Name;
-            //    }
-            //}
+
+            using (Controllers.AccountController accCon = new Controllers.AccountController())
+            {
+                logedUser = accCon.LogedUser();
+            }
+            if (logedUser != null)
+            {
+                Loged = logedUser.Loged;
+                UserId = logedUser.UserId;
+                UserName = logedUser.UserName;
+                UserRole = logedUser.UserRole;
+            }
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -41,8 +50,6 @@ namespace Ekipa.Models.ViewModel
                              Value = li.ID.ToString()
                          }).ToList();
                 CitiesDB = items;
-                //var user = db.Companies.FirstOrDefault(u => u.Login.Equals(UserName));
-                //UserRole = user.RoleId;}
             }
 
         }
