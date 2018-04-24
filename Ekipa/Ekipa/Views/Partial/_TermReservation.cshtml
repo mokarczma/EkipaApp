@@ -2,9 +2,15 @@
 
 @for (int i = 0; i < Model.CompanyTermsList.Count(); i++)
 {
-<div class="term-box">
-	@Html.DisplayFor(model => model.CompanyTermsList[i].DateFrom)
-	@Html.DisplayFor(model => model.CompanyTermsList[i].DateTo)
-	@Html.ActionLink("Zarezerwuj", "InfoAboutCompany", new { id = Model.CompanyTermsList[i].ID })
-</div>
+	<div class="term-box">
+		@Html.DisplayFor(model => model.CompanyTermsList[i].DateFrom)
+		@Html.DisplayFor(model => model.CompanyTermsList[i].DateTo)
+		@Html.ActionLink("Zarezerwuj", "CustomerReservation", "Reservation", new { id = Model.CompanyTermsList[i].ID })
+	</div>
+	if (null != TempData["alertMessage"])
+	{
+		<script type="text/javascript">
+       alert("@TempData["alertMessage"]");
+		</script>
+	}
 }

@@ -1,6 +1,13 @@
 ﻿@{
 	ViewBag.Title = "Home Page";
 }
+	if (null != TempData["alertMessage"])
+	{
+<script type="text/javascript">
+       alert("@TempData["alertMessage"]");
+</script>
+	}
+
 <div class="row">
 	<div class="home-img col-12">
 		<img class="mw-100" src="~/Content/images/Tlo.png" />

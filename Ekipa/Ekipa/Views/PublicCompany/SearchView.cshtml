@@ -1,25 +1,25 @@
 ﻿@model Ekipa.Models.ViewModel.Company.BasicCompanyInfoListVM
 
 @{
-    ViewBag.Title = "SearchView";
+	ViewBag.Title = "SearchView";
 }
 
 
 
-	@for (int i = 0; i < Model.basicCompanyInfoVMlist.Count(); i++)
-	{
-		<img class="img-responsive" src="@Url.Content(Model.basicCompanyInfoVMlist[i].CompanyMainImage.Link)" width="150" height="150" />
+@for (int i = 0; i < Model.basicCompanyInfoVMlist.Count(); i++)
+{
+	<img class="img-responsive" src="@Url.Content(Model.basicCompanyInfoVMlist[i].CompanyMainImage.Link)" width="150" height="150" />
 
 
-		@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].AverageRating)
-		@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CityName)
-		@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].NearestFreeDate)
-		@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName)
+	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].AverageRating)
+	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CityName)
+	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].NearestFreeDate)
+	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName)
 
 
 
 
 
-		@Html.ActionLink("Zobacz więcej", "InfoAboutCompany", new { id = Model.basicCompanyInfoVMlist[i].IdCompany })
+	@Html.ActionLink("Zobacz więcej", "InfoAboutCompany", new { id = Model.basicCompanyInfoVMlist[i].IdCompany })
 
-	}
+}

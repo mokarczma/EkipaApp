@@ -2,6 +2,12 @@
 @{
 	ViewBag.Title = "LoginCustomer";
 }
+	@if (null != TempData["alertMessage"])
+	{
+<script type="text/javascript">
+       alert("@TempData["alertMessage"]");
+</script>
+	}
 
 @using (Html.BeginForm())
 {

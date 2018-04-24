@@ -49,9 +49,5 @@ namespace Ekipa.Models.ViewModel.Company
 
         public string ConfirmPassword { get; set; }
 
-        public CompanyAccountVM() : base()
-        {
-
-        }
     }
 }

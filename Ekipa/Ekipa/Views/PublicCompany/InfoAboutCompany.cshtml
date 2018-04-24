@@ -12,7 +12,7 @@
 	<div class="row">
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		@Html.HiddenFor(model => model.Id)
+		@Html.HiddenFor(model => model.IdCompany)
 		<div class="row text-center">
 			@for (int i = 0; i < Model.CompanyTagList.Count(); i++)
 			{
@@ -36,13 +36,26 @@
 				}
 			}
 		</div>
-		<div class="row row-margin">
+		@*<div class="row row-margin">
 			@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
-		</div>
+		</div>*@
 
 		<h6>Wolne terminy</h6>
 		<div class="row row-margin">
-			@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTerms)
+			@*@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTerms)*@
+			@for (int i = 0; i < Model.CompanyTermVMList.Count(); i++)
+	{
+			<div>
+				@Html.DisplayFor(model => model.CompanyTermVMList[i].DateFrom)
+				@Html.DisplayFor(model => model.CompanyTermVMList[i].DateTo)
+				@Html.ActionLink("Zarezerwuj", "CustomerReservation", new { id = Model.CompanyTermVMList[i].ID })
+				tako
+			</div>
+	<div> co się dzieje</div>
+
+
+}
+
 		</div>
 
 

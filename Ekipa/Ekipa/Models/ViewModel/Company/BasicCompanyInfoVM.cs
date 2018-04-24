@@ -18,6 +18,5 @@ namespace Ekipa.Models.ViewModel.Company
         public List<Term> CompanyTermList { get; set; }
         public Image CompanyMainImage { get; set; }
         public double AverageRating { get; set; }
-
     }
 }

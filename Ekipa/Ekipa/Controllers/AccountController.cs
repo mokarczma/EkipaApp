@@ -53,7 +53,7 @@ namespace Ekipa.Controllers
         {
             ViewBag.CityList = CitiesQuery();
             FormsAuthentication.SignOut();
-            return RedirectToAction("LoginCustomer");
+            return RedirectToAction("Index","Home");
         }
 
         [HttpGet]
@@ -273,7 +273,7 @@ namespace Ekipa.Controllers
                         company.Password = Security.sha512encrypt(_model.Password);
                         company.RoleId = 6;
                         company.IsDelete = false;
-                        company.CityId = 10;
+                        company.CityId = 2;
                         db.Companies.Add(company);
                         db.SaveChanges();
                         return RedirectToAction("LoginCompany");
@@ -350,10 +350,10 @@ namespace Ekipa.Controllers
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
-                ViewBag.UserName = cust.Login;
+                var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                ViewBag.UserName = comp.Login;
                 ViewBag.IconNumber = 0;
-                ViewBag.Role = cust.RoleId;
+                ViewBag.Role = comp.RoleId;
             }
             return View();
         }
