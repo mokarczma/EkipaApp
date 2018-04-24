@@ -28,7 +28,7 @@ namespace Ekipa.Controllers
             {
                 var company = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
                 model = new CompanyTagsVM();
-      
+
                 var dbCompanyTags = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
                 ViewBag.NoTags = false;
 
@@ -45,7 +45,7 @@ namespace Ekipa.Controllers
                         Name = dbCompanyTags[i].Name,
                         DeleteFromCompany = dbCompanyTags[i].IsDelete
                     };
-                    ctVMList.Add(ctVM);   
+                    ctVMList.Add(ctVM);
                 }
                 model.CompanyTags = ctVMList;
 
@@ -58,7 +58,7 @@ namespace Ekipa.Controllers
                            }).ToList();
 
                 List<SelectListItem> otherTagsList = new List<SelectListItem>();
-            
+
                 foreach (var item in allTags)
                 {
                     otherTagsList.Add(item);
@@ -95,8 +95,8 @@ namespace Ekipa.Controllers
                     {
                         if (item.DeleteFromCompany)
                         {
-                           var tagDel = db.CompanyTags.SingleOrDefault(x => x.CompanyId == company.Id && x.TagId == item.Id);
-                           db.CompanyTags.Remove(tagDel);
+                            var tagDel = db.CompanyTags.SingleOrDefault(x => x.CompanyId == company.Id && x.TagId == item.Id);
+                            db.CompanyTags.Remove(tagDel);
                         }
                     }
                 }
@@ -119,7 +119,7 @@ namespace Ekipa.Controllers
 
                 db.SaveChanges();
             }
-            return RedirectToAction("IndexCompany","Account"); 
+            return RedirectToAction("IndexCompany", "Account");
         }
 
         [HttpGet]
@@ -134,8 +134,8 @@ namespace Ekipa.Controllers
         }
 
         //POST: Tag/Create
-       [HttpPost]
-       [ActionName("CreateTag")]
+        [HttpPost]
+        [ActionName("CreateTag")]
         public ActionResult CreateTag(TagVM model)
 
         {

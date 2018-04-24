@@ -22,7 +22,7 @@ namespace Ekipa.Controllers
                 tagList = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
 
                 List<Term> termList = new List<Term>();
-                termList = db.CompanyTerm.Where(t => t.CompanyId == company.Id).ToList();
+                termList = db.Terms.Where(t => t.CompanyId == company.Id).ToList();
                 List<CompanyAddTermVM> compTermsList = new List<CompanyAddTermVM>();
 
                 foreach (var item in termList)
@@ -40,7 +40,7 @@ namespace Ekipa.Controllers
                         YearTo = item.DateTo.Year,
                         MonthTo = item.DateTo.Month.ToString(),
                         DayTo = item.DateTo.Day,
-                      };
+                    };
                     compTermsList.Add(TermVM);
                 }
                 List<Image> imageList = new List<Image>();
@@ -61,8 +61,8 @@ namespace Ekipa.Controllers
                 return companyInfoVM;
             };
         }
-     
-     
+
+
         [HttpGet]
         public ActionResult InfoAboutCompany(int id)
         {
@@ -92,7 +92,8 @@ namespace Ekipa.Controllers
         }
         [HttpGet]
         public ActionResult SearchView()
-        {          return View();
+        {
+            return View();
         }
 
         [HttpPost]
@@ -102,7 +103,7 @@ namespace Ekipa.Controllers
             {
                 var dbCompany = db.Companies.Where(t => t.CityId == model.PlaceSearch && t.CompanyName.Contains(model.NameSearch)).ToList<Company>();
 
-                if (model.PlaceSearch ==2)
+                if (model.PlaceSearch == 2)
                 {
                     if (model.NameSearch == null)
                     {
@@ -119,7 +120,7 @@ namespace Ekipa.Controllers
                     {
                         dbCompany = db.Companies.Where(t => t.CityId == model.PlaceSearch).ToList();
                     }
-                }             
+                }
 
                 List<BasicCompanyInfoVM> basicCompanyInfoList = new List<BasicCompanyInfoVM>();
                 foreach (var item in dbCompany)
@@ -160,7 +161,7 @@ namespace Ekipa.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-                if (cust.RoleId == 6)
+                if (cust == null)
                 {
                     TempData["alertMessage"] = "Termin możesz zarezerwować tylko jako kient";
                     return RedirectToAction("Index", "Home");
@@ -178,12 +179,13 @@ namespace Ekipa.Controllers
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    var termDB = db.CompanyTerm.FirstOrDefault(t => t.Id.Equals(model.TermId));
+                    var termDB = db.Terms.FirstOrDefault(t => t.Id.Equals(model.TermId));
                     termDB.CustomerId = model.CustomerId;
                     Reservation newReservation = new Reservation()
                     {
-                        CompanyId = termDB.CompanyId,
                         DescriptionCustomer = model.DescriptionCustomer,
+                        Term = termDB,
+                        TermId = termDB.Id,
                     };
                     db.Rezervations.Add(newReservation);
                     db.SaveChanges();

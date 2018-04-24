@@ -42,8 +42,8 @@ namespace Ekipa.Controllers
                         logedUserVM.Loged = true;
                     }
                 }
-            }           
-                return logedUserVM;
+            }
+            return logedUserVM;
         }
 
 
@@ -53,7 +53,7 @@ namespace Ekipa.Controllers
         {
             ViewBag.CityList = CitiesQuery();
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -165,7 +165,7 @@ namespace Ekipa.Controllers
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
-            ViewBag.UserRole =5;
+            ViewBag.UserRole = 5;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
@@ -189,7 +189,7 @@ namespace Ekipa.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-              
+
                 customerVM = new CustomerAccountEditVM();
                 customerVM.Name = cust.Name;
                 customerVM.Surname = cust.Surname;
@@ -246,7 +246,7 @@ namespace Ekipa.Controllers
         [ActionName("RegisterCompany")]
         public ActionResult RegisterCompany()
         {
-           
+
             return View();
         }
 

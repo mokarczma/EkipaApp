@@ -12,6 +12,7 @@
 	@Html.HiddenFor(x => x.Id);
 	@Html.HiddenFor(x => x.TermId);
 	@Html.HiddenFor(x => x.CustomerId);
+	@Html.HiddenFor(x => x.CompanyId);
 
 
 	<div class="form-horizontal">
@@ -50,12 +51,6 @@
 			</div>
 		</div>
 	</div>
-	if (null != TempData["alertMessage"])
-	{
-		<script type="text/javascript">
-       alert("@TempData["alertMessage"]");
-		</script>
-	}
 }
 
 <div>

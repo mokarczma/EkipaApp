@@ -19,7 +19,7 @@ namespace Ekipa.Models
         public virtual DbSet<CompanyTag> CompanyTags { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Term> CompanyTerm { get; set; }
+        public virtual DbSet<Term> Terms { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Image> Images { get; set; }
@@ -32,7 +32,5 @@ namespace Ekipa.Models
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
-        public System.Data.Entity.DbSet<Ekipa.Models.ViewModel.Company.CompanyImagesVM> CompanyImagesVMs { get; set; }
     }
 }

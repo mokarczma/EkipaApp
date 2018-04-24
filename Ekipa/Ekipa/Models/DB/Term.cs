@@ -12,7 +12,8 @@ namespace Ekipa.Models.DB
         public int? CustomerId { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
-        public virtual ICollection<Company> Company { get; set; }
-        public virtual ICollection<Customer> Customer { get; set; }
+        public virtual Company Company { get; set; }
+        public virtual Customer Customer { get; set; }
+
     }
 }

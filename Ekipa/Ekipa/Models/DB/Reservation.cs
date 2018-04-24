@@ -12,13 +12,9 @@ namespace Ekipa.Models.DB
         public string DescriptionCompany { get; set; }
         public bool CompanyAccept { get; set; }
         public bool IsDelete { get; set; }
-
         public virtual ICollection<Opinion> Opinions { get; set; }
-        public int CompanyId { get; set; }
-        public virtual Company Company { get; set; }
 
-
-
-
+        public int TermId { get; set; }
+        public virtual Term Term { get; set; }
     }
 }

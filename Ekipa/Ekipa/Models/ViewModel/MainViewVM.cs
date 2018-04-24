@@ -10,11 +10,11 @@ namespace Ekipa.Models.ViewModel
 {
     public class MainViewVM
     {
-       [Display(Name = "Szukaj")]
-       public string NameSearch { get; set; } 
+        [Display(Name = "Szukaj")]
+        public string NameSearch { get; set; }
 
-       [Display(Name = "Miejscowość")]
-       public int PlaceSearch { get; set; }
+        [Display(Name = "Miejscowość")]
+        public int PlaceSearch { get; set; }
 
         public bool Loged { get; set; }
         public int UserId { get; set; }
@@ -54,5 +54,5 @@ namespace Ekipa.Models.ViewModel
 
         }
     }
-   
+
 }

@@ -162,61 +162,42 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804101616246_InitMigration.cs" />
-    <Compile Include="Migrations\201804101616246_InitMigration.Designer.cs">
-      <DependentUpon>201804101616246_InitMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201804241215304_Inicjalize.cs" />
+    <Compile Include="Migrations\201804241215304_Inicjalize.Designer.cs">
+      <DependentUpon>201804241215304_Inicjalize.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804101735099_EditCompanyColumnName.cs" />
-    <Compile Include="Migrations\201804101735099_EditCompanyColumnName.Designer.cs">
-      <DependentUpon>201804101735099_EditCompanyColumnName.cs</DependentUpon>
+    <Compile Include="Migrations\201804241221412_zmiany.cs" />
+    <Compile Include="Migrations\201804241221412_zmiany.Designer.cs">
+      <DependentUpon>201804241221412_zmiany.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804111323020_AddTag.cs" />
-    <Compile Include="Migrations\201804111323020_AddTag.Designer.cs">
-      <DependentUpon>201804111323020_AddTag.cs</DependentUpon>
+    <Compile Include="Migrations\201804241224593_zmianyRezervation.cs" />
+    <Compile Include="Migrations\201804241224593_zmianyRezervation.Designer.cs">
+      <DependentUpon>201804241224593_zmianyRezervation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804111338197_EditRole.cs" />
-    <Compile Include="Migrations\201804111338197_EditRole.Designer.cs">
-      <DependentUpon>201804111338197_EditRole.cs</DependentUpon>
+    <Compile Include="Migrations\201804241234307_zmianyRezervation3.cs" />
+    <Compile Include="Migrations\201804241234307_zmianyRezervation3.Designer.cs">
+      <DependentUpon>201804241234307_zmianyRezervation3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804111339420_EditRole2.cs" />
-    <Compile Include="Migrations\201804111339420_EditRole2.Designer.cs">
-      <DependentUpon>201804111339420_EditRole2.cs</DependentUpon>
+    <Compile Include="Migrations\201804241240431_zmianyCustomer.cs" />
+    <Compile Include="Migrations\201804241240431_zmianyCustomer.Designer.cs">
+      <DependentUpon>201804241240431_zmianyCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804111351377_EditCompanyTerm.cs" />
-    <Compile Include="Migrations\201804111351377_EditCompanyTerm.Designer.cs">
-      <DependentUpon>201804111351377_EditCompanyTerm.cs</DependentUpon>
+    <Compile Include="Migrations\201804241247553_zmianyCustomer1.cs" />
+    <Compile Include="Migrations\201804241247553_zmianyCustomer1.Designer.cs">
+      <DependentUpon>201804241247553_zmianyCustomer1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804130626060_AddCityModel.cs" />
-    <Compile Include="Migrations\201804130626060_AddCityModel.Designer.cs">
-      <DependentUpon>201804130626060_AddCityModel.cs</DependentUpon>
+    <Compile Include="Migrations\201804241257582_zmianyRezerwacja5.cs" />
+    <Compile Include="Migrations\201804241257582_zmianyRezerwacja5.Designer.cs">
+      <DependentUpon>201804241257582_zmianyRezerwacja5.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804141949129_EditTagModel.cs" />
-    <Compile Include="Migrations\201804141949129_EditTagModel.Designer.cs">
-      <DependentUpon>201804141949129_EditTagModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804141953565_deliTagModel.cs" />
-    <Compile Include="Migrations\201804141953565_deliTagModel.Designer.cs">
-      <DependentUpon>201804141953565_deliTagModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804152345244_CreateImage_zmianyTag.cs" />
-    <Compile Include="Migrations\201804152345244_CreateImage_zmianyTag.Designer.cs">
-      <DependentUpon>201804152345244_CreateImage_zmianyTag.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804152348450_CompanyTag_ponownie.cs" />
-    <Compile Include="Migrations\201804152348450_CompanyTag_ponownie.Designer.cs">
-      <DependentUpon>201804152348450_CompanyTag_ponownie.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804152359480_ImageDescription.cs" />
-    <Compile Include="Migrations\201804152359480_ImageDescription.Designer.cs">
-      <DependentUpon>201804152359480_ImageDescription.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804232348425_Add_Reservation+Opinion.cs" />
-    <Compile Include="Migrations\201804232348425_Add_Reservation+Opinion.Designer.cs">
-      <DependentUpon>201804232348425_Add_Reservation+Opinion.cs</DependentUpon>
+    <Compile Include="Migrations\201804241300081_zmianyCust.cs" />
+    <Compile Include="Migrations\201804241300081_zmianyCust.Designer.cs">
+      <DependentUpon>201804241300081_zmianyCust.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -229,6 +210,7 @@
     <Compile Include="Models\DB\Customer.cs" />
     <Compile Include="Models\DB\Image.cs" />
     <Compile Include="Models\DB\Reservation.cs" />
+    <Compile Include="Models\MyReservation.cs" />
     <Compile Include="Models\Principal.cs" />
     <Compile Include="Models\DB\Tag.cs" />
     <Compile Include="Models\DB\Role.cs" />
@@ -314,8 +296,8 @@
     <Content Include="Views\Partial\_TermReservation.cshtml" />
     <Content Include="Views\PublicCompany\View.cshtml" />
     <Content Include="Views\PublicCompany\SearchView.cshtml" />
-    <Content Include="Views\Reservation\CustomerReservation.cshtml" />
     <Content Include="Views\PublicCompany\CustomerReservation.cshtml" />
+    <Content Include="Views\Reservation\MyReservation.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -412,51 +394,36 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804101616246_InitMigration.resx">
-      <DependentUpon>201804101616246_InitMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804101735099_EditCompanyColumnName.resx">
-      <DependentUpon>201804101735099_EditCompanyColumnName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804111323020_AddTag.resx">
-      <DependentUpon>201804111323020_AddTag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804111338197_EditRole.resx">
-      <DependentUpon>201804111338197_EditRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804111339420_EditRole2.resx">
-      <DependentUpon>201804111339420_EditRole2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804111351377_EditCompanyTerm.resx">
-      <DependentUpon>201804111351377_EditCompanyTerm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804130626060_AddCityModel.resx">
-      <DependentUpon>201804130626060_AddCityModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804141949129_EditTagModel.resx">
-      <DependentUpon>201804141949129_EditTagModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804141953565_deliTagModel.resx">
-      <DependentUpon>201804141953565_deliTagModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804152345244_CreateImage_zmianyTag.resx">
-      <DependentUpon>201804152345244_CreateImage_zmianyTag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804152348450_CompanyTag_ponownie.resx">
-      <DependentUpon>201804152348450_CompanyTag_ponownie.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804152359480_ImageDescription.resx">
-      <DependentUpon>201804152359480_ImageDescription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804232348425_Add_Reservation+Opinion.resx">
-      <DependentUpon>201804232348425_Add_Reservation+Opinion.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804241215304_Inicjalize.resx">
+      <DependentUpon>201804241215304_Inicjalize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241221412_zmiany.resx">
+      <DependentUpon>201804241221412_zmiany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241224593_zmianyRezervation.resx">
+      <DependentUpon>201804241224593_zmianyRezervation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241234307_zmianyRezervation3.resx">
+      <DependentUpon>201804241234307_zmianyRezervation3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241240431_zmianyCustomer.resx">
+      <DependentUpon>201804241240431_zmianyCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241247553_zmianyCustomer1.resx">
+      <DependentUpon>201804241247553_zmianyCustomer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241257582_zmianyRezerwacja5.resx">
+      <DependentUpon>201804241257582_zmianyRezerwacja5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241300081_zmianyCust.resx">
+      <DependentUpon>201804241300081_zmianyCust.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

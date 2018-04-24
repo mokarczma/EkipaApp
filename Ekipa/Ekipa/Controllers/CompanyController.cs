@@ -11,7 +11,7 @@ using Ekipa.Models.DB;
 namespace Ekipa.Controllers
 {
     [Authorize]
-    public class  CompanyController : Controller
+    public class CompanyController : Controller
     {
         // GET: Company
         public ActionResult Index()
@@ -31,12 +31,12 @@ namespace Ekipa.Controllers
             var company = new Company();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-               company = db.Companies.SingleOrDefault(x => x.Login == login);
+                company = db.Companies.SingleOrDefault(x => x.Login == login);
             }
 
             CompanyInfoVM companyInfoVM = Controllers.PublicCompanyController.CompanyInfo(company.Id);
 
-            return View(companyInfoVM);        
+            return View(companyInfoVM);
         }
 
         [HttpGet]
@@ -77,7 +77,7 @@ namespace Ekipa.Controllers
                     db.SaveChanges();
                 }
             }
-      
+
             return View("");
         }
         [HttpGet]
@@ -189,7 +189,7 @@ namespace Ekipa.Controllers
                     comp.Speciality = model.Speciality ?? "";
                     if (model.SelectedCityID != null)
                     {
-                        comp.CityId = model.SelectedCityID ;
+                        comp.CityId = model.SelectedCityID;
                     }
 
                     db.SaveChanges();
