@@ -26,7 +26,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
             var company = new Company();
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -42,6 +42,10 @@ namespace Ekipa.Controllers
         [HttpGet]
         public ActionResult AddCompanyTerm()
         {
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 4;
             return View();
         }
 
@@ -51,7 +55,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
             if (ModelState.IsValid)
             {
@@ -88,7 +92,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
             CompanyDetailsVM compDetVM = null;
 
@@ -115,7 +119,7 @@ namespace Ekipa.Controllers
             var login = user.UserDetails.Login;
 
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
             CompanyDetailsVM compDetVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -176,7 +180,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

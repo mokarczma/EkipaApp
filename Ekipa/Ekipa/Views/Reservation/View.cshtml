@@ -1,0 +1,98 @@
+﻿@model Ekipa.Models.ViewModel.ReservationVM
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>ReservationVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionCustomer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionCustomer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionCompany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyAccept)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyAccept)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TermId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TermId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

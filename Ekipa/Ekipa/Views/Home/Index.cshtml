@@ -1,11 +1,12 @@
 ﻿@{
 	ViewBag.Title = "Home Page";
 }
-	if (null != TempData["alertMessage"])
+
+@if (null != TempData["alertMessage"])
 	{
-<script type="text/javascript">
-       alert("@TempData["alertMessage"]");
-</script>
+		<script type="text/javascript">
+			   alert("@TempData["alertMessage"]");
+		</script>
 	}
 
 <div class="row">

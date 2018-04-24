@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ekipa.Models.DB.Reservation>
+﻿@model IList<Ekipa.Models.ViewModel.ReservationVM>
 
 @{
     ViewBag.Title = "MyReservation";
@@ -10,44 +10,92 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.DescriptionCustomer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DescriptionCompany)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyAccept)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-     
-        <td>
-            @Html.DisplayFor(modelItem => item.DescriptionCustomer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DescriptionCompany)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyAccept)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDelete)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+
+	@foreach (var item in Model)
+	{
+		<dl class="dl-horizontal">
+			<dt>
+				@Html.DisplayNameFor(model => item.DescriptionCustomer)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.DescriptionCustomer)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.DescriptionCompany)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.DescriptionCompany)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.CompanyAccept)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.CompanyAccept)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.TermId)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.TermId)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.CustomerId)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.CustomerId)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.CustomerName)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.CustomerName)
+			</dd>
+
+			<dt>o
+				@Html.DisplayNameFor(model => item.CompanyId)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.CompanyId)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.CompanyName)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.CompanyName)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.DateFrom)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.DateFrom)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => item.DateTo)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => item.DateTo)
+			</dd>
+
+		</dl>
+	}
 
 </table>

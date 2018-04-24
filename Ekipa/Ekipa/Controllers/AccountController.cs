@@ -87,7 +87,7 @@ namespace Ekipa.Controllers
                         customer.PhoneNumber = _model.PhoneNumber;
                         customer.Email = _model.Email;
                         customer.Password = Security.sha512encrypt(_model.Password);
-                        customer.RoleId = 5;
+                        customer.RoleId = 3;
                         customer.IsDelete = false;
                         db.Customers.Add(customer);
                         db.SaveChanges();
@@ -150,30 +150,12 @@ namespace Ekipa.Controllers
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
                     authCookie.Expires = DateTime.UtcNow.AddMinutes(60);
                     Response.SetCookie(authCookie);
-                    return RedirectToAction("IndexCustomer", "Account");
+                    return RedirectToAction("Index", "Home");
                 }
                 return View(_model);
 
             }
 
-        }
-
-        [HttpGet]
-        [ActionName("IndexCustomer")]
-        public ActionResult IndexCustomer()
-        {
-            var userCustomer = User as MPrincipal;
-            var login = userCustomer.UserDetails.Login;
-            ViewBag.UserName = userCustomer.UserDetails.Login;
-            ViewBag.UserRole = 5;
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-                ViewBag.UserName = cust.Login;
-                ViewBag.IconNumber = 0;
-                ViewBag.Role = cust.RoleId;
-            }
-            return View();
         }
 
         [HttpGet]
@@ -184,7 +166,7 @@ namespace Ekipa.Controllers
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
-            ViewBag.UserRole = 5;
+            ViewBag.UserRole = 3;
             CustomerAccountEditVM customerVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -207,7 +189,7 @@ namespace Ekipa.Controllers
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
-            ViewBag.UserRole = 5;
+            ViewBag.UserRole = 3;
 
 
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -271,9 +253,9 @@ namespace Ekipa.Controllers
                         company.PhoneNumer = _model.PhoneNumber;
                         company.Email = _model.Email;
                         company.Password = Security.sha512encrypt(_model.Password);
-                        company.RoleId = 6;
+                        company.RoleId = 4;
                         company.IsDelete = false;
-                        company.CityId = 2;
+                        company.CityId = 1;
                         db.Companies.Add(company);
                         db.SaveChanges();
                         return RedirectToAction("LoginCompany");
@@ -334,7 +316,7 @@ namespace Ekipa.Controllers
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
                     authCookie.Expires = DateTime.UtcNow.AddMinutes(60);
                     Response.SetCookie(authCookie);
-                    return RedirectToAction("IndexCompany", "Account");
+                    return RedirectToAction("Index", "Home");
                 }
                 return View(_model);
             }
@@ -346,7 +328,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -366,7 +348,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
 
             CompanyAccountEditVM companyEditVM = null;
@@ -390,7 +372,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 6;
+            ViewBag.UserRole = 4;
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

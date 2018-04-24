@@ -24,9 +24,14 @@ namespace Ekipa.Models.ViewModel
         public bool CompanyAccept { get; set; }
 
         public int TermId { get; set; }
+
         public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
 
 
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTo { get; set; }
     }
 }

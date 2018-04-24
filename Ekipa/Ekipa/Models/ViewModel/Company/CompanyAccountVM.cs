@@ -15,13 +15,13 @@ namespace Ekipa.Models.ViewModel.Company
         [StringLength(200)]
         [Display(Name = "Nazwa firmy")]
         [Required(ErrorMessage = "Nazwa firmy jest wymagana", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,200}$", ErrorMessage = "Niepoprawna nazwa firmy")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`\s ]{2,200}$", ErrorMessage = "Niepoprawna nazwa firmy")]
         public string CompanyName { get; set; }
 
         [StringLength(200)]
         [Display(Name = "Login")]
         [Required(ErrorMessage = "Login jest wymagany", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,200}$", ErrorMessage = "Niepoprawny login")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`\s ]{2,200}$", ErrorMessage = "Niepoprawny login")]
         public string Login { get; set; }
 
         [StringLength(100)]

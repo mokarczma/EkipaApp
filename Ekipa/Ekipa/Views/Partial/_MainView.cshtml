@@ -1,7 +1,9 @@
 ﻿@model Ekipa.Models.ViewModel.MainViewVM
+@using (Html.BeginForm("SearchView", "PublicCompany", FormMethod.Post))
+{
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	<a class="navbar-brand mr-sm-auto" href="@Url.Action("ZnajdźEkipę", "Home/index",FormMethod.Get)">
-		<img class=" responsive ikon"  src='@Url.Content("~/Content/images/ikonZE.png")' />
+	<a class="navbar-brand mr-sm-auto" href="@Url.Action("ZnajdźEkipę", "Home/index", FormMethod.Get)">
+		<img class=" responsive ikon" src='@Url.Content("~/Content/images/ikonZE.png")' />
 	</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,57 +11,56 @@
 	</button>
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		@using (Html.BeginForm("SearchView", "PublicCompany", FormMethod.Post))
-		{
-		<div class="form-inline my-2 my-lg-0 col">
-			<div class="search-box">@Html.EditorFor(m => m.NameSearch, "", new { htmlAttributes = new { @class = "form-control mr-sm-2", placeholder = "Szukaj" } })</div>
-			<div class="choose-box">@Html.DropDownListFor(x => x.PlaceSearch, Model.CitiesDB, htmlAttributes: new { @class = "form-control mr-sm-2" })</div>
-			<button class="search-button btn my-2 my-sm-0" type="submit">Szukaj</button>
-		</div>
-		}
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item dropdown">
+		<div class="search-box">@Html.EditorFor(m => m.NameSearch, "", new { htmlAttributes = new { @class = "form-control select ", placeholder = "Szukaj" } })</div>
+		<div class="choose-box">@Html.DropDownListFor(x => x.PlaceSearch, Model.CitiesDB, htmlAttributes: new { @class = "form-control input" })</div>
+		<button class="search-button btn my-2 my-sm-0" type="submit">Szukaj</button>
+	</div>
 
-				@if (ViewBag.UserRole == 5)
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item dropdown">
+
+			@if (ViewBag.UserRole == 3)
 			{
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					@ViewBag.UserName
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="~/Account/IndexCustomer">Moje konto</a>
-					<a class="dropdown-item" href="#">Moje rezerwacje</a>
+					<a class="dropdown-item" href="~/Reservation/MyReservation">Moje rezerwacje</a>
+
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="~/Account/Logout">Wyloguj</a>
 				</div>
-		}
-		else if (ViewBag.UserRole == 6)
-		{
-			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				@ViewBag.UserName
-			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="~/Account/IndexCompany">Moje konto</a>
-				<a class="dropdown-item" href="~/Company/AddCompanyTerm">Moje terminy</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="~/Account/Logout">Wyloguj</a>
-			</div>
-	}
-	else
-	{
-		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Zaloguj
-		</a>
-		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+			}
+			else if (ViewBag.UserRole == 4)
+			{
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					@ViewBag.UserName
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="~/Account/IndexCompany">Moje konto</a>
+					<a class="dropdown-item" href="~/Company/AddCompanyTerm">Moje terminy</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="~/Account/Logout">Wyloguj</a>
+				</div>
+			}
+			else
+			{
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Zaloguj
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-			<a class="dropdown-item" href="~/Account/LoginCustomer">Logowanie </a>
-			<a class="dropdown-item" href="~/Account/LoginCompany">Logowanie firma </a>
-			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="~/Account/RegisterCustomer">Zarejestruj</a>
-			<a class="dropdown-item" href="~/Account/RegisterCompany">Zarejestruj firmę</a>
-		</div>
-}
-			</li>
-		</ul>
-	</div>
+					<a class="dropdown-item" href="~/Account/LoginCustomer">Logowanie </a>
+					<a class="dropdown-item" href="~/Account/LoginCompany">Logowanie firma </a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="~/Account/RegisterCustomer">Zarejestruj</a>
+					<a class="dropdown-item" href="~/Account/RegisterCompany">Zarejestruj firmę</a>
+				</div>
+			}
+		</li>
+	</ul>
+
 </nav>
 
+}

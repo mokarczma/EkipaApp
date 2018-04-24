@@ -103,7 +103,7 @@ namespace Ekipa.Controllers
             {
                 var dbCompany = db.Companies.Where(t => t.CityId == model.PlaceSearch && t.CompanyName.Contains(model.NameSearch)).ToList<Company>();
 
-                if (model.PlaceSearch == 2)
+                if (model.PlaceSearch == 1)
                 {
                     if (model.NameSearch == null)
                     {
@@ -126,12 +126,19 @@ namespace Ekipa.Controllers
                 foreach (var item in dbCompany)
                 {
                     CompanyInfoVM company = CompanyInfo(item.Id);
+                    Image imageMain = new Image();
+                     imageMain= db.Images.FirstOrDefault(i => i.CompanyId == company.IdCompany && i.MainPicture == true);
+                    if (imageMain == null)
+                    {
+                        imageMain = new Image() {                          
+                            Link = "~/Content/images/brakZdj.jpg" };
+                    }
                     BasicCompanyInfoVM basicInfo = new BasicCompanyInfoVM()
                     {
                         IdCompany = company.IdCompany,
                         CityName = company.CityName,
                         CompanyName = company.CityName,
-                        CompanyMainImage = company.CompanyImageList.FirstOrDefault(c => c.MainPicture == true),
+                        CompanyMainImage = imageMain,
                         CompanyTagList = company.CompanyTagList,
                         AverageRating = 4.5,
                         Services = company.Services,
@@ -191,8 +198,7 @@ namespace Ekipa.Controllers
                     db.SaveChanges();
                 }
                 TempData["alertMessage"] = "Zarezerwowano";
-                return RedirectToAction("MyReservation", "Home");
-
+                return RedirectToAction("MyReservation", "Reservation");
             }
             return View(model);
 

@@ -12,12 +12,13 @@ img {
     height: auto;
 }
 .search-box {
-	width: 50%;
+	width: 35%;
+	margin-left:5%;
 }
 
 	.search-box input {
-		width: 98% !important;
-		max-width: 98% !important;
+		width: 96% !important;
+		max-width: 96% !important;
 	}
 
 .choose-box {
