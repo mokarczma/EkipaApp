@@ -22,7 +22,9 @@ namespace Ekipa.Models.ViewModel
         public string DescriptionCompany { get; set; }
 
         public bool CompanyAccept { get; set; }
-        public Term Term { get; set; }
+
+        public int TermId { get; set; }
+        public int CustomerId { get; set; }
 
     }
 }

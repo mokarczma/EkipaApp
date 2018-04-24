@@ -156,19 +156,17 @@ namespace Ekipa.Controllers
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
             ReservationVM res = new ReservationVM();
-
+            res.TermId = id;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-                ViewBag.Role = cust.RoleId;
                 if (cust.RoleId == 6)
                 {
                     TempData["alertMessage"] = "Termin możesz zarezerwować tylko jako kient";
                     return RedirectToAction("Index", "Home");
                 }
-                var term = db.CompanyTerm.FirstOrDefault(t => t.Id.Equals(id));
-                term.CustomerId = cust.ID;
-                res.Term = term;
+                ViewBag.Role = cust.RoleId;
+                res.CustomerId = cust.ID;
             }
 
             return View(res);
@@ -180,11 +178,11 @@ namespace Ekipa.Controllers
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    var termDB = db.CompanyTerm.FirstOrDefault(t => t.Id.Equals(model.Term.Id));
-                    termDB.CustomerId = model.Term.CustomerId;
+                    var termDB = db.CompanyTerm.FirstOrDefault(t => t.Id.Equals(model.TermId));
+                    termDB.CustomerId = model.CustomerId;
                     Reservation newReservation = new Reservation()
                     {
-                        CompanyId = model.Term.CompanyId,
+                        CompanyId = termDB.CompanyId,
                         DescriptionCustomer = model.DescriptionCustomer,
                     };
                     db.Rezervations.Add(newReservation);

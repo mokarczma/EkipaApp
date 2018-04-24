@@ -9,6 +9,10 @@
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
+	@Html.HiddenFor(x => x.Id);
+	@Html.HiddenFor(x => x.TermId);
+	@Html.HiddenFor(x => x.CustomerId);
+
 
 	<div class="form-horizontal">
 		<h4>ReservationVM</h4>
