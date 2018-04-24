@@ -184,3 +184,4 @@ D:\EkipaApp\Ekipa\Ekipa\bin\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest
 D:\EkipaApp\Ekipa\Ekipa\bin\EntityFramework.SqlServerCompact.dll
 D:\EkipaApp\Ekipa\Ekipa\bin\System.Data.SqlServerCe.dll
 D:\EkipaApp\Ekipa\Ekipa\bin\EntityFramework.SqlServerCompact.xml
+D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.Add_ReservationOpinion.resources

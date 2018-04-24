@@ -42,45 +42,17 @@ namespace Ekipa.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Reservation", t => t.RezervationId, cascadeDelete: true)
-                .Index(t => t.RezervationId);
-            
-            CreateTable(
-                "dbo.CompanyImagesVM",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        MainPicturePath = c.String(),
-                        MainPictureID = c.String(),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.ImageVM",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Description = c.String(maxLength: 150),
-                        Link = c.String(),
-                        IsDelete = c.Boolean(nullable: false),
-                        MainPicture = c.Boolean(nullable: false),
-                        CompanyImagesVM_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.CompanyImagesVM", t => t.CompanyImagesVM_ID)
-                .Index(t => t.CompanyImagesVM_ID);
+                .Index(t => t.RezervationId);            
+       
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.ImageVM", "CompanyImagesVM_ID", "dbo.CompanyImagesVM");
             DropForeignKey("dbo.Opinion", "RezervationId", "dbo.Reservation");
             DropForeignKey("dbo.Reservation", "CompanyId", "dbo.Company");
-            DropIndex("dbo.ImageVM", new[] { "CompanyImagesVM_ID" });
             DropIndex("dbo.Opinion", new[] { "RezervationId" });
             DropIndex("dbo.Reservation", new[] { "CompanyId" });
-            DropTable("dbo.ImageVM");
-            DropTable("dbo.CompanyImagesVM");
             DropTable("dbo.Opinion");
             DropTable("dbo.Reservation");
             RenameIndex(table: "dbo.TermCompany", name: "IX_Term_Id", newName: "IX_CompanyTerm_Id");

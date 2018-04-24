@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201804152359480_ImageDescription.Designer.cs">
       <DependentUpon>201804152359480_ImageDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804232348425_Add_Reservation+Opinion.cs" />
+    <Compile Include="Migrations\201804232348425_Add_Reservation+Opinion.Designer.cs">
+      <DependentUpon>201804232348425_Add_Reservation+Opinion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AuthUser.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804152359480_ImageDescription.resx">
       <DependentUpon>201804152359480_ImageDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804232348425_Add_Reservation+Opinion.resx">
+      <DependentUpon>201804232348425_Add_Reservation+Opinion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
