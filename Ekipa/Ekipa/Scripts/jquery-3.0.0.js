@@ -3566,34 +3566,34 @@ jQuery.extend( {
 								},
 
 								// Only normal processors (resolve) catch and reject exceptions
-								process = special ?
-									mightThrow :
-									function() {
-										try {
-											mightThrow();
-										} catch ( e ) {
+								//process = special ?
+								//	mightThrow :
+								//	function() {
+								//		try {
+								//			mightThrow();
+								//		} catch ( e ) {
 
-											if ( jQuery.Deferred.exceptionHook ) {
-												jQuery.Deferred.exceptionHook( e,
-													process.stackTrace );
-											}
+								//			if ( jQuery.Deferred.exceptionHook ) {
+								//				jQuery.Deferred.exceptionHook( e,
+								//					process.stackTrace );
+								//			}
 
-											// Support: Promises/A+ section 2.3.3.3.4.1
-											// https://promisesaplus.com/#point-61
-											// Ignore post-resolution exceptions
-											if ( depth + 1 >= maxDepth ) {
+								//			// Support: Promises/A+ section 2.3.3.3.4.1
+								//			// https://promisesaplus.com/#point-61
+								//			// Ignore post-resolution exceptions
+								//			if ( depth + 1 >= maxDepth ) {
 
-												// Only substitute handlers pass on context
-												// and multiple values (non-spec behavior)
-												if ( handler !== Thrower ) {
-													that = undefined;
-													args = [ e ];
-												}
+								//				// Only substitute handlers pass on context
+								//				// and multiple values (non-spec behavior)
+								//				if ( handler !== Thrower ) {
+								//					that = undefined;
+								//					args = [ e ];
+								//				}
 
-												deferred.rejectWith( that, args );
-											}
-										}
-									};
+								//				deferred.rejectWith( that, args );
+								//			}
+								//		}
+								//	};
 
 							// Support: Promises/A+ section 2.3.3.3.1
 							// https://promisesaplus.com/#point-57

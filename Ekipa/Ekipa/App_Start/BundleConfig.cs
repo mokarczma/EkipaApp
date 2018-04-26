@@ -24,6 +24,9 @@ namespace Ekipa
             bundles.Add(new ScriptBundle("~/bundles/slick-slider").Include(
                     "~/Scripts/slick.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/Script-calendar").Include(
+                    "~/Scripts/script-custom-calendar.js"));
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                     "~/Content/bootstrap.css",
@@ -35,8 +38,6 @@ namespace Ekipa
             bundles.Add(new StyleBundle("~/Content/style").Include(
                     "~/Content/style/StyleSheet.css"
                     ));
-
-
         }
     }
 }

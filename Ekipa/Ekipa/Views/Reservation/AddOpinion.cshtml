@@ -28,19 +28,52 @@
 		<div class="form-group">
 			@Html.LabelFor(model => model.GradeValue, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.EditorFor(model => model.GradeValue, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.GradeValue, "", new { @class = "text-danger" })
+				<label  class="btn color-red ">1 @Html.RadioButtonFor(x => x.GradeValue, 1, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
+				<label  class="btn color-yellow">2 @Html.RadioButtonFor(x => x.GradeValue, 2, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
+				<label  class="btn btn-warning">3 @Html.RadioButtonFor(x => x.GradeValue, 3, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
+				<label  class="btn color-light-green">4 @Html.RadioButtonFor(x => x.GradeValue, 4, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
+				<label  class="btn color-green">5 @Html.RadioButtonFor(x => x.GradeValue, 5, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
+
+
+
+
 			</div>
-		</div>
 
-		<div class="form-group col-md-10">
-			<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
-		</div>
 
-		<div class="p-3"></div>
+			<div class="form-group col-md-10">
+				<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
+			</div>
 
-		<div class="form-group col-md-10">
-			@Html.ActionLink("Powrót", "MyReservation")
+			<div class="p-3"></div>
+
+			<div class="form-group col-md-10">
+				@Html.ActionLink("Powrót", "MyReservation")
+			</div>
 		</div>
 	</div>
 }
+	<style>
+		.badgebox {
+			opacity: 0;
+		}
+
+			.badgebox + .badge {
+				/* Move the check mark away when unchecked */
+				text-indent: -999999px;
+				/* Makes the badge's width stay the same checked and unchecked */
+				width: 27px;
+			}
+
+			.badgebox:focus + .badge {
+				/* Set something to make the badge looks focused */
+				/* This really depends on the application, in my case it was: */
+				/* Adding a light border */
+				box-shadow: inset 0px 0px 5px;
+				/* Taking the difference out of the padding */
+			}
+
+			.badgebox:checked + .badge {
+				/* Move the check mark back when checked */
+				text-indent: 0;
+			}
+	</style>

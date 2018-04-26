@@ -82,6 +82,12 @@ img {
 	background-color: #ae281c;
 }
 
+.color-light-green {
+	background-color: #C0D727;
+}
+
+C0D727
+
 .padding-column {
 	padding: 0 20px;
 }
@@ -93,3 +99,15 @@ img {
 	width: 30px;
 	height: 30px;
 }
+.stars {
+	background: #ffffff;
+	height: 30px;
+	width: 200px;
+	padding: 10px;
+	border-radius: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row-reverse;
+}
+

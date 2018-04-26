@@ -77,13 +77,13 @@ namespace Ekipa.Controllers
                 {
                     var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
                     var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
-                    if (comp != null)
+                    if (cust != null)
                     {
-                        ViewBag.UserRole = 6;
+                        ViewBag.UserRole = 3;
                     }
                     else
                     {
-                        ViewBag.UserRole = 5;
+                        ViewBag.UserRole = 4;
                     }
                 }
             }

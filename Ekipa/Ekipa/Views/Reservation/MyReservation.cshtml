@@ -4,43 +4,63 @@
     ViewBag.Title = "MyReservation";
 }
 
-<h2>MyReservation</h2>
-
 <table class="table">
+
+	<div class="row font-irregularis">
+		<div class="col-md-4 position-relative padding-column">
+			<h4>Twoje rezerwacje</h4>			
+		</div>
+		<div class="col-md-4 position-relative padding-column">
+			<h4>Twoj opis</h4>
+		</div>
+		<div class="col-md-4 position-relative padding-column">
+			<h4>Odpowiedz firmy</h4>
+		</div>
+	</div>
+
+
 
 	@for (int i = 0; i < Model.Count(); i++)
 	{
-	<div>
-		@Html.DisplayFor(model => model[i].DateStart)
-		@Html.DisplayFor(model => model[i].DateStop)
-		@Html.DisplayFor(model => model[i].CompanyName)
+		<hr />
 
+		<div class="row font-irregularis">
+			<div class="col-md-4 position-relative padding-column">
+				<h4>@Html.DisplayFor(model => model[i].CompanyName)</h4>
+				<div>
+					Termin:
+					@Html.DisplayFor(model => model[i].DateStart.Date) -
+					@Html.DisplayFor(model => model[i].DateStop.Date)
 
+					@if (Model[i].OpinionAdded == true)
+					{
+					<div>Dodałeś już opinię</div>
+					<div>
+						Firma:@Html.DisplayFor(model => model[i].CompanyName) dziękuje za dodanie opini
+					</div>
 
-		@if (Model[i].OpinionAdded == true)
-	{
-		<div> Dziękujemy za dodanie opini</div>
+						@Html.ActionLink(linkText: "Zobacz",actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new{id = Model[i].CompanyId }, htmlAttributes: null)
 
-		@Html.ActionLink(
-	 linkText: "Zobacz",
-	 actionName: "InfoAboutCompany",
-	 controllerName: "PublicCompany",
-	 routeValues: new
-	 {
-		 id = Model[i].CompanyId
-	 },
-	 htmlAttributes: null
- )
+					}
+					else if (Model[i].CompanyAccept == true)
+					{
+						<div>@Html.ActionLink("Dodaj opinię", "AddOpinion", new { idTerm = Model[i].TermId })</div>
 
-		}
-		else if (Model[i].CompanyAccept == true)
-		{
-		@Html.ActionLink("Dodaj opinię", "AddOpinion", new { idTerm = Model[i].TermId })
+					}
+					else
+					{
+						<div>Termin nie został jeszcze zaakceptowany przez firmę</div>
+						@Html.ActionLink(linkText: "Skontaktuj się z firmą",actionName: "InfoAboutCompany",controllerName: "PublicCompany", routeValues: new{id = Model[i].CompanyId}, htmlAttributes: null)
 
-		}
-	</div>
+					}
+				</div>
+			</div>
+			<div class="col-md-4 position-relative padding-column">
+				<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
+			</div>
+			<div class="col-md-4 position-relative padding-column">				
+				<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
+			</div>
+		</div>
 	}
-
-
-
-	</table>
+</table>

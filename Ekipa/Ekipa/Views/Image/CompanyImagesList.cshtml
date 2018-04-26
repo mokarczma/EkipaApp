@@ -24,13 +24,13 @@
 			@Html.HiddenFor(model => model.ImageList[i].Link)
 		}
 
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Zapisz" class="btn btn-default" />
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
+				</div>
 			</div>
-		</div>
 	}
 </div>
 <div>
-	@Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Dodaj nowe zdjęcie", "ImageAdd")
 </div>
