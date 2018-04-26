@@ -10,8 +10,8 @@ namespace Ekipa.Models.DB
         public int Id { get; set; }
         public int CompanyId { get; set; }
         public int? CustomerId { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateStop {get; set; }
         public virtual Company Company { get; set; }
         public virtual Customer Customer { get; set; }
 

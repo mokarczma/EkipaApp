@@ -23,7 +23,7 @@ namespace Ekipa.Models
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Image> Images { get; set; }
-        public virtual DbSet<Reservation> Rezervations { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Opinion> Opinions { get; set; }
 
 

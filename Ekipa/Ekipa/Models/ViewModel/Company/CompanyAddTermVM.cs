@@ -9,8 +9,8 @@ namespace Ekipa.Models.ViewModel.Company
     public class CompanyAddTermVM
     {
         public int ID { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateStop {get; set; }
         public int CustomerID { get; set; }
         public int YearFrom  { get; set; }
         public string MonthFrom { get; set; }

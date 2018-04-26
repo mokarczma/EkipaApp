@@ -31,15 +31,15 @@ namespace Ekipa.Controllers
                     {
                         ID = item.Id,
 
-                        DateFrom = item.DateFrom,
-                        YearFrom = item.DateFrom.Year,
-                        MonthFrom = item.DateFrom.Month.ToString(),
-                        DayFrom = item.DateFrom.Day,
+                        DateStart = item.DateStart,
+                        YearFrom = item.DateStart.Year,
+                        MonthFrom = item.DateStart.Month.ToString(),
+                        DayFrom = item.DateStart.Day,
 
-                        DateTo = item.DateTo,
-                        YearTo = item.DateTo.Year,
-                        MonthTo = item.DateTo.Month.ToString(),
-                        DayTo = item.DateTo.Day,
+                        DateStop = item.DateStop,
+                        YearTo = item.DateStop.Year,
+                        MonthTo = item.DateStop.Month.ToString(),
+                        DayTo = item.DateStop.Day,
                     };
                     compTermsList.Add(TermVM);
                 }
@@ -194,7 +194,7 @@ namespace Ekipa.Controllers
                         Term = termDB,
                         TermId = termDB.Id,
                     };
-                    db.Rezervations.Add(newReservation);
+                    db.Reservations.Add(newReservation);
                     db.SaveChanges();
                 }
                 TempData["alertMessage"] = "Zarezerwowano";

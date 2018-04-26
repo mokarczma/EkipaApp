@@ -13,12 +13,12 @@ namespace Ekipa.Models.ViewModel
 
         [StringLength(1000)]
         [Display(Name = "Wiadomość dla firmy dotycząca tworzonej reazerwacji")]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,1000}$")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,1000}$")]
         public string DescriptionCustomer { get; set; }
 
         [StringLength(1000)]
         [Display(Name = "Wiadomość dla firmy dotycząca tworzonej reazerwacji")]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,1000}$")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,1000}$")]
         public string DescriptionCompany { get; set; }
 
         public bool CompanyAccept { get; set; }
@@ -29,9 +29,10 @@ namespace Ekipa.Models.ViewModel
         public string CustomerName { get; set; }
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
+        public bool OpinionAdded { get; set; }
 
 
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        public DateTime DateStart{ get; set; }
+        public DateTime DateStop { get; set; }
     }
 }

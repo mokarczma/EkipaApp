@@ -199,6 +199,14 @@
     <Compile Include="Migrations\201804241300081_zmianyCust.Designer.cs">
       <DependentUpon>201804241300081_zmianyCust.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804251012402_zmianyTerm.cs" />
+    <Compile Include="Migrations\201804251012402_zmianyTerm.Designer.cs">
+      <DependentUpon>201804251012402_zmianyTerm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804251048201_zmianyRes.cs" />
+    <Compile Include="Migrations\201804251048201_zmianyRes.Designer.cs">
+      <DependentUpon>201804251048201_zmianyRes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AuthUser.cs" />
@@ -230,6 +238,7 @@
     <Compile Include="Models\ViewModel\LogedUserVM.cs" />
     <Compile Include="Models\ViewModel\MainViewVM.cs" />
     <Compile Include="Models\ViewModel\MessageVm.cs" />
+    <Compile Include="Models\ViewModel\OpinionVM.cs" />
     <Compile Include="Models\ViewModel\ReservationVM.cs" />
     <Compile Include="Models\ViewModel\TagVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -300,6 +309,7 @@
     <Content Include="Views\PublicCompany\CustomerReservation.cshtml" />
     <Content Include="Views\Reservation\MyReservation.cshtml" />
     <Content Include="Views\Reservation\View.cshtml" />
+    <Content Include="Views\Reservation\AddOpinion.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -358,7 +368,6 @@
     <Content Include="Views\Account\LoginCompany.cshtml" />
     <Content Include="Views\Account\RegisterCustomer.cshtml" />
     <Content Include="Views\Account\LoginCustomer.cshtml" />
-    <Content Include="Views\Account\IndexCustomer.cshtml" />
     <Content Include="Views\Account\EditCustomer.cshtml" />
     <Content Include="Views\Company\AddCompanyTerm.cshtml" />
     <Content Include="Views\Company\EditCompanyDetails.cshtml" />
@@ -425,6 +434,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804241300081_zmianyCust.resx">
       <DependentUpon>201804241300081_zmianyCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251012402_zmianyTerm.resx">
+      <DependentUpon>201804251012402_zmianyTerm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251048201_zmianyRes.resx">
+      <DependentUpon>201804251048201_zmianyRes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

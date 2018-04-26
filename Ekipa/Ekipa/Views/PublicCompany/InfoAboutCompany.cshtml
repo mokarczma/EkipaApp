@@ -46,8 +46,8 @@
 			@for (int i = 0; i < Model.CompanyTermVMList.Count(); i++)
 	{
 			<div>
-				@Html.DisplayFor(model => model.CompanyTermVMList[i].DateFrom)
-				@Html.DisplayFor(model => model.CompanyTermVMList[i].DateTo)
+				@Html.DisplayFor(model => model.CompanyTermVMList[i].DateStart)
+				@Html.DisplayFor(model => model.CompanyTermVMList[i].DateStop)
 				@Html.ActionLink("Zarezerwuj", "CustomerReservation", new { id = Model.CompanyTermVMList[i].ID })
 				tako
 			</div>

@@ -49,6 +49,17 @@ namespace Ekipa.Controllers
             return View();
         }
 
+        public static IEnumerable<DateTime> DateRangeToArray(DateTime start,
+                                                     DateTime end)
+        {
+            DateTime curDate = start;
+            while (curDate <= end)
+            {
+                yield return curDate;
+                curDate = curDate.AddDays(1);
+            }
+        }
+
         [HttpPost]
         public ActionResult AddCompanyTerm(CompanyAddTermVM model)
         {
@@ -59,6 +70,12 @@ namespace Ekipa.Controllers
 
             if (ModelState.IsValid)
             {
+                if (model.DateStop < model.DateStart)
+                {
+                    ModelState.AddModelError("DateStop", "Data końca nie może być wcześniejsza od daty początku");
+                    return View(model);
+                }
+
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
 
@@ -68,12 +85,35 @@ namespace Ekipa.Controllers
                     {
                         return View(model);
                     }
+                    //sprawdzanie czy ten dzień nie ma już terminu
 
-                    var companyTerms = new Term()
+                    IEnumerable<DateTime> dniTworzone = DateRangeToArray(model.DateStart, model.DateStop).ToList();
+
+                    var termList = db.Terms.Where(t => t.CompanyId == company.Id).ToList();
+
+
+
+                    foreach (var item in termList)
+                    {
+                        IEnumerable<DateTime> dateTimesZajete = DateRangeToArray(item.DateStart, item.DateStop).ToList();
+                        foreach (var zajte in dateTimesZajete)
+                        {
+                            foreach (var tworzone in dniTworzone)
+                            {
+                                if (tworzone == zajte)
+                                {
+                                    ModelState.AddModelError("DateStop", "W terminie, który chcesz utworzyć, występują dni, które już zaplanowałeś, sprawdź inne terminy");
+                                    return View(model);
+                                }
+                            }
+                        }
+                    }
+
+                var companyTerms = new Term()
                     {
                         CompanyId = company.Id,
-                        DateFrom = model.DateFrom,
-                        DateTo = model.DateTo,
+                        DateStart = model.DateStart,
+                        DateStop = model.DateStop,
                     };
 
                     company.CompanyTerms.Add(companyTerms);
@@ -81,9 +121,11 @@ namespace Ekipa.Controllers
                     db.SaveChanges();
                 }
             }
-
             return View("");
         }
+
+
+
         [HttpGet]
         [ActionName("CompanyDetails")]
         public ActionResult CompanyDetails()

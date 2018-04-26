@@ -47,6 +47,10 @@ namespace Ekipa
                         }
                     }
                 }
+                else
+                {
+                    HttpContext.Current.User = null;
+                }
             }
             catch 
             {

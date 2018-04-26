@@ -180,3 +180,5 @@ D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.zmianyCustomer.resources
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.zmianyCustomer1.resources
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.zmianyRezerwacja5.resources
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.zmianyCust.resources
+D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.zmianyTerm.resources
+D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.Migrations.zmianyRes.resources

@@ -10,13 +10,13 @@ namespace Ekipa.Models.ViewModel.Customer
         [StringLength(50)]
         [Display(Name = "Imie")]
         [Required(ErrorMessage = "Imie jest wymagane", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,50}$", ErrorMessage = "Niepoprawne imię")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,50}$", ErrorMessage = "Niepoprawne imię")]
         public string Name { get; set; }
 
         [StringLength(100)]
         [Display(Name = "Nazwisko")]
         [Required(ErrorMessage = "Nazwisko jest wymagane", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,100}$", ErrorMessage = "Niepoprawne nazwisko")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,100}$", ErrorMessage = "Niepoprawne nazwisko")]
         public string Surname { get; set; }
 
         [StringLength(200)]

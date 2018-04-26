@@ -6,96 +6,41 @@
 
 <h2>MyReservation</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
 
-
-	@foreach (var item in Model)
+	@for (int i = 0; i < Model.Count(); i++)
 	{
-		<dl class="dl-horizontal">
-			<dt>
-				@Html.DisplayNameFor(model => item.DescriptionCustomer)
-			</dt>
+	<div>
+		@Html.DisplayFor(model => model[i].DateStart)
+		@Html.DisplayFor(model => model[i].DateStop)
+		@Html.DisplayFor(model => model[i].CompanyName)
 
-			<dd>
-				@Html.DisplayFor(model => item.DescriptionCustomer)
-			</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => item.DescriptionCompany)
-			</dt>
 
-			<dd>
-				@Html.DisplayFor(model => item.DescriptionCompany)
-			</dd>
+		@if (Model[i].OpinionAdded == true)
+	{
+		<div> Dziękujemy za dodanie opini</div>
 
-			<dt>
-				@Html.DisplayNameFor(model => item.CompanyAccept)
-			</dt>
+		@Html.ActionLink(
+	 linkText: "Zobacz",
+	 actionName: "InfoAboutCompany",
+	 controllerName: "PublicCompany",
+	 routeValues: new
+	 {
+		 id = Model[i].CompanyId
+	 },
+	 htmlAttributes: null
+ )
 
-			<dd>
-				@Html.DisplayFor(model => item.CompanyAccept)
-			</dd>
+		}
+		else if (Model[i].CompanyAccept == true)
+		{
+		@Html.ActionLink("Dodaj opinię", "AddOpinion", new { idTerm = Model[i].TermId })
 
-			<dt>
-				@Html.DisplayNameFor(model => item.TermId)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => item.TermId)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => item.CustomerId)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => item.CustomerId)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => item.CustomerName)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => item.CustomerName)
-			</dd>
-
-			<dt>o
-				@Html.DisplayNameFor(model => item.CompanyId)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => item.CompanyId)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => item.CompanyName)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => item.CompanyName)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => item.DateFrom)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => item.DateFrom)
-			</dd>
-
-			<dt>
-				@Html.DisplayNameFor(model => item.DateTo)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => item.DateTo)
-			</dd>
-
-		</dl>
+		}
+	</div>
 	}
 
-</table>
+
+
+	</table>

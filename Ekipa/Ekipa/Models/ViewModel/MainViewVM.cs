@@ -26,21 +26,6 @@ namespace Ekipa.Models.ViewModel
         public MainViewVM()
         {
             List<SelectListItem> items = new List<SelectListItem>();
-            LogedUserVM logedUser = new LogedUserVM();
-
-
-            //using (Controllers.AccountController accCon = new Controllers.AccountController())
-            //{
-            //    logedUser = accCon.LogedUser();
-            //}
-            //if (logedUser != null)
-            //{
-            //    Loged = logedUser.Loged;
-            //    UserId = logedUser.UserId;
-            //    UserName = logedUser.UserName;
-            //    UserRole = logedUser.UserRole;
-            //}
-
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 items = (from li in db.Cities

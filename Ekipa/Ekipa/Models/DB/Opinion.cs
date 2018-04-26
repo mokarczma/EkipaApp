@@ -13,7 +13,7 @@ namespace Ekipa.Models.DB
         public bool AdminAccept { get; set; }
         public bool IsDelete { get; set; }
         public int CompanyId { get; set; }
-        public int RezervationId { get; set; }
-        public virtual Reservation Rezervation { get; set; }
+        public int ReservationId { get; set; }
+        public virtual Reservation Reservation { get; set; }
     }
 }

@@ -51,16 +51,23 @@ namespace Ekipa.Controllers
         [ActionName("Logout")]
         public ActionResult Loginout()
         {
-            ViewBag.CityList = CitiesQuery();
+            Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
             FormsAuthentication.SignOut();
+
             return RedirectToAction("Index", "Home");
+
         }
 
         [HttpGet]
         [ActionName("RegisterCustomer")]
         public ActionResult RegisterCustomer()
         {
-            ViewBag.CityList = CitiesQuery();
+            var user = User as MPrincipal;
+            if (user != null)
+            {
+                return RedirectToAction("Logout");
+            }
+
             return View();
         }
 
@@ -112,7 +119,12 @@ namespace Ekipa.Controllers
         [Route("LoginCustomer")]
         public ActionResult LoginCustomer()
         {
-            ViewBag.CityList = CitiesQuery();
+            var user = User as MPrincipal;
+            if (user != null)
+            {
+                return RedirectToAction("Logout");
+            }
+
             return View();
         }
 
@@ -134,7 +146,7 @@ namespace Ekipa.Controllers
 
                 _model.Password = Security.sha512encrypt(_model.Password);
 
-                Customer customer = db.Customers.FirstOrDefault(u => u.Password.Equals(_model.Password) && u.Password.Equals(_model.Password));
+                Customer customer = db.Customers.FirstOrDefault(u => u.Login.Equals(_model.Login) && u.Password.Equals(_model.Password));
 
                 string authId = Guid.NewGuid().ToString();
 
@@ -146,12 +158,13 @@ namespace Ekipa.Controllers
                 if (customer != null)
                 {
                     FormsAuthentication.SetAuthCookie(customer.Login, false);
-                    var authTicket = new FormsAuthenticationTicket(1, customer.Login, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(60), false, "");
+                    var authTicket = new FormsAuthenticationTicket(1, customer.Login, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(30), false, "");
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
-                    authCookie.Expires = DateTime.UtcNow.AddMinutes(60);
+                    authCookie.Expires = DateTime.UtcNow.AddMinutes(30);
                     Response.SetCookie(authCookie);
                     return RedirectToAction("Index", "Home");
                 }
+                ModelState.AddModelError("Password", "Niepoprawny login lub hasło");
                 return View(_model);
 
             }
@@ -162,7 +175,6 @@ namespace Ekipa.Controllers
         [ActionName("EditCustomer")]
         public ActionResult EditCustomer()
         {
-            ViewBag.CityList = CitiesQuery();
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
@@ -228,8 +240,14 @@ namespace Ekipa.Controllers
         [ActionName("RegisterCompany")]
         public ActionResult RegisterCompany()
         {
+            var user = User as MPrincipal;
+            if (user != null)
+            {
+                return RedirectToAction("Logout");
+            }
 
             return View();
+
         }
 
         [HttpPost]
@@ -279,6 +297,12 @@ namespace Ekipa.Controllers
         [Route("LoginCompany")]
         public ActionResult LoginCompany()
         {
+            var user = User as MPrincipal;
+            if (user != null)
+            {
+                return RedirectToAction("Logout");
+            }
+
             return View();
         }
 

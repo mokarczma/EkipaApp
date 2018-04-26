@@ -15,17 +15,17 @@ namespace Ekipa.Models.ViewModel.Company
         [StringLength(200)]
         [Display(Name = "Specjaność firmy")]
         [Required(ErrorMessage = "Specjalność jest wymagana", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,100}$", ErrorMessage = "Zbyt mało znaków")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,100}$", ErrorMessage = "Zbyt mało znaków")]
         public string Speciality { get; set; }
 
         [StringLength(1000)]
         [Display(Name = "Zakres usług")]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,1000}$", ErrorMessage = "Zbyt mało znaków")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,1000}$", ErrorMessage = "Zbyt mało znaków")]
         public string Services { get; set; }
 
         [StringLength(1000)]
         [Display(Name = "Wyceny")]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,1000}$", ErrorMessage = "Zbyt mało znaków")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,1000}$", ErrorMessage = "Zbyt mało znaków")]
         public string Pricing { get; set; }
 
         public int CityId { get; set; }
