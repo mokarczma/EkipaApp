@@ -21,6 +21,12 @@ namespace Ekipa.Controllers
                 List<Tag> tagList = new List<Tag>();
                 tagList = db.Tags.Where(t => t.CompanyTag.Any(c => c.CompanyId == company.Id)).ToList();
 
+                bool tagExist = false;
+                if (tagList != null)
+                {
+                    tagExist = true;
+                }
+
                 List<Term> termList = new List<Term>();
                 termList = db.Terms.Where(t => t.CompanyId == company.Id).ToList();
                 List<CompanyAddTermVM> compTermsList = new List<CompanyAddTermVM>();
@@ -56,7 +62,8 @@ namespace Ekipa.Controllers
                     PhoneNumer = company.PhoneNumer,
                     CompanyTagList = tagList,
                     CompanyTermVMList = compTermsList,
-                    CompanyImageList = imageList
+                    CompanyImageList = imageList,
+                    TagExist = tagExist
                 };
                 return companyInfoVM;
             };
@@ -137,7 +144,7 @@ namespace Ekipa.Controllers
                     {
                         IdCompany = company.IdCompany,
                         CityName = company.CityName,
-                        CompanyName = company.CityName,
+                        CompanyName = company.CompanyName,
                         CompanyMainImage = imageMain,
                         CompanyTagList = company.CompanyTagList,
                         AverageRating = 4.5,

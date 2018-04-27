@@ -14,9 +14,11 @@ namespace Ekipa.Models.ViewModel.Company
     {
         public int Id;
         public List<CompanyTagVM> CompanyTags { get; set; }
-        public List<SelectListItem> ChosenTags { get; set; }
+
+        public string SelectedTagId { get; set; }
 
         [Display(Name = "Wybierz nową etykietę")]
         public List<SelectListItem> OtherTags { get; set; }
+        public List <SelectListItem> ChosenTags { get; set; }
     }
 }

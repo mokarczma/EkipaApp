@@ -141,6 +141,13 @@ namespace Ekipa.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var company = db.Companies.SingleOrDefault(x => x.Login == login);
+                CompanyInfoVM companyInfoVM = Controllers.PublicCompanyController.CompanyInfo(company.Id);
+                bool tag = false;
+                if (companyInfoVM.CompanyTagList != null)
+                {
+                    tag = true;
+                }
+
                 var city = db.Cities.SingleOrDefault(x => x.ID == company.CityId);
                 compDetVM = new CompanyDetailsVM();
                 compDetVM.Pricing = company.Pricing;
@@ -148,6 +155,8 @@ namespace Ekipa.Controllers
                 compDetVM.Speciality = company.Speciality;
                 compDetVM.SelectedCityID = company.City.ID;
                 compDetVM.CityName = city.Name;
+                compDetVM.CompanyTagList = companyInfoVM.CompanyTagList;
+                compDetVM.TagExist = tag;
             }
             return View(compDetVM);
         }
@@ -239,11 +248,12 @@ namespace Ekipa.Controllers
                     }
 
                     db.SaveChanges();
-                    return RedirectToAction("IndexCompany", "Account");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
             return RedirectToAction("EditCompanyDetails");
         }
+      
     }
 }

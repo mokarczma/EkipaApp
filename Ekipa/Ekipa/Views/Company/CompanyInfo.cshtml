@@ -35,13 +35,11 @@
 }
 }
 		</div>
-		<div class="row row-margin">
-			@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
-		</div>
+
 
 		<h6>Wolne terminy</h6>
 		<div class="row row-margin">
-			@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTerms)
+			@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTermVMList)
 		</div>
 
 

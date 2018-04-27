@@ -103,7 +103,7 @@ namespace Ekipa.Controllers
 
                 // dodawanie nowych tagów z listy wybieralnej
 
-                if (model.ChosenTags != null)
+                if (model.SelectedTagId != null)
                 {
                     foreach (var item in model.ChosenTags)
                     {
@@ -119,7 +119,7 @@ namespace Ekipa.Controllers
 
                 db.SaveChanges();
             }
-            return RedirectToAction("IndexCompany", "Account");
+            return RedirectToAction("CompanyDetails", "Company");
         }
 
         [HttpGet]

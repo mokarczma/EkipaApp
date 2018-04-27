@@ -315,6 +315,7 @@
     <Content Include="Views\Reservation\AddOpinion.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Views\Calendar\_CalendarPartial.cshtml" />
+    <Content Include="Views\Partial\_ImageAdd.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -367,7 +368,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\IndexCompany.cshtml" />
     <Content Include="Views\Account\EditCompany.cshtml" />
     <Content Include="Views\Account\RegisterCompany.cshtml" />
     <Content Include="Views\Account\LoginCompany.cshtml" />
@@ -379,12 +379,7 @@
     <Content Include="Views\Company\CompanyDetails.cshtml" />
     <Content Include="Views\Tag\CreateTag.cshtml" />
     <Content Include="Views\Tag\CompanyTagsList.cshtml" />
-    <Content Include="Views\Tag\View.cshtml" />
-    <Content Include="Views\Tag\AddCompanyTag.cshtml" />
-    <Content Include="Views\Tag\DeleteCompanyTag.cshtml" />
-    <Content Include="Views\Image\ImageAdd.cshtml" />
     <Content Include="Views\Image\CompanyImagesList.cshtml" />
-    <Content Include="Views\Image\EditorTemplates\ImageVM.cshtml" />
     <Content Include="Views\Company\CompanyInfo.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />

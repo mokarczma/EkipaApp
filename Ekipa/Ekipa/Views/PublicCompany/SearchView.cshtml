@@ -4,17 +4,51 @@
 	ViewBag.Title = "SearchView";
 }
 
-
-
 @for (int i = 0; i < Model.basicCompanyInfoVMlist.Count(); i++)
 {
-		<img class="img-responsive" src="@Url.Content(Model.basicCompanyInfoVMlist[i].CompanyMainImage.Link)" width="150" height="150" />
+	<hr />
+	<div class="row">
 
-	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].AverageRating)
-	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CityName)
-	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].NearestFreeDate)
-	@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName)
+		<div class="col-md-3">
+			<img class="img-responsive" src="@Url.Content(Model.basicCompanyInfoVMlist[i].CompanyMainImage.Link)" />
 
-	@Html.ActionLink("Zobacz więcej", "InfoAboutCompany", new { id = Model.basicCompanyInfoVMlist[i].IdCompany })
+		</div>
+		<div class="col-md-3">
+			<h2>@Html.ActionLink(@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName).ToString(), "InfoAboutCompany", new { id = Model.basicCompanyInfoVMlist[i].IdCompany })</h2>
+			<h4>Ocena: @Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].AverageRating)/5</h4>
 
+		</div>
+
+
+		<div class="col-md-3 text-lg-center">
+
+				@for (int j = 0; j < Model.basicCompanyInfoVMlist[i].CompanyTagList.Count(); j++)
+				{
+						if (j == 0 || j==2)
+						{
+							<div class="tag_min-box color-green text-center " >
+								@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)
+							</div>
+							}
+						else if (j == 1 || j == 3)
+						{
+							<div class=" tag_min-box color-yellow text-center">
+								@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)
+							</div>
+						}
+						
+				}
+
+			</div>
+
+		<div class="col-md-3">
+			Pierwszy Wolny termin: 
+
+		</div>
+	</div>
 }
+
+
+
+
+

@@ -1,16 +1,26 @@
-﻿@model Ekipa.Models.ViewModel.Company.CompanyTermsVM
+﻿@model List<Ekipa.Models.ViewModel.Company.CompanyAddTermVM>
 
-@for (int i = 0; i < Model.CompanyTermsList.Count(); i++)
-{
-	<div class="term-box">
-		@Html.DisplayFor(model => model.CompanyTermsList[i].DateFrom)
-		@Html.DisplayFor(model => model.CompanyTermsList[i].DateTo)
-		@Html.ActionLink("Zarezerwuj", "CustomerReservation", "Reservation", new { id = Model.CompanyTermsList[i].ID })
-	</div>
-	if (null != TempData["alertMessage"])
-	{
-		<script type="text/javascript">
-       alert("@TempData["alertMessage"]");
-		</script>
-	}
+@{
+	int counter = 0;
 }
+<div class="row">
+
+	@for (int i = 0; i < Model.Count(); i++)
+	{
+		if (counter != 0 && counter % 3 == 0)
+		{
+				@:</div>
+				<hr />
+				@:<div class="row">
+		}
+		<div class="col-md-3">
+			<div class="box color-green term-box text-center">
+				@Html.DisplayFor(model => model[i].DateStart.Day).@Html.DisplayFor(model => model[i].DateStart.Month).@Html.DisplayFor(model => model[i].DateStart.Year) -
+				@Html.DisplayFor(model => model[i].DateStop.Day).@Html.DisplayFor(model => model[i].DateStop.Month).@Html.DisplayFor(model => model[i].DateStop.Year)
+				@Html.ActionLink("Zarezerwuj", "CustomerReservation", "Reservation", new { id = Model[i].ID })
+
+			</div>
+		</div>
+		counter++;
+	}
+</div>

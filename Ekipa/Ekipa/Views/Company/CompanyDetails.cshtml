@@ -3,35 +3,67 @@
 	ViewBag.Title = "CompanyDetails";
 }
 <h2>Informacje o Twojej firmie</h2>
-<div>
-	<dl class="dl-horizontal">
-		<dt>
-			@Html.DisplayNameFor(model => model.Speciality)
-		</dt>
-		<dd>
-			@Html.DisplayFor(model => model.Speciality)
-		</dd>
-		<dt>
-			@Html.DisplayNameFor(model => model.Services)
-		</dt>
-		<dd>
-			@Html.DisplayFor(model => model.Services)
-		</dd>
-		<dt>
-			@Html.DisplayNameFor(model => model.Pricing)
-		</dt>
-		<dd>
-			@Html.DisplayFor(model => model.Pricing)
-		</dd>
-		<dt>
-			@Html.DisplayNameFor(model => model.CityName)
-		</dt>
-		<dd>
-			@Html.DisplayFor(model => model.CityName)
-		</dd>
-	</dl>
-</div>
-<p>
-	@Html.ActionLink("Edytuj", "EditCompanyDetails", new { /* id = Model.PrimaryKey */ }) |
 
-</p>
+	@Html.AntiForgeryToken()
+
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="row text-center">
+		@if (Model.TagExist)
+		{
+			for (int i = 0; i < Model.CompanyTagList.Count(); i++)
+			{
+					if (i % 2 == 0)
+					{
+						<div class="color-yellow tag-box">
+							@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+						</div>
+					}
+					else if (i == 3 || i == 7 || i == 9)
+					{
+						<div class="color-red tag-box">
+							@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+						</div>
+					}
+					else
+					{
+						<div class="color-green tag-box">
+							@Html.DisplayFor(m => m.CompanyTagList[i].Name)
+						</div>
+					}
+			}
+		}
+		
+	</div>
+
+
+
+				<dl class="dl-horizontal">
+					<dt>
+						@Html.DisplayNameFor(model => model.Speciality)
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Speciality)
+					</dd>
+					<dt>
+						@Html.DisplayNameFor(model => model.Services)
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Services)
+					</dd>
+					<dt>
+						@Html.DisplayNameFor(model => model.Pricing)
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Pricing)
+					</dd>
+					<dt>
+						@Html.DisplayNameFor(model => model.CityName)
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.CityName)
+					</dd>
+				</dl>
+			<p>
+				@Html.ActionLink("Edytuj", "EditCompanyDetails", new { /* id = Model.PrimaryKey */ })
+
+			</p>
