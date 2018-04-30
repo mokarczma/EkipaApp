@@ -1,4 +1,4 @@
-﻿@model List<Ekipa.Models.ViewModel.Company.CompanyAddTermVM>
+﻿@model List<Ekipa.Models.ViewModel.Company.CompanyTermVM>
 
 @{
 	int counter = 0;
@@ -17,7 +17,7 @@
 			<div class="box color-green term-box text-center">
 				@Html.DisplayFor(model => model[i].DateStart.Day).@Html.DisplayFor(model => model[i].DateStart.Month).@Html.DisplayFor(model => model[i].DateStart.Year) -
 				@Html.DisplayFor(model => model[i].DateStop.Day).@Html.DisplayFor(model => model[i].DateStop.Month).@Html.DisplayFor(model => model[i].DateStop.Year)
-				@Html.ActionLink("Zarezerwuj", "CustomerReservation", "Reservation", new { id = Model[i].ID })
+				<a  class="white" href='@Url.Action("CustomerReservation", "PublicCompany", new RouteValueDictionary(  new { id = Model[i].ID }))'> Zarezerwuj</a>
 
 			</div>
 		</div>

@@ -8,6 +8,6 @@ namespace Ekipa.Models.ViewModel.Company
 {
     public class CompanyTermsVM
     {
-        public List<CompanyAddTermVM> CompanyTermsList {get; set;}
+        public List<CompanyTermVM> CompanyTermsList {get; set;}
     }
 }

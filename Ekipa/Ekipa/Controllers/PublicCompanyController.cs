@@ -28,29 +28,24 @@ namespace Ekipa.Controllers
                 }
 
                 List<Term> termList = new List<Term>();
-                termList = db.Terms.Where(t => t.CompanyId == company.Id).ToList();
-                List<CompanyAddTermVM> compTermsList = new List<CompanyAddTermVM>();
+                termList = db.Terms.Where(t => t.CompanyId == company.Id && t.IsDelete == false).ToList();
+                List<CompanyTermVM> compTermsList = new List<CompanyTermVM>();
 
                 foreach (var item in termList)
                 {
-                    CompanyAddTermVM TermVM = new CompanyAddTermVM
+                    CompanyTermVM TermVM = new CompanyTermVM
                     {
                         ID = item.Id,
-
                         DateStart = item.DateStart,
-                        YearFrom = item.DateStart.Year,
-                        MonthFrom = item.DateStart.Month.ToString(),
-                        DayFrom = item.DateStart.Day,
-
                         DateStop = item.DateStop,
-                        YearTo = item.DateStop.Year,
-                        MonthTo = item.DateStop.Month.ToString(),
-                        DayTo = item.DateStop.Day,
+                        CustomerID = item.CustomerId
+                      
                     };
                     compTermsList.Add(TermVM);
                 }
                 List<Image> imageList = new List<Image>();
-                imageList = db.Images.Where(t => t.CompanyId == company.Id).ToList();
+                imageList = db.Images.Where(t => t.CompanyId == company.Id && t.IsDelete == false).ToList();
+
                 CompanyInfoVM companyInfoVM = new CompanyInfoVM()
                 {
                     IdCompany = company.Id,
@@ -108,26 +103,7 @@ namespace Ekipa.Controllers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                var dbCompany = db.Companies.Where(t => t.CityId == model.PlaceSearch && t.CompanyName.Contains(model.NameSearch)).ToList<Company>();
-
-                if (model.PlaceSearch == 1)
-                {
-                    if (model.NameSearch == null)
-                    {
-                        dbCompany = db.Companies.ToList();
-                    }
-                    else
-                    {
-                        dbCompany = db.Companies.Where(t => t.CompanyName.Contains(model.NameSearch)).ToList();
-                    }
-                }
-                else
-                {
-                    if (model.NameSearch == null)
-                    {
-                        dbCompany = db.Companies.Where(t => t.CityId == model.PlaceSearch).ToList();
-                    }
-                }
+                var dbCompany = SearchTag(model.NameSearch, Convert.ToInt32(model.PlaceSearch));
 
                 List<BasicCompanyInfoVM> basicCompanyInfoList = new List<BasicCompanyInfoVM>();
                 foreach (var item in dbCompany)
@@ -140,6 +116,10 @@ namespace Ekipa.Controllers
                         imageMain = new Image() {                          
                             Link = "~/Content/images/brakZdj.jpg" };
                     }
+
+                    var nearestFreeDate = db.Terms.Where(t => t.CompanyId == item.Id && t.IsDelete == false && t.CustomerId == null && t.DateStart > DateTime.Now).OrderBy(x => x.DateStart).FirstOrDefault();
+
+
                     BasicCompanyInfoVM basicInfo = new BasicCompanyInfoVM()
                     {
                         IdCompany = company.IdCompany,
@@ -149,8 +129,9 @@ namespace Ekipa.Controllers
                         CompanyTagList = company.CompanyTagList,
                         AverageRating = 4.5,
                         Services = company.Services,
-                        Speciality = company.Speciality
-                    };
+                        Speciality = company.Speciality,
+                        NearestFreeDate = nearestFreeDate.DateStart.ToShortDateString() + " - " + nearestFreeDate.DateStop.ToShortDateString()
+                };
                     basicCompanyInfoList.Add(basicInfo);
                 }
                 BasicCompanyInfoListVM searched = new BasicCompanyInfoListVM();
@@ -159,6 +140,66 @@ namespace Ekipa.Controllers
                 return View(searched);
             }
         }
+
+        private static IEnumerable<Company> SearchTag(string name, int cityId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if (cityId == 1)
+                {
+                    if (name == null)
+                    {
+                        var dbCompany = db.Companies.ToList();
+                        return dbCompany;
+                    }
+                    return (from tag in db.Tags
+                            join compTag in db.CompanyTags on tag.Id equals compTag.TagId
+                            join comp in db.Companies on compTag.CompanyId equals comp.Id
+                            where (tag.Name.Contains(name) || comp.CompanyName.Contains(name))
+                            select new
+                            {
+                                Id = comp.Id,
+                                CityId = comp.CityId,
+                                CompanyName = comp.CompanyName,
+                                Services = comp.Services,
+                                Speciality = comp.Speciality
+                            }).ToList().Select(x => new Company
+                            {
+                                Id = x.Id,
+                                CityId = x.CityId,
+                                CompanyName = x.CompanyName,
+                                Services = x.Services,
+                                Speciality = x.Speciality
+                            });
+                }
+                if (name == null)
+                {
+                    var dbCompany = db.Companies.Where(t => t.CityId == cityId).ToList();
+                    return dbCompany;
+                }
+
+                return (from tag in db.Tags
+                        join compTag in db.CompanyTags on tag.Id equals compTag.TagId
+                        join comp in db.Companies on compTag.CompanyId equals comp.Id
+                        where (tag.Name.Contains(name) || comp.CompanyName.Contains(name)) && comp.CityId == cityId
+                        select new
+                        {
+                            Id = comp.Id,
+                            CityId = comp.CityId,
+                            CompanyName = comp.CompanyName,
+                            Services = comp.Services,
+                            Speciality = comp.Speciality
+                        }).ToList().Select(x => new Company
+                        {
+                            Id = x.Id,
+                            CityId = x.CityId,
+                            CompanyName = x.CompanyName,
+                            Services = x.Services,
+                            Speciality = x.Speciality
+                        });
+            }
+        }
+        
         [HttpGet]
         public ActionResult CustomerReservation(int id)
         {

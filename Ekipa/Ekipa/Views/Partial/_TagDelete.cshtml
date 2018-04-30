@@ -1,0 +1,9 @@
+﻿@model Ekipa.Models.ViewModel.CompanyTagVM
+
+@using (Html.BeginForm("DeleteCompanyTag", "Tag", FormMethod.Post))
+{
+	@Html.HiddenFor(m => m.Id)
+	@Html.DisplayFor(m => m.Name)
+	<a class="ikonDelete"><input type="image" src="~/Content/images/delete.png" alt="Submit" width="25" height="25"></a>
+}
+

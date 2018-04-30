@@ -14,6 +14,7 @@ namespace Ekipa.Controllers
     {
         // GET: Tag
         [HttpGet]
+        [Authorize]
         public ActionResult CompanyTagsList()
         {
             var user = User as MPrincipal;
@@ -78,49 +79,6 @@ namespace Ekipa.Controllers
             }
             return View("CompanyTagsList", model);
         }
-        [HttpPost]
-        public ActionResult CompanyTagsList(CompanyTagsVM model)
-        {
-            var user = User as MPrincipal;
-            var login = user.UserDetails.Login;
-            ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.Role = 4;
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var company = db.Companies.SingleOrDefault(x => x.Login == login);
-                //usuwanie tagów z firmy
-                if (model.CompanyTags != null)
-                {
-                    foreach (var item in model.CompanyTags)
-                    {
-                        if (item.DeleteFromCompany)
-                        {
-                            var tagDel = db.CompanyTags.SingleOrDefault(x => x.CompanyId == company.Id && x.TagId == item.Id);
-                            db.CompanyTags.Remove(tagDel);
-                        }
-                    }
-                }
-
-                // dodawanie nowych tagów z listy wybieralnej
-
-                if (model.SelectedTagId != null)
-                {
-                    foreach (var item in model.ChosenTags)
-                    {
-                        CompanyTag cTag = new CompanyTag()
-                        {
-                            CompanyId = company.Id,
-                            TagId = Convert.ToInt32(item.Value)
-
-                        };
-                        db.CompanyTags.Add(cTag);
-                    }
-                }
-
-                db.SaveChanges();
-            }
-            return RedirectToAction("CompanyDetails", "Company");
-        }
 
         [HttpGet]
         [ActionName("CreateTag")]
@@ -159,7 +117,7 @@ namespace Ekipa.Controllers
                     }
                 }
             }
-            return View(model);
+            return RedirectToAction("CompanyTagsList");
 
         }
         //GET: Tag/Delete/5
@@ -192,7 +150,7 @@ namespace Ekipa.Controllers
         [HttpPost]
         [ActionName("AddCompanyTag")]
 
-        public ActionResult AddCompanyTag(Models.DB.Tag tag)
+        public ActionResult AddCompanyTag(CompanyTagsVM model)
         {
             var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;
@@ -202,40 +160,31 @@ namespace Ekipa.Controllers
                 CompanyTag cTag = new CompanyTag()
                 {
                     CompanyId = company.Id,
-                    TagId = tag.Id
-
+                    TagId = Convert.ToInt32(model.SelectedTagId)
                 };
                 db.CompanyTags.Add(cTag);
+                db.SaveChanges();
+
             }
-            return RedirectToAction("TagsList");
-        }
-        [HttpGet]
-        [ActionName("DeleteCompanyTag")]
-        public ActionResult DeleteCompanyTag()
-        {
-            return View();
+            return RedirectToAction("CompanyTagsList");
         }
 
-
-        [HttpDelete]
+        [HttpPost]
         [ActionName("DeleteCompanyTag")]
 
-        public ActionResult DeleteCompanyTag(Models.DB.Tag tag)
+        public ActionResult DeleteCompanyTag(CompanyTagVM model)
         {
             var userCompany = User as MPrincipal;
             var login = userCompany.UserDetails.Login;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                var company = db.Companies.SingleOrDefault(x => x.Login == login);
-                CompanyTag cTag = new CompanyTag()
-                {
-                    CompanyId = company.Id,
-                    TagId = tag.Id
+                var company = db.Companies.FirstOrDefault(x => x.Login == login);
 
-                };
-                db.CompanyTags.Remove(cTag);
+                var tag = db.CompanyTags.FirstOrDefault(t => t.TagId == model.Id && t.CompanyId == company.Id);
+                db.CompanyTags.Remove(tag);
+                db.SaveChanges();
             }
-            return RedirectToAction("TagsList");
+            return RedirectToAction("CompanyTagsList");
         }
     }
 }

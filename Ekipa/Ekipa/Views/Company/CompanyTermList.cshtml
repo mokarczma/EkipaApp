@@ -1,0 +1,90 @@
+﻿@model Ekipa.Models.ViewModel.Company.CompanyTermsVM
+
+@{
+	ViewBag.Title = "CompanyTerm";
+	int counter = 0;
+	Ekipa.Models.ViewModel.Company.CompanyTermVM createTerm = new Ekipa.Models.ViewModel.Company.CompanyTermVM();
+
+}
+<div class=" row">
+
+	<div class="col-md-2">
+		<h2>Terminy</h2>
+	</div>
+	<div class="col-md-2">
+		<div class="color-red text-center "> Zarezerwowane</div>
+	</div>
+	<div class="col-md-2">
+		<div class="color-yellow text-center "> Do akceptacji</div>
+	</div>
+	<div class="col-md-2">
+		<div class="color-green text-center "> Wolne terminy</div>
+	</div>
+</div>
+<hr />
+
+@if (ViewBag.NoTerm == true)
+{
+	<div>Nie dodałeś jeszcze żadnych terminów </div>
+}
+else
+{
+	<div class="row">
+
+		@for (int i = 0; i < Model.CompanyTermsList.Count(); i++)
+		{
+			if (counter != 0 && counter % 6 == 0)
+			{
+				@:</div>
+			<hr />
+			@:<div class="row">
+			}
+			if (Model.CompanyTermsList[i].Actual)
+			{
+				<div class="col-md-2">
+
+					@if (Model.CompanyTermsList[i].CustomerID != null)
+					{
+						if (Model.CompanyTermsList[i].Accepted == true)
+						{
+							<div class="color-red term text-center">
+								@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Day).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Month).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Year) -
+								@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Day).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Month).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Year)
+								@Html.ActionLink("Zobacz", "CompanyReservation", "Reservation", new { id = Model.CompanyTermsList[i].ID }, null)
+							</div>
+						}
+						else
+						{
+							<div class="color-yellow term text-center">
+								@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Day).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Month).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Year) -
+								@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Day).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Month).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Year)
+								@Html.ActionLink("Zaakceptuj", "CompanyReservation", "Reservation", new { id = Model.CompanyTermsList[i].ID }, null)
+							</div>
+						}
+					}
+					else
+					{
+						<div class="color-green term text-center">
+							@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Day).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Month).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStart.Year) -
+							@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Day).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Month).@Html.DisplayFor(model => model.CompanyTermsList[i].DateStop.Year)
+							@Html.ActionLink("Usuń", "DeleteTerm", "Company", new { id = Model.CompanyTermsList[i].ID }, null)
+						</div>
+					}
+				</div>
+			}
+			counter++;
+		}
+	</div>
+	<hr />
+	@Html.Partial("~/Views/Partial/_TermCreate.cshtml", createTerm)
+}
+
+
+<style>
+
+	.term {
+		border-radius: 6px;
+		padding: 4px;
+		box-sizing: border-box;
+	}
+</style>

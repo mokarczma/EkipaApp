@@ -14,6 +14,7 @@ namespace Ekipa.Models.DB
         public DateTime DateStop {get; set; }
         public virtual Company Company { get; set; }
         public virtual Customer Customer { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

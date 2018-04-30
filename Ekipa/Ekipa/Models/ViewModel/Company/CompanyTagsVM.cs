@@ -19,6 +19,5 @@ namespace Ekipa.Models.ViewModel.Company
 
         [Display(Name = "Wybierz nową etykietę")]
         public List<SelectListItem> OtherTags { get; set; }
-        public List <SelectListItem> ChosenTags { get; set; }
     }
 }

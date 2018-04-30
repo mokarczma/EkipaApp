@@ -21,25 +21,6 @@ namespace Ekipa.Controllers
         }
 
         [HttpGet]
-        public ActionResult CompanyInfo()
-        {
-            var user = User as MPrincipal;
-            var login = user.UserDetails.Login;
-            ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.UserRole = 4;
-
-            var company = new Company();
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                company = db.Companies.SingleOrDefault(x => x.Login == login);
-            }
-
-            CompanyInfoVM companyInfoVM = Controllers.PublicCompanyController.CompanyInfo(company.Id);
-
-            return View(companyInfoVM);
-        }
-
-        [HttpGet]
         public ActionResult AddCompanyTerm()
         {
             var user = User as MPrincipal;
@@ -47,6 +28,18 @@ namespace Ekipa.Controllers
             ViewBag.UserName = user.UserDetails.Login;
             ViewBag.UserRole = 4;
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult DeleteTerm(int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var term = db.Terms.FirstOrDefault(t => t.Id == id);
+                term.IsDelete = true;
+                db.SaveChanges();
+            }
+                return RedirectToAction("CompanyTermList", "Company");
         }
 
         public static IEnumerable<DateTime> DateRangeToArray(DateTime start,
@@ -61,7 +54,7 @@ namespace Ekipa.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCompanyTerm(CompanyAddTermVM model)
+        public ActionResult AddCompanyTerm(CompanyTermVM model)
         {
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
@@ -123,14 +116,64 @@ namespace Ekipa.Controllers
             }
             return View("");
         }
+        [HttpGet]
+        [ActionName("CompanyTermList")]
+        public ActionResult CompanyTermList()
+        {
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 4;
+            List<Term> termList = new List<Term>();
+            List<CompanyTermVM> compTermsList = new List<CompanyTermVM>();
 
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var company = db.Companies.SingleOrDefault(x => x.Login == login);
+                termList = db.Terms.Where(t => t.CompanyId == company.Id && t.IsDelete == false).OrderBy(x =>x.DateStart).ToList();
+                if (compTermsList == null)
+                {
+                    ViewBag.NoTerm = true;
+                    return View("");
+                }
+                foreach (var item in termList)
+                {
+                    bool actual = false;
+                    if (item.DateStart > DateTime.Now || (item.DateStart < DateTime.Now && item.DateStop > DateTime.Now))
+                    {
+                        actual = true;
+                    }
 
+                    var rez = db.Reservations.FirstOrDefault(x => x.TermId == item.Id);
+                    int reservationId = 0;
+                    bool acceptedRez = false;
+                    
+                    if (rez != null)
+                    {
+                        reservationId = rez.Id;
+                        acceptedRez = rez.CompanyAccept;
+                    }
 
+                    CompanyTermVM TermVM = new CompanyTermVM
+                    {
+                        ID = item.Id,
+                        DateStart = item.DateStart,
+                        DateStop = item.DateStop,
+                        CustomerID = item.CustomerId,
+                        Actual = actual,
+                        ReservationId = reservationId,
+                        Accepted = acceptedRez                        
+                    };
+                    compTermsList.Add(TermVM);
+                }
+            }
+            CompanyTermsVM companyTermsVM = new CompanyTermsVM() { CompanyTermsList = compTermsList };
+            return View(companyTermsVM);
+        }
         [HttpGet]
         [ActionName("CompanyDetails")]
         public ActionResult CompanyDetails()
         {
-            ViewBag.CityList = CitiesQuery();
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
@@ -200,7 +243,6 @@ namespace Ekipa.Controllers
                     }
                 }
                 compDetVM.Cities = sortedCities;
-
             }
 
             return View("EditCompanyDetails", compDetVM);

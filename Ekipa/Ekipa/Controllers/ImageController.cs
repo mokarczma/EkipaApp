@@ -85,7 +85,6 @@ namespace Ekipa.Controllers
                             dbItem.Link = item.Link;
                             dbItem.Description = item.Description;
                             dbItem.CompanyId = company.Id;
-                            dbItem.IsDelete = item.IsDelete;
                             if (imagesModel.MainPictureID == dbItem.Id.ToString())
                             {
                                 dbItem.MainPicture = true;
@@ -146,12 +145,25 @@ namespace Ekipa.Controllers
 
 
                     }
-                    }
-
                 }
-                return RedirectToAction("CompanyImagesList");
+
             }
+            return RedirectToAction("CompanyImagesList");
+        }
+        [HttpGet]
+        public ActionResult DeleteImage(int id)
+        {
+            var userCompany = User as MPrincipal;
+            var login = userCompany.UserDetails.Login;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var company = db.Companies.FirstOrDefault(x => x.Login == login);
 
-
+                var image = db.Images.FirstOrDefault(t => t.Id == id && t.CompanyId == company.Id);
+                db.Images.Remove(image);
+                db.SaveChanges();
+            }
+            return RedirectToAction("CompanyImagesList");
         }
     }
+}

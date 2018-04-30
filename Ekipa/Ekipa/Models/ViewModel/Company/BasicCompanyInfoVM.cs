@@ -14,7 +14,7 @@ namespace Ekipa.Models.ViewModel.Company
         public string Speciality { get; set; }
         public string Services { get; set; }
         public List<Tag> CompanyTagList { get; set; }
-        public Term NearestFreeDate { get; set; }
+        public string NearestFreeDate { get; set; }
         public List<Term> CompanyTermList { get; set; }
         public Image CompanyMainImage { get; set; }
         public double AverageRating { get; set; }

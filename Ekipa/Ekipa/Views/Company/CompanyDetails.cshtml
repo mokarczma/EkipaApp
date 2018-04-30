@@ -63,7 +63,8 @@
 						@Html.DisplayFor(model => model.CityName)
 					</dd>
 				</dl>
-			<p>
-				@Html.ActionLink("Edytuj", "EditCompanyDetails", new { /* id = Model.PrimaryKey */ })
+				<p>
+					@Html.ActionLink("Edytuj", "EditCompanyDetails", new { /* id = Model.PrimaryKey */ })
+					@Html.ActionLink("Edytuj etykiety", "CompanyTagsList", "Tag", new { /* id = Model.PrimaryKey */ }, "")
 
-			</p>
+				</p>

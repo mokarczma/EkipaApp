@@ -30,7 +30,7 @@ namespace Ekipa.Controllers
 
                     foreach (var item in termList)
                     {
-                        var reservationDB = db.Reservations.FirstOrDefault(r => r.TermId == item.Id);
+                        var reservationDB = db.Reservations.FirstOrDefault(r => r.TermId == item.Id && r.IsDelete == false);
                         var opinion = db.Opinions.FirstOrDefault(o => o.ReservationId == reservationDB.Id);
                         bool opinionAdded = false;
                         if (opinion != null)
@@ -52,7 +52,7 @@ namespace Ekipa.Controllers
                                 CompanyId = item.CompanyId,
                                 CustomerId = customer.ID,
                                 TermId = item.Id,
-                                OpinionAdded = opinionAdded                                 
+                                OpinionAdded = opinionAdded
                             };
                             resList.Add(reservationVM);
                         }
@@ -82,7 +82,7 @@ namespace Ekipa.Controllers
                 opinion.CompanyName = comp.CompanyName;
                 opinion.ReservationId = res.Id;
             }
-                return View(opinion);
+            return View(opinion);
         }
 
         [HttpPost]
@@ -107,5 +107,59 @@ namespace Ekipa.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public ActionResult CompanyReservation(int id)
+        {
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.Role = 4;
+            ReservationVM res = new ReservationVM();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var dbReservation = db.Reservations.FirstOrDefault(u => u.TermId == id);
+                res.TermId = dbReservation.TermId;
+                res.DescriptionCustomer = dbReservation.DescriptionCustomer;
+                res.DescriptionCompany = dbReservation.DescriptionCompany;
+                res.CompanyAccept = dbReservation.CompanyAccept;
+                res.CustomerName = dbReservation.Term.Customer.Name + " " + dbReservation.Term.Customer.Surname;
+            }
+            return View(res);
+        }
+        [HttpPost]
+        public ActionResult CompanyReservation(ReservationVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var dbReservation = db.Reservations.FirstOrDefault(u => u.TermId == model.Id && u.IsDelete == false);
+                    dbReservation.DescriptionCompany = model.DescriptionCompany ?? "";
+                    dbReservation.CompanyAccept = model.CompanyAccept;
+                    dbReservation.IsDelete = model.IsDelete;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("CompanyTermList", "Company");
+
+            }
+
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult CancelReservation(ReservationVM reservation)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var reservationDB = db.Reservations.FirstOrDefault(u => u.TermId == reservation.TermId);
+                reservationDB.IsDelete = true;
+                int termId = reservationDB.TermId;
+                var termDB = db.Terms.FirstOrDefault(t => t.Id == termId);
+                termDB.CustomerId = null;
+                db.SaveChanges();
+            }
+            return RedirectToAction("CompanyTermList", "Company");
+        }
     }
 }
+
+

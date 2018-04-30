@@ -4,53 +4,57 @@
 @{
 	ViewBag.Title = "TagsList";
 }
-<h2>Zarządzaj etykietami, aby ułatwić klientom wyszukanie Twojej firny</h2>
+<h3>Zarządzaj etykietami, aby ułatwić klientom wyszukanie Twojej firny</h3>
+<hr />
+
+
+
+@using (Html.BeginForm("AddCompanyTag", "Tag", FormMethod.Post))
+{
+	<div class="navbar navbar-expand-lg navbar-dark">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<h4>Wybierz nową</h4>
+			<div class="search-box">
+				@Html.DropDownListFor(x => x.SelectedTagId, Model.OtherTags, htmlAttributes: new { @class = "form-control" })
+			</div>
+			<button class="search-button btn my-2 my-sm-0" type="submit">Dodaj</button>
+			<div class="search-box">@Html.ActionLink("Utórz nową etykietę", "CreateTag")</div>
+		</div>
+	</div>
+}
+<hr />
+
 <div>
 	<h4>Twoje etykiety</h4>
-	<hr />
 	<dl class="dl-horizontal"></dl>
 </div>
-<div class="row">
-	@using (Html.BeginForm("CompanyTagsList", "Tag", FormMethod.Post))
+
+<div class="row text-center">
+
+	@for (int i = 0; i < Model.CompanyTags.Count(); i++)
 	{
-		@Html.AntiForgeryToken()
-		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-		if (ViewBag.NoTags == false)
+		if (i % 2 == 0)
 		{
+			<div class="color-yellow tag-box">
+				@Html.Partial("~/Views/Partial/_TagDelete.cshtml", Model.CompanyTags[i])
+			</div>
 
-			for (int i = 0; i < Model.CompanyTags.Count(); i++)
-			{
 
-				<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-					@Html.EditorFor(m => m.CompanyTags[i].Name, "", new { htmlAttributes = new { @class = "form-control" } })
-					<p> Usuń: @Html.CheckBoxFor(m => m.CompanyTags[i].DeleteFromCompany, new { @checked = "checked" })</p>
-				</div>
-				@Html.HiddenFor(model => model.CompanyTags[i].Id)
-
-			}
 		}
-		<div class="form-group">
-			<div>
-				@*@Html.LabelFor(model => model.OtherTags, htmlAttributes: new { @class = "control-label col-md-2" })*@
-				<div class="col-md-10">
-					@*@Html.ListBoxFor(x => x.SelectedTagId, Model.OtherTags, htmlAttributes: new { @class = "form-control" })
-					@Html.DropDownListFor(x => x.ChosenTags, Model.OtherTags, htmlAttributes: new { @class = "form-control" })*@
-
-					@Html.DropDownListFor(x => Model.OtherTags, new SelectList(Model.ChosenTags, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
-
-
-				</div>
+		else if (i == 3 || i == 7 || i == 9)
+		{
+			<div class="color-red tag-box">
+				@Html.Partial("~/Views/Partial/_TagDelete.cshtml", Model.CompanyTags[i])
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
+
+		}
+		else
+		{
+			<div class="color-green tag-box">
+				@Html.Partial("~/Views/Partial/_TagDelete.cshtml", Model.CompanyTags[i])
 			</div>
-		</div>
+
+		}
 	}
+
 </div>
-<p>
-	@Html.ActionLink("Utórz nową etykietę", "CreateTag")
-	@Html.ActionLink("Powrót", "IndexCompany")
-</p>

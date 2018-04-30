@@ -10,11 +10,12 @@
 	<div class="row">
 
 		<div class="col-md-3">
-			<img class="img-responsive" src="@Url.Content(Model.basicCompanyInfoVMlist[i].CompanyMainImage.Link)" />
-
+			<a href='@Url.Action("InfoAboutCompany", "PublicCompany", new RouteValueDictionary( new { id = Model.basicCompanyInfoVMlist[i].IdCompany }))'>
+				<img class="img-responsive" src="@Url.Content(Model.basicCompanyInfoVMlist[i].CompanyMainImage.Link)" />
+			</a>
 		</div>
 		<div class="col-md-3">
-			<h2>@Html.ActionLink(@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName).ToString(), "InfoAboutCompany", new { id = Model.basicCompanyInfoVMlist[i].IdCompany })</h2>
+			<h2>@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName)</h2>
 			<h4>Ocena: @Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].AverageRating)/5</h4>
 
 		</div>
@@ -35,14 +36,13 @@
 							<div class=" tag_min-box color-yellow text-center">
 								@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)
 							</div>
-						}						
+						}					
 				}
-
 			</div>
 
 		<div class="col-md-3">
-			Pierwszy Wolny termin: 
-
+			Pierwszy Wolny termin:
+			<h4>@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].NearestFreeDate)</h4>
 		</div>
 	</div>
 }

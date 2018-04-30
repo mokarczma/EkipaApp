@@ -14,7 +14,7 @@ namespace Ekipa.Models.ViewModel.Company
         public string Pricing { get; set; }
         public string PhoneNumer { get; set; }
         public List<Image> CompanyImageList { get; set; }
-        public List<CompanyAddTermVM> CompanyTermVMList { get; set; }
+        public List<CompanyTermVM> CompanyTermVMList { get; set; }
         public List<Reservation> CompanyReservationList { get; set; }
         public List<Opinion> CompanyOpinionList { get; set; }
         public bool TagExist { get; set; }
