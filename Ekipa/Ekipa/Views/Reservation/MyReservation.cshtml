@@ -1,66 +1,124 @@
 ﻿@model IList<Ekipa.Models.ViewModel.ReservationVM>
 
 @{
-    ViewBag.Title = "MyReservation";
+	ViewBag.Title = "MyReservation";
 }
 
-<table class="table">
+@if (null != TempData["alertMessage"])
+{
+	<script type="text/javascript">
+			   alert("@TempData["alertMessage"]");
+	</script>
+}
 
-	<div class="row font-irregularis">
-		<div class="col-md-4 position-relative padding-column">
-			<h4>Twoje rezerwacje</h4>			
-		</div>
-		<div class="col-md-4 position-relative padding-column">
-			<h4>Twoj opis</h4>
-		</div>
-		<div class="col-md-4 position-relative padding-column">
-			<h4>Odpowiedz firmy</h4>
-		</div>
-	</div>
-
-
-
-	@for (int i = 0; i < Model.Count(); i++)
-	{
-		<hr />
+@if (ViewBag.UserRole == 3)
+{
+	<table class="table">
 
 		<div class="row font-irregularis">
 			<div class="col-md-4 position-relative padding-column">
-				<h4>@Html.DisplayFor(model => model[i].CompanyName)</h4>
-				<div>
-					Termin:
-					@Html.DisplayFor(model => model[i].DateStart.Date) -
-					@Html.DisplayFor(model => model[i].DateStop.Date)
-
-					@if (Model[i].OpinionAdded == true)
-					{
-					<div>Dodałeś już opinię</div>
-					<div>
-						Firma:@Html.DisplayFor(model => model[i].CompanyName) dziękuje za dodanie opini
-					</div>
-
-						@Html.ActionLink(linkText: "Zobacz",actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new{id = Model[i].CompanyId }, htmlAttributes: null)
-
-					}
-					else if (Model[i].CompanyAccept == true)
-					{
-						<div>@Html.ActionLink("Dodaj opinię", "AddOpinion", new { idTerm = Model[i].TermId })</div>
-
-					}
-					else
-					{
-						<div>Termin nie został jeszcze zaakceptowany przez firmę</div>
-						@Html.ActionLink(linkText: "Skontaktuj się z firmą",actionName: "InfoAboutCompany",controllerName: "PublicCompany", routeValues: new{id = Model[i].CompanyId}, htmlAttributes: null)
-
-					}
-				</div>
+				<h4>Twoje rezerwacje</h4>
 			</div>
 			<div class="col-md-4 position-relative padding-column">
-				<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
+				<h4>Twoj opis</h4>
 			</div>
-			<div class="col-md-4 position-relative padding-column">				
-				<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
+			<div class="col-md-4 position-relative padding-column">
+				<h4>Odpowiedz firmy</h4>
 			</div>
 		</div>
-	}
-</table>
+
+
+
+		@for (int i = 0; i < Model.Count(); i++)
+		{
+			<hr />
+
+			<div class="row font-irregularis">
+				<div class="col-md-4 position-relative padding-column">
+					<h4>@Html.DisplayFor(model => model[i].CompanyName)</h4>
+					<div>
+						Termin:
+						@Html.DisplayFor(model => model[i].DateStart.Date) -
+						@Html.DisplayFor(model => model[i].DateStop.Date)
+
+						@if (Model[i].OpinionAdded == true)
+						{
+							<div>Dodałeś już opinię</div>
+							<div>
+								Firma:@Html.DisplayFor(model => model[i].CompanyName) dziękuje za dodanie opini
+							</div>
+
+							@Html.ActionLink(linkText: "Zobacz", actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new { id = Model[i].CompanyId }, htmlAttributes: null)
+
+						}
+						else if (Model[i].CompanyAccept == true)
+						{
+							<div>@Html.ActionLink("Dodaj opinię", "AddOpinion", new { idTerm = Model[i].TermId })</div>
+
+						}
+						else
+						{
+							<div>Termin nie został jeszcze zaakceptowany przez firmę</div>
+							@Html.ActionLink(linkText: "Skontaktuj się z firmą", actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new { id = Model[i].CompanyId }, htmlAttributes: null)
+
+						}
+					</div>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
+				</div>
+			</div>
+		}
+	</table>
+
+}
+@if (ViewBag.UserRole == 4)
+{
+
+	<table class="table">
+
+		<div class="row font-irregularis">
+			<div class="col-md-4 position-relative padding-column">
+				<h4>Twoje rezerwacje</h4>
+			</div>
+			<div class="col-md-4 position-relative padding-column">
+				<h4>Opis klienta</h4>
+			</div>
+			<div class="col-md-4 position-relative padding-column">
+				<h4>Twoja odpowiedź</h4>
+			</div>
+		</div>
+
+
+
+		@for (int i = 0; i < Model.Count(); i++)
+		{
+			<hr />
+
+			<div class="row font-irregularis">
+				<div class="col-md-4 position-relative padding-column">
+					<h4>@Html.DisplayFor(model => model[i].CustomerName)</h4>
+					<div>
+						Termin:
+						@Html.DisplayFor(model => model[i].DateStart.Date) -
+						@Html.DisplayFor(model => model[i].DateStop.Date)
+
+						
+					</div>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
+				</div>
+			</div>
+		}
+	</table>
+
+
+}
+

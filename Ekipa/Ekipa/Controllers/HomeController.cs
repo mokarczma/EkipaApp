@@ -27,15 +27,60 @@ namespace Ekipa.Controllers
                     var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
                     if (cust != null)
                     {
-                        ViewBag.UserRole = 3;
+                        ViewBag.UserRole = cust.RoleId;
                     }
                     else
                     {
-                        ViewBag.UserRole = 4;
+                        ViewBag.UserRole = comp.RoleId;
                     }
                 }
             }
             return View();
+        }
+        [HttpGet]
+        public ActionResult OpinionAcceptList()
+        {
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+            ViewBag.UserRole = 5;
+            List<OpinionVM> opinionList = new List<OpinionVM>();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+               var opinions = db.Opinions.Where(o => o.AdminAccept == false && o.IsDelete == false).ToList();
+                foreach (var item in opinions)
+                {
+                    OpinionVM opinionVM = new OpinionVM()
+                    {
+                        Description = item.Description,
+                        Id = item.Id,
+                    };
+                    opinionList.Add(opinionVM);
+                }
+            }
+            return View(opinionList);
+        }
+        [HttpGet]
+        public ActionResult OpinionAdminAccept(int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var opinion = db.Opinions.FirstOrDefault(o => o.Id == id);
+                opinion.AdminAccept = true;
+                db.SaveChanges();
+            }
+                return RedirectToAction("OpinionAcceptList");
+        }
+        [HttpGet]
+        public ActionResult OpinionDelete(int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var opinion = db.Opinions.FirstOrDefault(o => o.Id == id);
+                opinion.IsDelete = true;
+                db.SaveChanges();
+            }
+            return RedirectToAction("OpinionAcceptList");
         }
     }
 }

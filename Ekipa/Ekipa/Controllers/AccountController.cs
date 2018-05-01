@@ -203,38 +203,37 @@ namespace Ekipa.Controllers
             ViewBag.UserName = userCustomer.UserDetails.Login;
             ViewBag.UserRole = 3;
 
-
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var baseCompEmail = db.Companies.FirstOrDefault(x => x.Email == model.Email);
-                var baseCustEmail = db.Customers.FirstOrDefault(x => x.Email == model.Email);
-
-
-                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-                if (cust != null)
+           
+                using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    // loginu nie można zmienić, więc tutaj tylko email nie może się powtórzyć z takim jaki jużjest w bazie
-                    if ((baseCompEmail == null && baseCustEmail == null) || model.Email == cust.Email)
+                    var baseCompEmail = db.Companies.FirstOrDefault(x => x.Email == model.Email);
+                    var baseCustEmail = db.Customers.FirstOrDefault(x => x.Email == model.Email);
+
+
+                    var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                    if (cust != null)
                     {
-                        cust.Name = model.Name ?? "";
-                        cust.Surname = model.Surname ?? "";
-                        cust.PhoneNumber = model.PhoneNumber ?? "";
-                        cust.Email = model.Email ?? "";
-                        if (!string.IsNullOrEmpty(model.Password) && model.Password == cust.Password)
+                        // loginu nie można zmienić, więc tutaj tylko email nie może się powtórzyć z takim jaki jużjest w bazie
+                        if ((baseCompEmail == null && baseCustEmail == null) || model.Email == cust.Email)
                         {
-                            cust.Password = model.NewPassword;
+                            cust.Name = model.Name ?? "";
+                            cust.Surname = model.Surname ?? "";
+                            cust.PhoneNumber = model.PhoneNumber ?? "";
+                            cust.Email = model.Email ?? "";
+                            if (!string.IsNullOrEmpty(model.Password) && model.Password == cust.Password)
+                            {
+                                cust.Password = model.NewPassword;
+                            }
+                            db.SaveChanges();
                         }
-                        db.SaveChanges();
-                        return RedirectToAction("EditCustomer");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Email", "Użytkownik o podanym emailu już istnieje");
+                        else
+                        {
+                            ModelState.AddModelError("Email", "Użytkownik o podanym emailu już istnieje");
+                        }
                     }
                 }
-            }
 
-            return RedirectToAction("EditCustomer");
+                return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         [ActionName("RegisterCompany")]

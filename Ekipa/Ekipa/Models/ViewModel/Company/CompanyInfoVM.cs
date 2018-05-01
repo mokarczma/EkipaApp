@@ -16,7 +16,7 @@ namespace Ekipa.Models.ViewModel.Company
         public List<Image> CompanyImageList { get; set; }
         public List<CompanyTermVM> CompanyTermVMList { get; set; }
         public List<Reservation> CompanyReservationList { get; set; }
-        public List<Opinion> CompanyOpinionList { get; set; }
+        public List<OpinionVM> CompanyOpinionList { get; set; }
         public bool TagExist { get; set; }
 
     }

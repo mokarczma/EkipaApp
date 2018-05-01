@@ -27,25 +27,51 @@ namespace Ekipa.Controllers
                     tagExist = true;
                 }
 
-                List<Term> termList = new List<Term>();
-                termList = db.Terms.Where(t => t.CompanyId == company.Id && t.IsDelete == false).ToList();
-                List<CompanyTermVM> compTermsList = new List<CompanyTermVM>();
+                List<CompanyTermVM> compTermList = Controllers.TermController.CompanyTermToList(company.Id).Where(c => c.Actual == true && c.CustomerID == null).ToList();
 
-                foreach (var item in termList)
+                CompanyTermVM nearestTerm = compTermList.FirstOrDefault(t => t.DateStart > DateTime.Now);
+
+                string nearestFreeTerm = "Brak wolnych terminów";
+                if (nearestTerm != null)
                 {
-                    CompanyTermVM TermVM = new CompanyTermVM
-                    {
-                        ID = item.Id,
-                        DateStart = item.DateStart,
-                        DateStop = item.DateStop,
-                        CustomerID = item.CustomerId
-                      
-                    };
-                    compTermsList.Add(TermVM);
+                    nearestFreeTerm = nearestTerm.DateStart.ToShortDateString();
                 }
+
                 List<Image> imageList = new List<Image>();
                 imageList = db.Images.Where(t => t.CompanyId == company.Id && t.IsDelete == false).ToList();
 
+                Image imageMain = new Image();
+                imageMain = db.Images.FirstOrDefault(i => i.CompanyId == company.Id && i.MainPicture == true);
+                if (imageMain == null)
+                {
+                    imageMain = new Image()
+                    {
+                        Link = "~/Content/images/brakZdj.jpg"
+                    };
+                }
+                var opinionList = db.Opinions.Where(o => o.CompanyId == company.Id && o.IsDelete == false && o.AdminAccept == true).ToList();
+                List<OpinionVM> opinionListVM = new List<OpinionVM>();
+
+                List<int> gradeValues = new List<int>();
+
+                for (int i = 0; i < opinionList.Count(); i++)
+                {
+                    var customName = opinionList[i].Reservation.Term.Customer.Name + " " + opinionList[i].Reservation.Term.Customer.Surname;
+                    OpinionVM opinionVM = new OpinionVM
+                    {
+                        Description = opinionList[i].Description,
+                        CustomerName = customName,
+                        GradeValue = opinionList[i].GradeValue
+                    };
+                    opinionListVM.Add(opinionVM);
+                    gradeValues.Add(opinionList[i].GradeValue);
+                }
+
+                double average = 0;
+                if (gradeValues.Count > 0)
+                {
+                   average = gradeValues.Average();
+                }
                 CompanyInfoVM companyInfoVM = new CompanyInfoVM()
                 {
                     IdCompany = company.Id,
@@ -56,9 +82,14 @@ namespace Ekipa.Controllers
                     Pricing = company.Pricing,
                     PhoneNumer = company.PhoneNumer,
                     CompanyTagList = tagList,
-                    CompanyTermVMList = compTermsList,
+                    CompanyTermVMList = compTermList,
                     CompanyImageList = imageList,
-                    TagExist = tagExist
+                    TagExist = tagExist,
+                    NearestFreeDate = nearestFreeTerm,
+                    CompanyMainImage = imageMain,
+                    CompanyOpinionList = opinionListVM,
+                    AverageRating = average
+                    
                 };
                 return companyInfoVM;
             };
@@ -101,47 +132,37 @@ namespace Ekipa.Controllers
         [HttpPost]
         public ActionResult SearchView(MainViewVM model)
         {
+            BasicCompanyInfoListVM searched = new BasicCompanyInfoListVM();
+
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                var dbCompany = SearchTag(model.NameSearch, Convert.ToInt32(model.PlaceSearch));
-
+                var dbCompany = SearchCompany(model.NameSearch, Convert.ToInt32(model.PlaceSearch));
                 List<BasicCompanyInfoVM> basicCompanyInfoList = new List<BasicCompanyInfoVM>();
+
                 foreach (var item in dbCompany)
                 {
                     CompanyInfoVM company = CompanyInfo(item.Id);
-                    Image imageMain = new Image();
-                     imageMain= db.Images.FirstOrDefault(i => i.CompanyId == company.IdCompany && i.MainPicture == true);
-                    if (imageMain == null)
-                    {
-                        imageMain = new Image() {                          
-                            Link = "~/Content/images/brakZdj.jpg" };
-                    }
-
-                    var nearestFreeDate = db.Terms.Where(t => t.CompanyId == item.Id && t.IsDelete == false && t.CustomerId == null && t.DateStart > DateTime.Now).OrderBy(x => x.DateStart).FirstOrDefault();
-
 
                     BasicCompanyInfoVM basicInfo = new BasicCompanyInfoVM()
                     {
                         IdCompany = company.IdCompany,
                         CityName = company.CityName,
                         CompanyName = company.CompanyName,
-                        CompanyMainImage = imageMain,
+                        CompanyMainImage = company.CompanyMainImage,
                         CompanyTagList = company.CompanyTagList,
-                        AverageRating = 4.5,
+                        AverageRating = company.AverageRating,
                         Services = company.Services,
                         Speciality = company.Speciality,
-                        NearestFreeDate = nearestFreeDate.DateStart.ToShortDateString() + " - " + nearestFreeDate.DateStop.ToShortDateString()
-                };
+                        NearestFreeDate = company.NearestFreeDate
+                    };
                     basicCompanyInfoList.Add(basicInfo);
                 }
-                BasicCompanyInfoListVM searched = new BasicCompanyInfoListVM();
                 searched.basicCompanyInfoVMlist = basicCompanyInfoList;
-
-                return View(searched);
             }
+            return View(searched);
         }
 
-        private static IEnumerable<Company> SearchTag(string name, int cityId)
+        private static IEnumerable<Company> SearchCompany(string name, int cityId)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

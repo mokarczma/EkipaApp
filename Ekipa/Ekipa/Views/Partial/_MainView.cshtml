@@ -37,11 +37,22 @@
 						@ViewBag.UserName
 					</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="~/Company/CompanyTermList">Terminy i rezerwacje</a>
+						<a class="dropdown-item" href="~/Term/CompanyTermList">Terminy i rezerwacje</a>
 						<a class="dropdown-item" href="~/Image/CompanyImagesList">Zarządzaj zdjęciami</a>
 						<a class="dropdown-item" href="~/Company/CompanyDetails">Informacje o firmie</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="~/Account/EditCompany">Moje konto</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="~/Account/Logout">Wyloguj</a>
+					</div>
+				}
+				else if (ViewBag.UserRole == 5)
+				{
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						@ViewBag.UserName
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="~/Home/OpinionAcceptList">Akceptacja opini</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="~/Account/Logout">Wyloguj</a>
 					</div>

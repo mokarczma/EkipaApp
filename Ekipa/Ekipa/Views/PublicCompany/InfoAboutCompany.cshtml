@@ -3,6 +3,15 @@
 	ViewBag.Title = "InfoAboutCompany";
 
 }
+
+@if (null != TempData["alertMessage"])
+{
+	<script type="text/javascript">
+			   alert("@TempData["alertMessage"]");
+	</script>
+}
+
+
 <div class="row text-center">
 	@if (Model.TagExist)
 	{
@@ -30,15 +39,23 @@
 	}
 
 </div>
-<h2>@Html.DisplayFor(model => model.CompanyName)</h2>
+<h1>@Html.DisplayFor(model => model.CompanyName)</h1>
 <di>
-	<h4> @Html.DisplayFor(model => model.CityName)</h4>
-	<h6> Tel: @Html.DisplayFor(model => model.PhoneNumer)</h6>
+	<h2> @Html.DisplayFor(model => model.CityName)</h2>
+	<h4>
+		Tel: @Html.DisplayFor(model => model.PhoneNumer)
+
+		<a class="color-green white term-box" href='@Url.Action("MessageFromCustomer", "Message", new RouteValueDictionary(  new { idCompany = Model.IdCompany}))'>
+			Wyślij wiadomość
+		</a>
+
+
+	</h4>
 	<hr />
 
 
-		<h4>Wolne terminy</h4>
-			@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTermVMList)
+	<h4>Wolne terminy</h4>
+	@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTermVMList)
 
 	<hr />
 
@@ -62,6 +79,18 @@
 	<div class="row row-margin">
 		@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
 	</div>
+
+	<hr />
+	<h2>Opinie:</h2>
+	Średnia ocena: <div>@Html.DisplayFor(model => model.AverageRating)</div>
+
+
+	@for (int i = 0; i < Model.CompanyOpinionList.Count(); i++)
+	{
+		<div class="row row-margin">
+			@Html.Partial("~/Views/Partial/_Opinion.cshtml", Model.CompanyOpinionList[i])
+		</div>
+	}
 
 
 	<style>

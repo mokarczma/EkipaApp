@@ -7,6 +7,10 @@
 <h2>Rezerwacja:</h2>
 
 <h4>@Model.CustomerName</h4>
+
+<a class="color-green white term-box" href='@Url.Action("MessageFromCompany", "Message", new RouteValueDictionary(  new { idCustomer = Model.CustomerId}))'>
+	Wyślij wiadomość
+</a>
 <hr />
 
 @using (Html.BeginForm())

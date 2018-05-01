@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using System.Net.Mail;
+using Ekipa.Models;
 
 namespace Ekipa.Controllers
 {
@@ -18,54 +19,96 @@ namespace Ekipa.Controllers
         }
 
         [HttpGet]
-        public ActionResult SendMessage()
+        public ActionResult Message(MessageVm model)
         {
-            MessageVm message = new MessageVm();
-            return View(message);
+            return View(model);
         }
 
 
-
         [HttpPost]
-        public ActionResult SendMessage(MessageVm mess)
+        public ActionResult SendMessage(MessageVm model)
         {
-            using (SmtpClient client = new SmtpClient())
+            if (ModelState.IsValid)
             {
-                //podajemy dane dostępowe
-                var credential = new NetworkCredential
+                using (SmtpClient client = new SmtpClient())
                 {
-                    UserName = "znajdzEkipe.pl@gmail.com",
-                    Password = "MessageController"
-                };
-                client.Credentials = credential;
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "znajdzEkipe.pl@gmail.com",
+                        Password = "MessageController"
+                    };
+                    client.Credentials = credential;
 
-                //host oraz port poczty,
-                //dostawca udostępnia nam te dane
-                client.Host = "smtp.gmail.com";
-                client.Port = 587;
-                client.EnableSsl = true;
+                    client.Host = "smtp.gmail.com";
+                    client.Port = 587;
+                    client.EnableSsl = true;
 
-                //tworzymy wiadomość
-                var message = new MailMessage();
+                    var message = new MailMessage();
 
-                //dodajemy odbiorców
-                message.To.Add(new MailAddress("znajdzEkipe.pl@gmail.com"));
-                //podajemy adres nadawcy
-                message.From = new MailAddress("kamoniska@gmail.com");
-                //Tytuł wiadomości
-                message.Subject = "Tytuł nowej wiadomości";
-                message.Body = "Wiadomość testowa";
-                //Możemy uzyć znaczników html wewnątrz ciała wiadomości (parametr Body), w tym celu ustawiamy parametr na true
-                message.IsBodyHtml = true;
+                    message.To.Add(new MailAddress(model.AddresseeEmail));
+                    message.From = new MailAddress(model.SenderEmail);
 
-                //Opcjonalnie możemy również dodać załącznik
-                //Attachment a = new Attachment("zdjecie.jpg", System.Net.Mime.MediaTypeNames.Image.Jpeg);
-                //message.Attachments.Add(a);
+                    message.Subject = "ZnajdzEkipe.pl - wiadomość od uzytownika:" + model.SenderName;
+                    message.Body = model.Description + Environment.NewLine + "adres emailowy użytkownika " + model.SenderName + ": " + model.SenderEmail;
 
-                client.Send(message);
-
-                return View();
+                    message.IsBodyHtml = true;
+                    client.Send(message);
+                }
             }
+            TempData["alertMessage"] = "Wiadomość została wysłana";
+            if (model.CompanyId > 0)
+            {
+                return RedirectToAction("InfoAboutCompany", "PublicCompany", new { id = model.CompanyId });
+            }
+            return RedirectToAction("CompanyTermList", "Term");
+
+        }
+
+        [HttpGet]
+        public ActionResult MessageFromCustomer(int idCompany)
+        {
+            MessageVm message = new MessageVm();
+            var user = User as MPrincipal;
+            if (user == null)
+            {
+                TempData["alertMessage"] = "Zaloguj się, aby wysłać wiadomość";
+                return RedirectToAction("LoginCustomer", "Account");
+            }
+            {
+                var login = user.UserDetails.Login;
+                ViewBag.UserName = user.UserDetails.Login;
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var comp = db.Companies.FirstOrDefault(u => u.Id.Equals(idCompany));
+                    var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                    message.SenderName = cust.Name + " " + cust.Surname;
+                    message.SenderEmail = cust.Email;
+                    message.AddresseeName = comp.CompanyName;
+                    message.AddresseeEmail = comp.Email;
+                    message.CompanyId = idCompany;
+                }
+            }
+            return RedirectToAction("Message",message);
+        }
+        [HttpGet]
+        public ActionResult MessageFromCompany(int idCustomer)
+        {
+            MessageVm message = new MessageVm();
+            var user = User as MPrincipal;
+            {
+                var login = user.UserDetails.Login;
+                ViewBag.UserName = user.UserDetails.Login;
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var comp = db.Companies.FirstOrDefault(u => u.Login == login);
+                    var cust = db.Customers.FirstOrDefault(u => u.ID == idCustomer);
+                    message.AddresseeName = cust.Name + " " + cust.Surname;
+                    message.AddresseeEmail = cust.Email;
+                    message.SenderName = comp.CompanyName;
+                    message.SenderEmail = comp.Email;
+                }
+            }
+            return RedirectToAction("Message", message);
         }
     }
 }

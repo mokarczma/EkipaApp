@@ -13,6 +13,13 @@ namespace Ekipa.Models.ViewModel
         [Display(Description = "Treść")]
         [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,1000}$", ErrorMessage = "Zbyt mało znaków")]
         public string Description { get; set; }
-        public string EmailToSend { get; set; }
+        public string SenderName { get; set; }
+        public string SenderEmail { get; set; }
+        public string AddresseeName { get; set; }
+        public string AddresseeEmail { get; set; }
+        public int CompanyId { get; set; }
+        public int CustomerId { get; set; }
+
+
     }
 }

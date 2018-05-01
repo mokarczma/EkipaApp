@@ -21,5 +21,6 @@ namespace Ekipa.Models.ViewModel
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
         public int ReservationId { get; set; }
+        public string CustomerName { get; set; }
     }
 }

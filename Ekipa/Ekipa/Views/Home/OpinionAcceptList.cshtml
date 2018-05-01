@@ -1,0 +1,26 @@
+﻿@model List<Ekipa.Models.ViewModel.OpinionVM>
+
+@{
+	ViewBag.Title = "OpinionAcceptList";
+}
+
+<h2>Niezaakceptowane opinie</h2>
+
+
+@for (int i = 0; i < Model.Count(); i++)
+{
+	<hr />
+	<h4>
+		<a class="green" href='@Url.Action("OpinionAdminAccept", "Home", new RouteValueDictionary(  new { id = Model[i].Id}))'>
+			Zaakcepuj
+		</a>
+		<a class="red" href='@Url.Action("OpinionDelete", "Home", new RouteValueDictionary(  new { id = Model[i].Id}))'>
+			Usuń
+		</a>
+
+	</h4>
+	<div>
+		@Html.DisplayFor(model => model[i].Description, new { htmlAttributes = new { @class = "form-control" } })
+	</div>
+
+}

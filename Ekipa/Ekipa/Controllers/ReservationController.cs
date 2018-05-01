@@ -21,12 +21,24 @@ namespace Ekipa.Controllers
                 List<ReservationVM> resList = new List<ReservationVM>();
                 var login = user.UserDetails.Login;
                 ViewBag.UserName = user.UserDetails.Login;
-                ViewBag.UserRole = 3;
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
                     var customer = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-                    ViewBag.UserRole = customer.RoleId;
-                    var termList = db.Terms.Where(t => t.CustomerId == customer.ID).ToList<Term>();
+                    var company = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+
+                    List<Term> termList = new List<Term>();
+
+                    if (customer != null)
+                    {
+                        ViewBag.UserRole = customer.RoleId;
+                        termList = db.Terms.Where(t => t.CustomerId == customer.ID).ToList<Term>();
+                    }
+                    if (company != null)
+                    {
+                        ViewBag.UserRole = company.RoleId;
+                        termList = db.Terms.Where(t => t.CompanyId == company.Id && t.CustomerId != null).ToList<Term>();
+
+                    }
 
                     foreach (var item in termList)
                     {
@@ -37,9 +49,9 @@ namespace Ekipa.Controllers
                         {
                             opinionAdded = true;
                         }
-                        if (reservationDB.IsDelete == false)
-                        {
+                   
                             var companyDB = db.Companies.FirstOrDefault(c => c.Id == item.CompanyId);
+                            var customerDB = db.Customers.FirstOrDefault(c => c.ID == item.CustomerId);
                             ReservationVM reservationVM = new ReservationVM()
                             {
                                 DescriptionCompany = reservationDB.DescriptionCompany,
@@ -47,15 +59,14 @@ namespace Ekipa.Controllers
                                 CompanyAccept = reservationDB.CompanyAccept,
                                 DateStart = item.DateStart,
                                 DateStop = item.DateStop,
-                                CustomerName = customer.Name,
+                                CustomerName = customerDB.Name + " " + customerDB.Surname,
                                 CompanyName = companyDB.CompanyName,
                                 CompanyId = item.CompanyId,
-                                CustomerId = customer.ID,
+                                CustomerId = customerDB.ID,
                                 TermId = item.Id,
                                 OpinionAdded = opinionAdded
                             };
                             resList.Add(reservationVM);
-                        }
                     }
                 }
                 return View(resList);
@@ -123,6 +134,7 @@ namespace Ekipa.Controllers
                 res.DescriptionCompany = dbReservation.DescriptionCompany;
                 res.CompanyAccept = dbReservation.CompanyAccept;
                 res.CustomerName = dbReservation.Term.Customer.Name + " " + dbReservation.Term.Customer.Surname;
+                res.CustomerId = dbReservation.Term.Customer.ID;
             }
             return View(res);
         }
@@ -139,7 +151,7 @@ namespace Ekipa.Controllers
                     dbReservation.IsDelete = model.IsDelete;
                     db.SaveChanges();
                 }
-                return RedirectToAction("CompanyTermList", "Company");
+                return RedirectToAction("CompanyTermList", "Term");
 
             }
 

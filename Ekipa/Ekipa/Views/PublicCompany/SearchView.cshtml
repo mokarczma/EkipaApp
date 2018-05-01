@@ -23,22 +23,22 @@
 
 		<div class="col-md-3 text-lg-center">
 
-				@for (int j = 0; j < Model.basicCompanyInfoVMlist[i].CompanyTagList.Count(); j++)
+			@for (int j = 0; j < Model.basicCompanyInfoVMlist[i].CompanyTagList.Count(); j++)
+			{
+				if (j == 0 || j == 2)
 				{
-						if (j == 0 || j==2)
-						{
-							<div class="tag_min-box color-green text-center " >
-								@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)
-							</div>
-							}
-						else if (j == 1 || j == 3)
-						{
-							<div class=" tag_min-box color-yellow text-center">
-								@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)
-							</div>
-						}					
+					<div class="tag_min-box color-green text-center ">
+						@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)
+					</div>
 				}
-			</div>
+				else if (j == 1 || j == 3)
+				{
+					<div class=" tag_min-box color-yellow text-center">
+						@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)
+					</div>
+				}
+			}
+		</div>
 
 		<div class="col-md-3">
 			Pierwszy Wolny termin:
@@ -46,8 +46,3 @@
 		</div>
 	</div>
 }
-
-
-
-
-
