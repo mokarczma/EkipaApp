@@ -36,16 +36,16 @@
 			<div class="row font-irregularis">
 				<div class="col-md-4 position-relative padding-column">
 					<h4>@Html.DisplayFor(model => model[i].CompanyName)</h4>
-					<div>
+					<div class="font20">
 						Termin:
-						@Html.DisplayFor(model => model[i].DateStart.Date) -
-						@Html.DisplayFor(model => model[i].DateStop.Date)
+						<b>@Html.DisplayFor(model => model[i].DateStart) -
+						@Html.DisplayFor(model => model[i].DateStop)</b>
 
 						@if (Model[i].OpinionAdded == true)
 						{
 							<div>Dodałeś już opinię</div>
 							<div>
-								Firma:@Html.DisplayFor(model => model[i].CompanyName) dziękuje za dodanie opini
+								Firma: @Html.DisplayFor(model => model[i].CompanyName) dziękuje za dodanie opini
 							</div>
 
 							@Html.ActionLink(linkText: "Zobacz", actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new { id = Model[i].CompanyId }, htmlAttributes: null)
@@ -64,10 +64,10 @@
 						}
 					</div>
 				</div>
-				<div class="col-md-4 position-relative padding-column">
+				<div class="col-md-4 position-relative padding-column font20">
 					<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
 				</div>
-				<div class="col-md-4 position-relative padding-column">
+				<div class="col-md-4 position-relative padding-column font20">
 					<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
 				</div>
 			</div>
@@ -103,8 +103,8 @@
 					<h4>@Html.DisplayFor(model => model[i].CustomerName)</h4>
 					<div>
 						Termin:
-						@Html.DisplayFor(model => model[i].DateStart.Date) -
-						@Html.DisplayFor(model => model[i].DateStop.Date)
+						@Html.DisplayFor(model => model[i].DateStart) -
+						@Html.DisplayFor(model => model[i].DateStop)
 
 						
 					</div>
@@ -122,3 +122,7 @@
 
 }
 
+<style>
+	.font20{
+		font-size: 20px;
+</style>

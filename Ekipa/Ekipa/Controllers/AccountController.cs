@@ -235,6 +235,16 @@ namespace Ekipa.Controllers
 
                 return RedirectToAction("Index", "Home");
         }
+
+        //[HttpPost]
+        //public ActionResult PasswordEdit(int id)
+        //{
+        //    //get data for partial view
+        //    var model = GetGridModeldata(parameter);
+
+        //    //return partial view
+        //    return partialview("partialViewName", model);
+        //}
         [HttpGet]
         [ActionName("RegisterCompany")]
         public ActionResult RegisterCompany()

@@ -16,8 +16,23 @@
 		</div>
 		<div class="col-md-3">
 			<h2>@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName)</h2>
-			<h4>Ocena: @Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].AverageRating)/5</h4>
+			<h4>
+				Ocena:
 
+
+				<a class="stars">
+					@for (int j = 0; j < Model.basicCompanyInfoVMlist[i].AverageRating; j++)
+			{
+				<span class="fa fa-star checked"></span>
+	}
+					@for (int j = 0; j < (5 - Model.basicCompanyInfoVMlist[i].AverageRating); j++)
+			{
+				<span class="fa fa-star"></span>
+	}
+					@Model.basicCompanyInfoVMlist[i].AverageRating/5
+				</a>
+			</h4>
+			Liczba opini:@Model.basicCompanyInfoVMlist[i].OpinionsCount
 		</div>
 
 

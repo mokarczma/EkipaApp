@@ -1,12 +1,25 @@
 ﻿@model Ekipa.Models.ViewModel.OpinionVM
 	
 <div>
-	<h2>@Html.DisplayFor(model => model.CustomerName)</h2>
+	<h5>
+		@Html.DisplayFor(model => model.CustomerName)
 
-	<h2>@Html.DisplayFor(model => model.Description)</h2>
+		<a class="stars">
+			@for (int i = 0; i < Model.GradeValue; i++)
+		{
+			<span class="fa fa-star checked"></span>
+		}
+			@for (int i = 0; i < (5 - Model.GradeValue); i++)
+		{
+			<span class="fa fa-star"></span>
+		}
+			@Model.GradeValue/5
 
+		</a>
 
+	</h5>
 
-	@Html.DisplayFor(model => model.GradeValue)
+	<h2 class="descript">@Html.DisplayFor(model => model.Description)</h2>
+
 </div>
 <hr />

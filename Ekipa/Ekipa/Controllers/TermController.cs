@@ -101,8 +101,9 @@ namespace Ekipa.Controllers
 
                     db.SaveChanges();
                 }
+                return RedirectToAction("CompanyTermList");
             }
-            return View("");
+            return View(model);
         }
         [HttpGet]
         [ActionName("CompanyTermList")]
@@ -159,6 +160,8 @@ namespace Ekipa.Controllers
                             ID = item.Id,
                             DateStart = item.DateStart,
                             DateStop = item.DateStop,
+                            Start = item.DateStart.ToShortDateString(),
+                            Stop = item.DateStop.ToShortDateString(),
                             CustomerID = item.CustomerId,
                             Actual = actual,
                             ReservationId = reservationId,

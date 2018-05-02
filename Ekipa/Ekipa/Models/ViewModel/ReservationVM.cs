@@ -34,7 +34,7 @@ namespace Ekipa.Models.ViewModel
         public bool IsDelete { get; set; }
 
 
-        public DateTime DateStart{ get; set; }
-        public DateTime DateStop { get; set; }
+        public string DateStart{ get; set; }
+        public string DateStop { get; set; }
     }
 }

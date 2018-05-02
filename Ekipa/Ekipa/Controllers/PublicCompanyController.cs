@@ -88,8 +88,8 @@ namespace Ekipa.Controllers
                     NearestFreeDate = nearestFreeTerm,
                     CompanyMainImage = imageMain,
                     CompanyOpinionList = opinionListVM,
-                    AverageRating = average
-                    
+                    AverageRating = average,
+                    OpinionsCount = opinionListVM.Count()
                 };
                 return companyInfoVM;
             };
@@ -109,14 +109,14 @@ namespace Ekipa.Controllers
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
                     var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
-                    var cust = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                    var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
                     if (cust != null)
                     {
-                        ViewBag.UserRole = 3;
+                        ViewBag.UserRole = cust.RoleId;
                     }
-                    else
+                    else if(comp != null)
                     {
-                        ViewBag.UserRole = 4;
+                        ViewBag.UserRole = comp.RoleId;
                     }
                 }
             }
@@ -133,6 +133,29 @@ namespace Ekipa.Controllers
         public ActionResult SearchView(MainViewVM model)
         {
             BasicCompanyInfoListVM searched = new BasicCompanyInfoListVM();
+            var user = User as MPrincipal;
+
+            if (user != null)
+            {
+
+                var login = user.UserDetails.Login;
+                ViewBag.UserName = user.UserDetails.Login;
+
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var compUser = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                    var custUser = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                    if (compUser != null)
+                    {
+                        ViewBag.UserRole = compUser.RoleId;
+                    }
+                    else if (custUser != null)
+                    {
+                        ViewBag.UserRole = custUser.RoleId;
+
+                    }
+                }
+            }
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -153,7 +176,8 @@ namespace Ekipa.Controllers
                         AverageRating = company.AverageRating,
                         Services = company.Services,
                         Speciality = company.Speciality,
-                        NearestFreeDate = company.NearestFreeDate
+                        NearestFreeDate = company.NearestFreeDate,
+                        OpinionsCount = company.OpinionsCount
                     };
                     basicCompanyInfoList.Add(basicInfo);
                 }
@@ -166,7 +190,7 @@ namespace Ekipa.Controllers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                if (cityId == 1)
+                if (cityId == 1 || cityId == 0)
                 {
                     if (name == null)
                     {
@@ -221,57 +245,7 @@ namespace Ekipa.Controllers
             }
         }
         
-        [HttpGet]
-        public ActionResult CustomerReservation(int id)
-        {
-            var user = User as MPrincipal;
-            if (user == null)
-            {
-                TempData["alertMessage"] = "Zaloguj się, aby zarezerwować termin";
-                return RedirectToAction("LoginCustomer", "Account");
-            }
-            var login = user.UserDetails.Login;
-            ViewBag.UserName = user.UserDetails.Login;
-            ReservationVM res = new ReservationVM();
-            res.TermId = id;
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
-                if (cust == null)
-                {
-                    TempData["alertMessage"] = "Termin możesz zarezerwować tylko jako kient";
-                    return RedirectToAction("Index", "Home");
-                }
-                ViewBag.Role = cust.RoleId;
-                res.CustomerId = cust.ID;
-            }
-
-            return View(res);
-        }
-        [HttpPost]
-        public ActionResult CustomerReservation(ReservationVM model)
-        {
-            if (ModelState.IsValid)
-            {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-                    var termDB = db.Terms.FirstOrDefault(t => t.Id.Equals(model.TermId));
-                    termDB.CustomerId = model.CustomerId;
-                    Reservation newReservation = new Reservation()
-                    {
-                        DescriptionCustomer = model.DescriptionCustomer,
-                        Term = termDB,
-                        TermId = termDB.Id,
-                    };
-                    db.Reservations.Add(newReservation);
-                    db.SaveChanges();
-                }
-                TempData["alertMessage"] = "Zarezerwowano";
-                return RedirectToAction("MyReservation", "Reservation");
-            }
-            return View(model);
-
-
-        }
+      
+        
     }
 }

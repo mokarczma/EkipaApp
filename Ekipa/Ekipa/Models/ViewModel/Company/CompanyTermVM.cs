@@ -11,6 +11,8 @@ namespace Ekipa.Models.ViewModel.Company
         public int ID { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateStop {get; set; }
+        public string Start { get; set; }
+        public string Stop { get; set; }
         public int ?CustomerID { get; set; }
         public bool Actual { get; set; }
         public bool Accepted { get; set; }

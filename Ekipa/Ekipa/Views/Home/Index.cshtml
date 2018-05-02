@@ -1,36 +1,51 @@
-﻿@{
+﻿@model Ekipa.Models.ViewModel.MainViewVM
+
+@{
 	ViewBag.Title = "Home Page";
+
 }
 
 @if (null != TempData["alertMessage"])
-	{
-		<script type="text/javascript">
+{
+	<script type="text/javascript">
 			   alert("@TempData["alertMessage"]");
-		</script>
-	}
+	</script>
+}
 
 <div class="row">
-	<div class="home-img col-12">
-		<img class="mw-100" src="~/Content/images/Tlo.png" />
-	</div>
+	<img class="mw-100 home" src="~/Content/images/Tlo.png" />
 </div>
+@using (Html.BeginForm("SearchView", "PublicCompany", FormMethod.Post, new { id = "homeForm" }))
+{
+	<div class="row">
+		<div class="col-md-4 position-relative padding-column">
+			<h2>Budujesz dom?</h2>
+			<p>
+				Potrzebujesz sprawdzonej ekipy budowlanej?
+			</p>
+		</div>
+		<div class="col-md-4 position-relative padding-column">
+			<h2>Remontujesz mieszkanie?</h2>
+			<p> Potrzebujesz ekipy remontowej polecanej przez innych zadowolonych klientów? </p>
 
-<div class="row font-irregularis">
-	<div class="col-md-4 position-relative padding-column">
-		<h2>Budujesz dom?</h2>
-		<p>
-			Potrzebujesz sprawdzonej ekipy budowlanej?
-		</p>
-		<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865"><div class="color-green home-action-button">Szukaj &raquo;</div></a>
+		</div>
+		<div class="col-md-4 position-relative padding-column">
+			<h2>Urządzasz salon?</h2>
+			<p> Potrzebujesz projektanata wnętrz?</p>
+		</div>
 	</div>
-	<div class="col-md-4 position-relative padding-column">
-		<h2>Remontujesz mieszkanie?</h2>
-		<p> Potrzebujesz ekipy remontowej polecanej przez innych zadowolonych klientów? </p>
-		<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866"><div class="color-yellow home-action-button">Sprawdź &raquo;</div></a>
+	<div class="row">
+		<div class="col-md-4 position-relative padding-column">
+
+			<input type="submit" value="Szukaj &raquo;" class="w-100 color-green home-action-button" style="max-width:400px" />
+		</div>
+		<div class="col-md-4 position-relative padding-column">
+			
+			<input type="submit" value="Sprawdź &raquo;" class="w-100 color-yellow home-action-button" style="max-width:400px" />
+		</div>
+		<div class="col-md-4 position-relative padding-column">
+		
+			<input type="submit" value="Zobacz &raquo;" class="w-100 color-red home-action-button" style="max-width:400px" />
+		</div>
 	</div>
-	<div class="col-md-4 position-relative padding-column">
-		<h2>Urządzasz salon?</h2>
-		<p> Potrzebujesz projektanata wnętrz?</p>
-		<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867"><div class="color-red home-action-button">Zobacz więcej &raquo;</div></a>
-	</div>
-</div>
+}

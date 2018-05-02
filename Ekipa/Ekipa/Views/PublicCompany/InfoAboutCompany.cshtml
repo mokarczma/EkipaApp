@@ -12,7 +12,7 @@
 }
 
 
-<div class="row text-center">
+<div class="row text-center" style="margin: 20px 0 40px;">
 	@if (Model.TagExist)
 	{
 		for (int i = 0; i < Model.CompanyTagList.Count(); i++)
@@ -39,71 +39,114 @@
 	}
 
 </div>
-<h1>@Html.DisplayFor(model => model.CompanyName)</h1>
-<di>
-	<h2> @Html.DisplayFor(model => model.CityName)</h2>
-	<h4>
-		Tel: @Html.DisplayFor(model => model.PhoneNumer)
+<h3>
+	@Html.DisplayFor(model => model.CompanyName)
+	<a class="stars">
+		@for (int i = 0; i < Model.AverageRating; i++)
+		{
+			<span class="fa fa-star checked"></span>
+		}
+		@for (int i = 0; i < (5 - Model.AverageRating); i++)
+		{
+			<span class="fa fa-star"></span>
+		}
+		@Model.AverageRating/5
 
-		<a class="color-green white term-box" href='@Url.Action("MessageFromCustomer", "Message", new RouteValueDictionary(  new { idCompany = Model.IdCompany}))'>
-			Wyślij wiadomość
-		</a>
+	</a>
+</h3>
+
+<h2> @Html.DisplayFor(model => model.CityName)</h2>
+<h4>
+	Tel: @Html.DisplayFor(model => model.PhoneNumer)
+
+	<a class="color-green white term-box" style="padding: 10px 20px;" href='@Url.Action("MessageFromCustomer", "Message", new RouteValueDictionary(  new { idCompany = Model.IdCompany}))'>
+		Wyślij wiadomość
+	</a>
 
 
-	</h4>
-	<hr />
+</h4>
+<hr class="line" />
 
+<h4>Wolne terminy</h4>
+@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTermVMList)
 
-	<h4>Wolne terminy</h4>
-	@Html.Partial("~/Views/Partial/_TermReservation.cshtml", Model.CompanyTermVMList)
+<hr class="line" />
 
-	<hr />
-
-	<div class="row">
-		<div class="col-md-4">
-			<h4>Specjalność</h4>
-			<div>@Html.DisplayFor(model => model.Speciality)</div>
-		</div>
-		<div class="col-md-4">
-			<h4>Zakres usług</h4>
-			<div>@Html.DisplayFor(model => model.Services)</div>
-		</div>
-		<div class="col-md-4">
-			<h4>Wyceny</h4>
-			<div>@Html.DisplayFor(model => model.Pricing)</div>
-		</div>
+<div class="row">
+	<div class="col-md-4">
+		<h4>Specjalność</h4>
+		<div>@Html.DisplayFor(model => model.Speciality)</div>
 	</div>
-	<hr />
-
-
-	<div class="row row-margin">
-		@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
+	<div class="col-md-4">
+		<h4>Zakres usług</h4>
+		<div>@Html.DisplayFor(model => model.Services)</div>
 	</div>
+	<div class="col-md-4">
+		<h4>Wyceny</h4>
+		<div>@Html.DisplayFor(model => model.Pricing)</div>
+	</div>
+</div>
+<hr class="line" />
 
-	<hr />
-	<h2>Opinie:</h2>
-	Średnia ocena: <div>@Html.DisplayFor(model => model.AverageRating)</div>
+<div class="row row-margin">
+	@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
+</div>
 
+<hr class="line" />
+<h4>Ocena kientów</h4>
 
-	@for (int i = 0; i < Model.CompanyOpinionList.Count(); i++)
+<a class="stars">
+	Ogólna ocena:
+	@for (int i = 0; i < Model.AverageRating; i++)
 	{
-		<div class="row row-margin">
-			@Html.Partial("~/Views/Partial/_Opinion.cshtml", Model.CompanyOpinionList[i])
-		</div>
+		<span class="fa fa-star checked"></span>
+	}
+	@for (int i = 0; i < (5 - Model.AverageRating); i++)
+	{
+		<span class="fa fa-star"></span>
+	}
+	@Model.AverageRating/5
+
+</a>
+<hr class="line" />
+
+@for (int i = 0; i < Model.CompanyOpinionList.Count(); i++)
+{
+	<div class="row row-margin">
+		@Html.Partial("~/Views/Partial/_Opinion.cshtml", Model.CompanyOpinionList[i])
+	</div>
+}
+
+
+<style>
+	h4 {
+		text-transform: uppercase;
+		font-size: 30px;
+	}
+
+	h3 {
+		font-size: 40px;
+	}
+
+	.stars {
+		font-size: 20px;
 	}
 
 
-	<style>
+	.line {
+		margin: 30px 0px;
+	}
 
-		.row-margin {
-			margin-top: 20px;
-		}
+	.row-margin {
+		margin-top: 20px;
+	}
 
-		.tag-box {
-			border-radius: 6px;
-			padding: 4px;
-			box-sizing: border-box;
-			margin: 0 10px;
-		}
-	</style>
+	.tag-box {
+		border-radius: 6px;
+		padding: 4px;
+		box-sizing: border-box;
+		margin: 0 10px;
+		padding: 10px 20px;
+	}
+</style>
 

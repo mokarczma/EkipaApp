@@ -17,5 +17,6 @@ namespace Ekipa.Models.ViewModel.Company
         public string NearestFreeDate { get; set; }
         public Image CompanyMainImage { get; set; }
         public double AverageRating { get; set; }
+        public int OpinionsCount { get; set; }
     }
 }

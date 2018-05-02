@@ -23,11 +23,11 @@
 			@:<div class="row">
 			}
 				  <div class="col-md-4 pos">
-				  	<img class="img-responsive" src="@Url.Content(Model.ImageList[i].Link)" width="100%" height="90%" />
+				  	<img class="img-responsive" src="@Url.Content(Model.ImageList[i].Link)"/>
 				  	<div class="description-box">@Html.EditorFor(m => m.ImageList[i].Description, "", new { htmlAttributes = new { @class = "form-control select" } })</div>
 				  <div class="description-box"> Ustaw jako zdjęcie głowne: @Html.RadioButtonFor(m => m.MainPictureID, Model.ImageList[i].Id.ToString())</div>
 				  <a href='@Url.Action("DeleteImage", "Image", new RouteValueDictionary(new { id = Model.ImageList[i].Id}))'>
-				  	<img src='@Url.Content("~/Content/Images/delete.png")' />
+				  	<img class="float-right" src='@Url.Content("~/Content/Images/delete.png")' />
 				  </a>
 				  @Html.HiddenFor(model => model.ImageList[i].Id)
 				  @Html.HiddenFor(model => model.ImageList[i].Link)

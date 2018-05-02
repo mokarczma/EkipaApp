@@ -17,6 +17,7 @@ namespace Ekipa.Controllers
 
         {
             var user = User as MPrincipal;
+            ViewBag.Home = 1;
             if (user != null)
             {
                 var login = user.UserDetails.Login;

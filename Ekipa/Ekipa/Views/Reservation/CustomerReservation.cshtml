@@ -1,0 +1,49 @@
+﻿@model Ekipa.Models.ViewModel.ReservationVM
+
+@{
+	ViewBag.Title = "CustomerReservation";
+}
+
+<h2>Zarezerwuj termin w firmie: @Model.CompanyName</h2>
+<hr/>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.HiddenFor(x => x.Id);
+	@Html.HiddenFor(x => x.TermId);
+	@Html.HiddenFor(x => x.CustomerId);
+	@Html.HiddenFor(x => x.CompanyId);
+
+<div class="form-horizontal">
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group">
+
+		<div class="col-md-10">
+			<h5>Wiadomość dla firmy dotycząca tworzonej reazerwacji</h5>
+
+			@Html.TextAreaFor(m => m.DescriptionCompany, new { @class = "form-control", @cols = "20" })
+			@Html.ValidationMessageFor(model => model.DescriptionCustomer, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<button class="search-button btn my-2 my-sm-0" type="submit">Zarezerwuj</button>
+		</div>
+	</div>
+</div>
+}
+
+<style>
+
+	#DescriptionCompany {
+		min-height: 350px;
+		max-height: 350px;
+		min-width: 70%;
+		max-width: 70%;
+		outline: none;
+		font-family: Georgia;
+		font-size: 18px;
+	}
+
+</style>

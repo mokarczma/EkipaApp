@@ -1,9 +1,4 @@
-﻿@font-face {
-	font-family: FontRegural;
-	src: url(/Fonts/Irregularis.ttf);
-}
-
-body {
+﻿body {
 	font-family: Irregularis;
 }
 
@@ -31,13 +26,16 @@ img {
 	}
 .description-box {
 	width: 100%;
-	margin-left: 10%;
 	margin-top: 3%;}
 
-	.description-box select {
-		width:100% !important;
-		max-width: 100% !important;
-	}
+.description-box select {
+	width:100% !important;
+	max-width: 100% !important;
+}
+
+.description-box input {
+	max-width: inherit;
+}
 
 .search-button {
 	color: #76af24;
@@ -58,14 +56,12 @@ img {
 	color: #fff;
 	text-transform: uppercase;
 	font-size: 14px;
-	position: absolute;
-	bottom: 0;
 	left: 20px;
 	right: 20px;
 	border-radius: 6px;
 }
 .term-box {
-	width: 70%;
+	width: 80%;
 	font-size: 25px;
 	margin: 10%;
 	border-radius: 6px;
@@ -150,4 +146,26 @@ img {
 
 .red {
 	color: #ae281c !important;
+}
+.text-box-w {
+	width: 100%;
+	height:100px !important; 
+}
+
+	.text-box-w input {
+		width: 96% !important;
+		max-width: 96% !important;
+		height: 100px !important;
+		overflow:auto !important;
+		
+	}
+
+.descript {
+	outline: none;
+	font-family: Georgia;
+	font-size: 20px;
+	line-height: 150%;
+}
+.checked {
+	color: gold;
 }

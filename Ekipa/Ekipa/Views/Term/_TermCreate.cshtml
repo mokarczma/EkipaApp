@@ -1,16 +1,15 @@
 ﻿@model Ekipa.Models.ViewModel.Company.CompanyTermVM
-@{
-	ViewBag.Title = "AddCompanyTerm";
-	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
-	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM);
-}
-<h2>Stwórz nowy termin</h2>
-@using (Html.BeginForm())
+
+
+
+<h5>Dodaj nowy termin</h5>
+
+@using (Html.BeginForm("AddCompanyTerm", "Term", FormMethod.Post))
 {
 	@Html.AntiForgeryToken()
 
 	<div class="form-horizontal">
-		<hr />
+
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 		<div class="form-group">
 			<dt>Data początkowa</dt>
@@ -33,4 +32,5 @@
 		</div>
 	</div>
 }
+
 

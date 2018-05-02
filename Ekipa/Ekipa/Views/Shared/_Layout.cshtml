@@ -9,14 +9,17 @@
 	@Styles.Render("~/Content/style/slick-slider-style")
 
 	@Styles.Render("~/Content/style")
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	@Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/modernizr")
+
 </head>
-@{
+	@{
 	Ekipa.Models.ViewModel.MainViewVM mainViewVM = new Ekipa.Models.ViewModel.MainViewVM();
-}
+	}
 <body>
 	@Html.Partial("~/Views/Partial/_MainView.cshtml", mainViewVM)
-	<div class="p-3"></div>
 
 	<div class="container body-content">
 		@RenderBody()

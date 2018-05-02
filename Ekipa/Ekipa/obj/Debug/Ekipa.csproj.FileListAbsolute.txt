@@ -183,3 +183,4 @@ D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.csproj.CoreCompileInputs.cache
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.csproj.CopyComplete
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.dll
 D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.pdb
+D:\EkipaApp\Ekipa\Ekipa\obj\Debug\Ekipa.csprojResolveAssemblyReference.cache

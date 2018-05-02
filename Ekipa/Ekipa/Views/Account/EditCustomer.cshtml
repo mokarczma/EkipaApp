@@ -2,69 +2,89 @@
 @{
 	ViewBag.Title = "EditCustomer";
 }
+@section Scripts
+{
+	<script>
+
+		$(function () {
+			$('.editModal').modal();
+		});
+
+		function editProduct(id) {
+			$.ajax({
+				url: '/Account/PasswordEdit/' + productId, // The method name + paramater
+				success: function (data) {
+					$('#modalWrapper').html(data); // This should be an empty div where you can inject your new html (the partial view)
+				}
+			});
+		}
+
+	</script>
+}
+
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-	<h4>Edytuj dane</h4>
-	<hr />
-	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-	@Html.HiddenFor(model => model.ID)
-	<div class="form-group">
-		@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+	<div class="form-horizontal">
+		<h4>Edytuj dane</h4>
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.ID)
+		<div class="form-group">
+			@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+			</div>
 		</div>
-	</div>
-	<div class="form-group col-md-10">
-		<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
-	</div>
+		<div class="form-group col-md-10">
+			<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
+		</div>
 
-</div>
+		<a href="#" onclick="editProduct(id)" class="btn btn-primary">Edytuj hasło</a>
+
+	</div>
 }
-
-

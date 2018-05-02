@@ -57,8 +57,8 @@ namespace Ekipa.Controllers
                                 DescriptionCompany = reservationDB.DescriptionCompany,
                                 DescriptionCustomer = reservationDB.DescriptionCustomer,
                                 CompanyAccept = reservationDB.CompanyAccept,
-                                DateStart = item.DateStart,
-                                DateStop = item.DateStop,
+                                DateStart = item.DateStart.ToShortDateString(),
+                                DateStop = item.DateStop.ToShortDateString(),
                                 CustomerName = customerDB.Name + " " + customerDB.Surname,
                                 CompanyName = companyDB.CompanyName,
                                 CompanyId = item.CompanyId,
@@ -171,7 +171,59 @@ namespace Ekipa.Controllers
             }
             return RedirectToAction("CompanyTermList", "Company");
         }
+        [HttpGet]
+        public ActionResult CustomerReservation(int id)
+        {
+            var user = User as MPrincipal;
+            if (user == null)
+            {
+                TempData["alertMessage"] = "Zaloguj się, aby zarezerwować termin";
+                return RedirectToAction("LoginCustomer", "Account");
+            }
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+            ReservationVM res = new ReservationVM();
+            res.TermId = id;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                if (cust == null)
+                {
+                    TempData["alertMessage"] = "Termin możesz zarezerwować tylko jako kient";
+                    return RedirectToAction("Index", "Home");
+                }
+                ViewBag.UserRole = cust.RoleId;
+                res.CustomerId = cust.ID;
+                var term = db.Terms.FirstOrDefault(u => u.Id == id);
+                res.CompanyName = term.Company.CompanyName;
+            }
+            return View(res);
+        }
+        [HttpPost]
+        public ActionResult CustomerReservation(ReservationVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var termDB = db.Terms.FirstOrDefault(t => t.Id.Equals(model.TermId));
+                    termDB.CustomerId = model.CustomerId;
+                    Reservation newReservation = new Reservation()
+                    {
+                        DescriptionCustomer = model.DescriptionCustomer,
+                        Term = termDB,
+                        TermId = termDB.Id,
+                    };
+                    db.Reservations.Add(newReservation);
+                    db.SaveChanges();
+                }
+                TempData["alertMessage"] = "Zarezerwowano";
+                return RedirectToAction("MyReservation", "Reservation");
+            }
+            return View(model);
+        }
+
+        }
     }
-}
 
 
