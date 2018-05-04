@@ -124,7 +124,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.Role = 4;
+            ViewBag.UserRole = 4;
             ReservationVM res = new ReservationVM();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -135,6 +135,9 @@ namespace Ekipa.Controllers
                 res.CompanyAccept = dbReservation.CompanyAccept;
                 res.CustomerName = dbReservation.Term.Customer.Name + " " + dbReservation.Term.Customer.Surname;
                 res.CustomerId = dbReservation.Term.Customer.ID;
+                res.CustomerNumber = dbReservation.Term.Customer.PhoneNumber;
+                res.DateStart = dbReservation.Term.DateStart.ToShortDateString();
+                res.DateStop = dbReservation.Term.DateStop.ToShortDateString();
             }
             return View(res);
         }

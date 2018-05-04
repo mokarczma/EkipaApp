@@ -45,7 +45,7 @@ namespace Ekipa.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCompanyTerm(CompanyTermVM model)
+        public ActionResult TermCreate(CompanyTermVM model)
         {
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
@@ -56,8 +56,8 @@ namespace Ekipa.Controllers
             {
                 if (model.DateStop < model.DateStart)
                 {
-                    ModelState.AddModelError("DateStop", "Data końca nie może być wcześniejsza od daty początku");
-                    return View(model);
+                    TempData["alertMessage"] = "Data końca nie może być wcześniejsza od daty początku";
+                    return RedirectToAction("CompanyTermList");
                 }
 
                 using (ApplicationDbContext db = new ApplicationDbContext())
@@ -82,9 +82,9 @@ namespace Ekipa.Controllers
                             foreach (var tworzone in dniTworzone)
                             {
                                 if (tworzone == zajte)
-                                {
-                                    ModelState.AddModelError("DateStop", "W terminie, który chcesz utworzyć, występują dni, które już zaplanowałeś, sprawdź inne terminy");
-                                    return View(model);
+                                {                                    
+                                    TempData["alertMessage"] = "W terminie, który chcesz utworzyć, występują dni, które już zaplanowałeś, sprawdź inne terminy";
+                                    return RedirectToAction("CompanyTermList");
                                 }
                             }
                         }
@@ -117,7 +117,7 @@ namespace Ekipa.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var company = db.Companies.SingleOrDefault(x => x.Login == login);
-
+                
                 List<CompanyTermVM> compTerm = CompanyTermToList(company.Id);
                 if (compTerm == null)
                 {
@@ -125,6 +125,7 @@ namespace Ekipa.Controllers
                     return View("");
                 }
                 CompanyTermsVM companyTermsVM = new CompanyTermsVM() { CompanyTermsList = compTerm };
+                
                 return View(companyTermsVM);
             }
         }

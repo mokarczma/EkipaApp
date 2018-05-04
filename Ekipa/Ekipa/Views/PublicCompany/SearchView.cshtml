@@ -3,6 +3,14 @@
 @{
 	ViewBag.Title = "SearchView";
 }
+@if (Model.ListCount > 0)
+{
+	<h5>Znaleziono: @Model.ListCount</h5>
+}
+else
+{
+	<h2>Nie znaleziono firmy, która spełniałaby podane przez Ciebie kryteria. Spróbuj ponownie</h2>
+}
 
 @for (int i = 0; i < Model.basicCompanyInfoVMlist.Count(); i++)
 {
@@ -22,13 +30,13 @@
 
 				<a class="stars">
 					@for (int j = 0; j < Model.basicCompanyInfoVMlist[i].AverageRating; j++)
-			{
-				<span class="fa fa-star checked"></span>
-	}
+					{
+						<span class="fa fa-star checked"></span>
+					}
 					@for (int j = 0; j < (5 - Model.basicCompanyInfoVMlist[i].AverageRating); j++)
-			{
-				<span class="fa fa-star"></span>
-	}
+					{
+						<span class="fa fa-star"></span>
+					}
 					@Model.basicCompanyInfoVMlist[i].AverageRating/5
 				</a>
 			</h4>

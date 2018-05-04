@@ -4,13 +4,19 @@
 	ViewBag.Title = "CompanyReservation";
 }
 
-<h2>Rezerwacja:</h2>
-
-<h4>@Model.CustomerName</h4>
-
-<a class="color-green white term-box" href='@Url.Action("MessageFromCompany", "Message", new RouteValueDictionary(  new { idCustomer = Model.CustomerId}))'>
-	Wyślij wiadomość
-</a>
+<h1>
+	Rezerwacja:
+	<a class="term">@Model.DateStart - @Model.DateStop</a>
+	<a class="acc">Zaakceptuj @Html.EditorFor(model => model.CompanyAccept)</a>
+</h1>
+<h4>
+	@Model.CustomerName <a class="mess">(Tel: @Model.CustomerNumber)</a>
+</h4>	
+<div>
+	<a class="color-green white mess" href='@Url.Action("MessageFromCompany", "Message", new RouteValueDictionary(  new { idCustomer = Model.CustomerId}))'>
+		Wyślij e-mail
+	</a>
+</div>
 <hr />
 
 @using (Html.BeginForm())
@@ -19,25 +25,14 @@
 	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 	@Html.HiddenFor(model => model.Id)
 
-	<div class="row form-group col-md-12">
-		@Html.LabelFor(model => model.DescriptionCustomer, htmlAttributes: new { @class = "control-label col-md-2" })
-		@Html.DisplayFor(model => model.DescriptionCustomer)
-	</div>
 
-	<div class="row form-group col-md-12">
-		@Html.LabelFor(model => model.DescriptionCompany, htmlAttributes: new { @class = "control-label col-md-2" })
-		@Html.EditorFor(model => model.DescriptionCompany, new { htmlAttributes = new { @class = "form-control" } })
-		@Html.ValidationMessageFor(model => model.DescriptionCompany, "", new { @class = "text-danger" })
-	</div>
-	<div class="row form-group col-md-12">
-		@Html.LabelFor(model => model.CompanyAccept, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			<div class="checkbox">
-				@Html.EditorFor(model => model.CompanyAccept)
-				@Html.ValidationMessageFor(model => model.CompanyAccept, "", new { @class = "text-danger" })
-			</div>
-		</div>
-	</div>
+	<h5>Wiadomość od @Model.CustomerName:</h5>
+	<div class="DescriptionCustomer">@Html.DisplayFor(model => model.DescriptionCustomer)</div>
+
+	<h5>Twoja odpowiedź:</h5>
+	@Html.TextAreaFor(m => m.DescriptionCompany, new { @class = "form-control", @cols = "20" })
+	@Html.ValidationMessageFor(model => model.DescriptionCompany, "", new { @class = "text-danger" })
+
 
 	<div class="form-group">
 		<div class="col-md-offset-2 col-md-10">
@@ -54,8 +49,46 @@
 	@Html.HiddenFor(model => model.TermId)
 
 	<div class="form-group">
-		<div class="col-md-offset-2 col-md-10">
+		<a class="col-md-offset-2 col-md-10">
 			<button class="search-button btn my-2 my-sm-0" type="submit">Anuluj rezerwację</button>
-		</div>
+		</a>
 	</div>
 }
+
+<style>
+
+	#DescriptionCompany {
+		min-height: 200px;
+		max-height: 200px;
+		min-width: 100%;
+		max-width: 100%;
+		outline: none;
+		font-family: Georgia;
+		font-size: 18px;
+		margin-bottom:10px;
+	}
+
+	.DescriptionCustomer {
+		min-height: 50px;
+		min-width: 100%;
+		max-width: 100%;
+		outline: none;
+		font-family: Georgia;
+		font-size: 18px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.term {
+		margin-left: 10px;
+		font-size: 30px;
+	}
+	.acc {
+		margin-left: 20px;
+		font-size: 22px;
+	}
+	.mess {
+		padding: 10px;
+		font-size: 16px;
+	}
+
+</style>

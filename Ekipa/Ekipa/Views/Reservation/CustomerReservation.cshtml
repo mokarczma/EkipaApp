@@ -22,7 +22,7 @@
 		<div class="col-md-10">
 			<h5>Wiadomość dla firmy dotycząca tworzonej reazerwacji</h5>
 
-			@Html.TextAreaFor(m => m.DescriptionCompany, new { @class = "form-control", @cols = "20" })
+			@Html.TextAreaFor(m => m.DescriptionCustomer, new { @class = "form-control", @cols = "20" })
 			@Html.ValidationMessageFor(model => model.DescriptionCustomer, "", new { @class = "text-danger" })
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 
 <style>
 
-	#DescriptionCompany {
+	#DescriptionCustomer {
 		min-height: 350px;
 		max-height: 350px;
 		min-width: 70%;

@@ -3,49 +3,64 @@
 	ViewBag.Title = "EditCompanyDetails";
 }
 <h2>Edytuj informacje o swojej firmie</h2>
+<hr />
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
 
-	<div class="form-horizontal">
-		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		<div class="form-group">
-			<dt>@Html.LabelFor(model => model.Speciality, htmlAttributes: new { @class = "control-label col-md-2" })</dt>
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Speciality, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.Speciality, "", new { @class = "text-danger" })
-			</div>
-		</div>
-		<div class="form-group">
-			<dt>@Html.LabelFor(model => model.Services, htmlAttributes: new { @class = "control-label col-md-2" })</dt>
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Services, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.Services, "", new { @class = "text-danger" })
-			</div>
-		</div>
-		<div class="form-group">
-			<dt>@Html.LabelFor(model => model.Pricing, htmlAttributes: new { @class = "control-label col-md-2" })</dt>
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Pricing, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.Pricing, "", new { @class = "text-danger" })
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<dt>@Html.LabelFor(model => model.Cities, htmlAttributes: new { @class = "control-label col-md-2" })</dt>
-				<div class="col-md-10">
-					@Html.DropDownListFor(x => x.SelectedCityID, Model.Cities, htmlAttributes: new { @class = "form-control" })
-				</div>
-			</div>
-		</div>
+
+	<h4>@Html.LabelFor(model => model.Speciality, htmlAttributes: new { @class = "control-label col-md-2" })</h4>
+	@Html.TextAreaFor(model => model.Speciality)
+	@Html.ValidationMessageFor(model => model.Speciality, "", new { @class = "text-danger" })
+
+	<h4>@Html.LabelFor(model => model.Services, htmlAttributes: new { @class = "control-label col-md-2" })</h4>
+	@Html.TextAreaFor(model => model.Services)
+	@Html.ValidationMessageFor(model => model.Services, "", new { @class = "text-danger" })
+
+	<h4>@Html.LabelFor(model => model.Pricing, htmlAttributes: new { @class = "control-label col-md-2" })</h4>
+	@Html.TextAreaFor(model => model.Pricing)
+	@Html.ValidationMessageFor(model => model.Pricing, "", new { @class = "text-danger" })
+
+	<div class="form-group">
+
+		<h4>@Html.LabelFor(model => model.Cities, htmlAttributes: new { @class = "control-label col-md-2" })</h4>
+		@Html.DropDownListFor(x => x.SelectedCityID, Model.Cities, htmlAttributes: new { @class = "form-control" })
+	</div>
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
 			</div>
 
 		</div>
-	</div>
-}
-<div>
-	@Html.ActionLink("Powrót", "CompanyDetails")
-</div>
+		}
+		<div>
+			@Html.ActionLink("Powrót", "CompanyDetails")
+		</div>
+
+		<style>
+
+			#Speciality, #Services, #Pricing {
+				min-height: 180px;
+				max-height: 180px;
+				min-width: 100%;
+				max-width: 100%;
+				outline: none;
+				font-family: Georgia;
+				font-size: 18px;
+			}
+
+			.term {
+				margin-left: 10px;
+				font-size: 30px;
+			}
+
+			.acc {
+				margin-left: 20px;
+				font-size: 22px;
+			}
+
+			.mess {
+				padding: 10px;
+				font-size: 16px;
+			}
+		</style>

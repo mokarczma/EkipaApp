@@ -133,6 +133,7 @@ namespace Ekipa.Controllers
         public ActionResult SearchView(MainViewVM model)
         {
             BasicCompanyInfoListVM searched = new BasicCompanyInfoListVM();
+            
             var user = User as MPrincipal;
 
             if (user != null)
@@ -157,14 +158,14 @@ namespace Ekipa.Controllers
                 }
             }
 
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var dbCompany = SearchCompany(model.NameSearch, Convert.ToInt32(model.PlaceSearch));
+
+            var dbCompany = SearchCompany(model.NameSearch, Convert.ToInt32(model.PlaceSearch)).Select(c => c.Id).Distinct();
+
                 List<BasicCompanyInfoVM> basicCompanyInfoList = new List<BasicCompanyInfoVM>();
 
                 foreach (var item in dbCompany)
                 {
-                    CompanyInfoVM company = CompanyInfo(item.Id);
+                    CompanyInfoVM company = CompanyInfo(item);
 
                     BasicCompanyInfoVM basicInfo = new BasicCompanyInfoVM()
                     {
@@ -182,7 +183,8 @@ namespace Ekipa.Controllers
                     basicCompanyInfoList.Add(basicInfo);
                 }
                 searched.basicCompanyInfoVMlist = basicCompanyInfoList;
-            }
+                 searched.ListCount = basicCompanyInfoList.Count();
+         
             return View(searched);
         }
 
@@ -197,25 +199,25 @@ namespace Ekipa.Controllers
                         var dbCompany = db.Companies.ToList();
                         return dbCompany;
                     }
+                    var tags = db.Tags.Where(t => t.Name.Contains(name));
+
                     return (from tag in db.Tags
-                            join compTag in db.CompanyTags on tag.Id equals compTag.TagId
-                            join comp in db.Companies on compTag.CompanyId equals comp.Id
-                            where (tag.Name.Contains(name) || comp.CompanyName.Contains(name))
-                            select new
-                            {
-                                Id = comp.Id,
-                                CityId = comp.CityId,
-                                CompanyName = comp.CompanyName,
-                                Services = comp.Services,
-                                Speciality = comp.Speciality
-                            }).ToList().Select(x => new Company
-                            {
-                                Id = x.Id,
-                                CityId = x.CityId,
-                                CompanyName = x.CompanyName,
-                                Services = x.Services,
-                                Speciality = x.Speciality
-                            });
+                                  join compTag in db.CompanyTags on tag.Id equals compTag.TagId
+                                  join comp in db.Companies on compTag.CompanyId equals comp.Id
+                                  where (tag.Name.Contains(name))
+                                  select new
+                                  {
+                                      Id = comp.Id
+                                  }).ToList().Select(x => new Company
+                                  {
+                                      Id = x.Id
+                                  }).Concat((from com in db.Companies
+                                             where com.CompanyName.Contains(name)
+                                             select new { IdCompany = com.Id }).ToList().Select(k => new Company
+                                             {
+                                                 Id = k.IdCompany
+                                             })).ToList();
+
                 }
                 if (name == null)
                 {
@@ -223,25 +225,22 @@ namespace Ekipa.Controllers
                     return dbCompany;
                 }
 
-                return (from tag in db.Tags
-                        join compTag in db.CompanyTags on tag.Id equals compTag.TagId
-                        join comp in db.Companies on compTag.CompanyId equals comp.Id
-                        where (tag.Name.Contains(name) || comp.CompanyName.Contains(name)) && comp.CityId == cityId
-                        select new
-                        {
-                            Id = comp.Id,
-                            CityId = comp.CityId,
-                            CompanyName = comp.CompanyName,
-                            Services = comp.Services,
-                            Speciality = comp.Speciality
-                        }).ToList().Select(x => new Company
-                        {
-                            Id = x.Id,
-                            CityId = x.CityId,
-                            CompanyName = x.CompanyName,
-                            Services = x.Services,
-                            Speciality = x.Speciality
-                        });
+               return (from tag in db.Tags
+                                 join compTag in db.CompanyTags on tag.Id equals compTag.TagId
+                                 join comp in db.Companies on compTag.CompanyId equals comp.Id
+                                 where (tag.Name.Contains(name) && comp.CityId == cityId)
+                                 select new
+                                 {
+                                     Id = comp.Id
+                                 }).ToList().Select(x => new Company
+                                 {
+                                     Id = x.Id
+                                 }).Concat((from com in db.Companies
+                                            where com.CompanyName.Contains(name) && com.CityId == cityId
+                                            select new { IdCompany = com.Id }).ToList().Select(k => new Company
+                                            {
+                                                Id = k.IdCompany
+                                            })).ToList();
             }
         }
         

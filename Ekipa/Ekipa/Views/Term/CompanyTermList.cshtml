@@ -6,6 +6,13 @@
 	Ekipa.Models.ViewModel.Company.CompanyTermVM createTerm = new Ekipa.Models.ViewModel.Company.CompanyTermVM();
 
 }
+@if (null != TempData["alertMessage"])
+{
+	<script type="text/javascript">
+			   alert("@TempData["alertMessage"]");
+	</script>
+}
+
 <div class=" row">
 
 	<div class="col-md-2">
@@ -20,7 +27,7 @@
 	<div class="col-md-2">
 		<div class="color-green text-center white "> Wolne terminy</div>
 	</div>
-	<a href="~/Reservation/MyReservation" class="yellow" >Wszystkie rezerwacje</a>
+	<a href="~/Reservation/MyReservation" class="yellow">Wszystkie rezerwacje</a>
 </div>
 <hr />
 
@@ -48,34 +55,34 @@ else
 					{
 						if (Model.CompanyTermsList[i].Accepted == true)
 						{
-					<div class="color-red term text-center white">
-						@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
-						@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
-						<a class="white" href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
-							 Zobacz
-						</a>
-					</div>
+							<div class="color-red term text-center white">
+								@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
+								@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
+								<a class="white" href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+									Zobacz
+								</a>
+							</div>
 						}
 						else
 						{
-					<div class="color-yellow term text-center white">
-						@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
-						@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
-						<a class="white" href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
-							Zaakceptuj
-						</a>
-					</div>
+							<div class="color-yellow term text-center white">
+								@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
+								@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
+								<a class="white" href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+									Zaakceptuj
+								</a>
+							</div>
 						}
 					}
 					else
 					{
-					<div class="color-green term text-center white">
-						@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
-						@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
-						<a class="white" href='@Url.Action("DeleteTerm", "Company", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
-							Usuń
-						</a>
-					</div>
+						<div class="color-green term text-center white">
+							@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
+							@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
+							<a class="white" href='@Url.Action("DeleteTerm", "Company", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+								Usuń
+							</a>
+						</div>
 					}
 				</div>
 			}
@@ -93,6 +100,6 @@ else
 		border-radius: 6px;
 		padding: 4px;
 		box-sizing: border-box;
-		width:90%;
+		width: 90%;
 	}
 </style>

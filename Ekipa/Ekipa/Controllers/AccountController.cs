@@ -14,7 +14,7 @@ namespace Ekipa.Controllers
 {
     public class AccountController : Controller
     {
-        public LogedUserVM LogedUser()
+        public  LogedUserVM LogedUser()
         {
             var userLogged = User as MPrincipal;
             LogedUserVM logedUserVM = new LogedUserVM() { Loged = false };
@@ -158,7 +158,7 @@ namespace Ekipa.Controllers
                 if (customer != null)
                 {
                     FormsAuthentication.SetAuthCookie(customer.Login, false);
-                    var authTicket = new FormsAuthenticationTicket(1, customer.Login, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(30), false, "");
+                    var authTicket = new FormsAuthenticationTicket(customer.ID, customer.Login, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(30), false, "");
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
                     authCookie.Expires = DateTime.UtcNow.AddMinutes(30);
                     Response.SetCookie(authCookie);
@@ -179,12 +179,12 @@ namespace Ekipa.Controllers
             var login = userCustomer.UserDetails.Login;
             ViewBag.UserName = userCustomer.UserDetails.Login;
             ViewBag.UserRole = 3;
-            CustomerAccountEditVM customerVM = null;
+            CustomerAccountVM customerVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
 
-                customerVM = new CustomerAccountEditVM();
+                customerVM = new CustomerAccountVM();
                 customerVM.Name = cust.Name;
                 customerVM.Surname = cust.Surname;
                 customerVM.PhoneNumber = cust.PhoneNumber;
@@ -196,7 +196,7 @@ namespace Ekipa.Controllers
 
         [HttpPost]
         [ActionName("EditCustomer")]
-        public ActionResult EditCustomer(CustomerAccountEditVM model)
+        public ActionResult EditCustomer(CustomerAccountVM model)
         {
             var userCustomer = User as MPrincipal;
             var login = userCustomer.UserDetails.Login;
@@ -220,10 +220,6 @@ namespace Ekipa.Controllers
                             cust.Surname = model.Surname ?? "";
                             cust.PhoneNumber = model.PhoneNumber ?? "";
                             cust.Email = model.Email ?? "";
-                            if (!string.IsNullOrEmpty(model.Password) && model.Password == cust.Password)
-                            {
-                                cust.Password = model.NewPassword;
-                            }
                             db.SaveChanges();
                         }
                         else
@@ -236,15 +232,70 @@ namespace Ekipa.Controllers
                 return RedirectToAction("Index", "Home");
         }
 
-        //[HttpPost]
-        //public ActionResult PasswordEdit(int id)
-        //{
-        //    //get data for partial view
-        //    var model = GetGridModeldata(parameter);
 
-        //    //return partial view
-        //    return partialview("partialViewName", model);
-        //}
+
+
+        [HttpGet]
+        [ActionName("NewPassword")]
+        public ActionResult NewPassword()
+        {
+            var userCustomer = User as MPrincipal;
+            var login = userCustomer.UserDetails.Login;
+            ViewBag.UserName = userCustomer.UserDetails.Login;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+
+                var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                if (cust != null)
+                {
+                    ViewBag.UserRole = cust.RoleId;
+                }
+                else
+                {
+                    ViewBag.UserRole = comp.RoleId;
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("NewPassword")]
+        public ActionResult NewPassword(NewPasswordVM model)
+        {
+
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = user.UserDetails.Login;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
+                var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+                model.Password = Security.sha512encrypt(model.Password);
+
+                if (cust != null)
+                {
+                    if (!string.IsNullOrEmpty(model.Password) && model.Password == cust.Password)
+                    {
+                        cust.Password =  Security.sha512encrypt(model.NewPassword);
+                        TempData["alertMessage"] = "Hasło zostało zmienione";
+                    }
+                }
+                if (comp != null)
+                {
+                    if (!string.IsNullOrEmpty(model.Password) && model.Password == cust.Password)
+                    {
+                        comp.Password = Security.sha512encrypt(model.NewPassword);
+                        TempData["alertMessage"] = "Hasło zostało zmienione";
+                    }
+                }
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         [ActionName("RegisterCompany")]
         public ActionResult RegisterCompany()
@@ -384,13 +435,13 @@ namespace Ekipa.Controllers
             ViewBag.UserRole = 4;
 
 
-            CompanyAccountEditVM companyEditVM = null;
+            CompanyAccountVM companyEditVM = null;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var comp = db.Companies.FirstOrDefault(u => u.Login.Equals(login));
                 ViewBag.UserName = comp.Login;
                 ViewBag.Role = comp.RoleId;
-                companyEditVM = new CompanyAccountEditVM();
+                companyEditVM = new CompanyAccountVM();
                 companyEditVM.CompanyName = comp.CompanyName;
                 companyEditVM.PhoneNumber = comp.PhoneNumer;
                 companyEditVM.Email = comp.Email;
@@ -400,7 +451,7 @@ namespace Ekipa.Controllers
         }
         [HttpPost]
         [ActionName("EditCompany")]
-        public ActionResult EditCompany(CompanyAccountEditVM model)
+        public ActionResult EditCompany(CompanyAccountVM model)
         {
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
@@ -421,10 +472,6 @@ namespace Ekipa.Controllers
                         comp.CompanyName = model.CompanyName ?? "";
                         comp.PhoneNumer = model.PhoneNumber ?? "";
                         comp.Email = model.Email ?? "";
-                        if (!string.IsNullOrEmpty(model.Password) && model.Password == comp.Password)
-                        {
-                            comp.Password = model.NewPassword;
-                        }
                         db.SaveChanges();
                         return RedirectToAction("EditCompany");
                     }

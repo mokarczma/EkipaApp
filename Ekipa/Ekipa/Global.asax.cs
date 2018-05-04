@@ -34,7 +34,7 @@ namespace Ekipa
                     if (authTicket != null && !authTicket.Expired)
                     {
                         var usr = new MPrincipal(new FormsIdentity(authTicket), new string[] { });
-                        usr.UserDetails = new AuthUser() { Login = authTicket.Name };
+                        usr.UserDetails = new AuthUser() { Login = authTicket.Name};
                         HttpContext.Current.User = usr;
 
                         TimeSpan span = authTicket.Expiration.Subtract(DateTime.UtcNow);

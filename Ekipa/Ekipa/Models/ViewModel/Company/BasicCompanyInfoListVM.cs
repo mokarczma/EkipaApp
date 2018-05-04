@@ -8,5 +8,6 @@ namespace Ekipa.Models.ViewModel.Company
     public class BasicCompanyInfoListVM
     {
         public List<BasicCompanyInfoVM> basicCompanyInfoVMlist { get; set; }
+        public int ListCount { get; set; }
     }
 }

@@ -28,6 +28,7 @@ namespace Ekipa.Models.ViewModel
 
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
+        public string CustomerNumber { get; set; }
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
         public bool OpinionAdded { get; set; }

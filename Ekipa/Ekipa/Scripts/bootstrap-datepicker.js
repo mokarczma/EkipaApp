@@ -1688,7 +1688,7 @@
 		format: 'mm/dd/yyyy',
 		keepEmptyValues: false,
 		keyboardNavigation: true,
-		language: 'en',
+		language: 'pl',
 		minViewMode: 0,
 		maxViewMode: 4,
 		multidate: false,
@@ -1721,14 +1721,15 @@
 	];
 	$.fn.datepicker.Constructor = Datepicker;
 	var dates = $.fn.datepicker.dates = {
-		en: {
-			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-			daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-			daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-			months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-			today: "Today",
-			clear: "Clear",
+		pl: {
+			days: ["Niedziela", "Poniedzia³ek", "Wtorek", "Œroda", "Czwartek", "Pi¹tek", "Sobota"],
+			daysShort: ["Niedz.", "Pon.", "Wt.", "Œr.", "Czw.", "Pi¹t.", "Sob."],
+			daysMin: ["Ndz.", "Pn.", "Wt.", "Œr.", "Czw.", "Pt.", "Sob."],
+			months: ["Styczeñ", "Luty", "Marzec", "Kwiecieñ", "Maj", "Czerwiec", "Lipiec", "Sierpieñ", "Wrzesieñ", "PaŸdziernik", "Listopad", "Grudzieñ"],
+			monthsShort: ["Sty.", "Lut.", "Mar.", "Kwi.", "Maj", "Cze.", "Lip.", "Sie.", "Wrz.", "PaŸ.", "Lis.", "Gru."],
+			today: "Dzisiaj",
+			weekStart: 1,
+			clear: "Wyczyœæ",
 			titleFormat: "MM yyyy"
 		}
 	};

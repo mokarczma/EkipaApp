@@ -20,7 +20,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.Role = 4;
+            ViewBag.UserRole = 4;
 
 
             CompanyTagsVM model = null;
@@ -87,7 +87,7 @@ namespace Ekipa.Controllers
             var user = User as MPrincipal;
             var login = user.UserDetails.Login;
             ViewBag.UserName = user.UserDetails.Login;
-            ViewBag.Role = 4;
+            ViewBag.UserRole = 4;
             return View();
         }
 
@@ -109,16 +109,16 @@ namespace Ekipa.Controllers
                         tag.IsDelete = false;
                         db.Tags.Add(tag);
                         db.SaveChanges();
-                        return RedirectToAction("TagsList");
+                        return RedirectToAction("CompanyTagsList");
                     }
                     else
                     {
                         ModelState.AddModelError("Tag", "Etykieta o takiej nazwie już istnieje");
                     }
                 }
+                return RedirectToAction("CompanyTagsList");
             }
-            return RedirectToAction("CompanyTagsList");
-
+            return View(model);
         }
         //GET: Tag/Delete/5
         public ActionResult TagDelete(int id)
@@ -152,8 +152,10 @@ namespace Ekipa.Controllers
 
         public ActionResult AddCompanyTag(CompanyTagsVM model)
         {
-            var userCompany = User as MPrincipal;
-            var login = userCompany.UserDetails.Login;
+            var user = User as MPrincipal;
+            var login = user.UserDetails.Login;
+            ViewBag.UserName = login;
+            ViewBag.UserRole = 4;
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var company = db.Companies.SingleOrDefault(x => x.Login == login);

@@ -1,24 +1,57 @@
-﻿@{
-	int counter = 0;
+﻿@{ List<Ekipa.Models.DB.Image> __inheritsHelper = null;
 }
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
 
-<div class="row">
+	$('.fade').slick({
+		dots: true,
+		infinite: true,
+		speed: 500,
+		fade: true,
+		cssEase: 'linear'
+	});
 
+</script>
+
+
+<div>
+	@* for each item in children of the selected media folder *@
 	@foreach (var item in Model)
-
-
 	{
-		if (counter != 0 && counter % 3 == 0)
-		{
-			@:</div>
-		<hr />
-
-		@:<div class="row">
-		}
-		<div class="col-md-4">
-			<img class="img-responsive" src="@Url.Content(item.Link)"/>
-		</div>
-		counter++;
+		<div class="fade"><img src="@Url.Content(item.Link)" /></div>
+		<div class="fade"><img src="@Url.Content(item.Link)" /></div>
+		<div class="fade"><img src="@Url.Content(item.Link)" /></div>
 
 	}
 </div>
+
+
+
+
+@*<div class="row">
+
+		@foreach (var item in Model)
+
+
+		{
+			if (counter != 0 && counter % 3 == 0)
+			{
+				@:
+			</div>
+			<hr />
+
+			@:<div class="row">
+			}
+			<div class="col-md-4">
+				<img class="img-responsive" src="@Url.Content(item.Link)" />
+			</div>
+			counter++;
+
+		}
+	</div>*@
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+
