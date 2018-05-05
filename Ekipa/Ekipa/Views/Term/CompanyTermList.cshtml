@@ -19,15 +19,15 @@
 		<h2>Terminy</h2>
 	</div>
 	<div class="col-md-2">
-		<div class="color-red text-center white "> Zarezerwowane</div>
+		<div class="color-red term text-center white"> Zarezerwowane</div>
 	</div>
 	<div class="col-md-2">
-		<div class="color-yellow text-center white "> Do akceptacji</div>
+		<div class="color-yellow term text-center white "> Do akceptacji</div>
 	</div>
 	<div class="col-md-2">
-		<div class="color-green text-center white "> Wolne terminy</div>
+		<div class="color-green term text-center white"> Wolne terminy</div>
 	</div>
-	<a href="~/Reservation/MyReservation" class="yellow">Wszystkie rezerwacje</a>
+	<a href="~/Reservation/MyReservation" class="red">Wszystkie rezerwacje</a>
 </div>
 <hr />
 
@@ -62,6 +62,7 @@ else
 									Zobacz
 								</a>
 							</div>
+							counter++;
 						}
 						else
 						{
@@ -72,6 +73,7 @@ else
 									Zaakceptuj
 								</a>
 							</div>
+							counter++;
 						}
 					}
 					else
@@ -83,10 +85,10 @@ else
 								Usuń
 							</a>
 						</div>
+						counter++;
 					}
 				</div>
 			}
-			counter++;
 		}
 	</div>
 	<hr />

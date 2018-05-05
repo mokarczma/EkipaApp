@@ -83,7 +83,7 @@ namespace Ekipa.Controllers
                             {
                                 if (tworzone == zajte)
                                 {                                    
-                                    TempData["alertMessage"] = "W terminie, który chcesz utworzyć, występują dni, które już zaplanowałeś, sprawdź inne terminy";
+                                    TempData["alertMessage"] = "W tworzonym terminie występują zaplanowane wcześniej dni, sprawdź inne terminy";
                                     return RedirectToAction("CompanyTermList");
                                 }
                             }

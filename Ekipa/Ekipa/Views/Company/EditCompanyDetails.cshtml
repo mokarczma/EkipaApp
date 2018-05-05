@@ -19,48 +19,49 @@
 
 	<h4>@Html.LabelFor(model => model.Pricing, htmlAttributes: new { @class = "control-label col-md-2" })</h4>
 	@Html.TextAreaFor(model => model.Pricing)
-	@Html.ValidationMessageFor(model => model.Pricing, "", new { @class = "text-danger" })
+	@Html.ValidationMessageFor(model => model.Pricing, "", new { @class = "text-danger", @id = "froala-editor" })
 
 	<div class="form-group">
 
 		<h4>@Html.LabelFor(model => model.Cities, htmlAttributes: new { @class = "control-label col-md-2" })</h4>
 		@Html.DropDownListFor(x => x.SelectedCityID, Model.Cities, htmlAttributes: new { @class = "form-control" })
 	</div>
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
-			</div>
-
-		</div>
-		}
-		<div>
-			@Html.ActionLink("Powrót", "CompanyDetails")
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
 		</div>
 
-		<style>
+	</div>
+}
 
-			#Speciality, #Services, #Pricing {
-				min-height: 180px;
-				max-height: 180px;
-				min-width: 100%;
-				max-width: 100%;
-				outline: none;
-				font-family: Georgia;
-				font-size: 18px;
-			}
+<div>
+	@Html.ActionLink("Powrót", "CompanyDetails")
+</div>
 
-			.term {
-				margin-left: 10px;
-				font-size: 30px;
-			}
+<style>
 
-			.acc {
-				margin-left: 20px;
-				font-size: 22px;
-			}
+	#Speciality, #Services, #Pricing {
+		min-height: 180px;
+		max-height: 180px;
+		min-width: 100%;
+		max-width: 100%;
+		outline: none;
+		font-family: Georgia;
+		font-size: 18px;
+	}
 
-			.mess {
-				padding: 10px;
-				font-size: 16px;
-			}
-		</style>
+	.term {
+		margin-left: 10px;
+		font-size: 30px;
+	}
+
+	.acc {
+		margin-left: 20px;
+		font-size: 22px;
+	}
+
+	.mess {
+		padding: 10px;
+		font-size: 16px;
+	}
+</style>

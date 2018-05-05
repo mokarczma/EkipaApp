@@ -72,6 +72,8 @@ namespace Ekipa.Controllers
                 {
                    average = gradeValues.Average();
                 }
+
+
                 CompanyInfoVM companyInfoVM = new CompanyInfoVM()
                 {
                     IdCompany = company.Id,

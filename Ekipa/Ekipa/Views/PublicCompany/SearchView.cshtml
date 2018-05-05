@@ -23,7 +23,11 @@ else
 			</a>
 		</div>
 		<div class="col-md-3">
-			<h2>@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName)</h2>
+			<h2>
+				<a style="color:black" href='@Url.Action("InfoAboutCompany", "PublicCompany", new RouteValueDictionary( new { id = Model.basicCompanyInfoVMlist[i].IdCompany }))'>
+				@Html.DisplayFor(model => model.basicCompanyInfoVMlist[i].CompanyName)
+				</a>
+			</h2>
 			<h4>
 				Ocena:
 
@@ -48,7 +52,7 @@ else
 
 			@for (int j = 0; j < Model.basicCompanyInfoVMlist[i].CompanyTagList.Count(); j++)
 			{
-				if (j == 0 || j == 2)
+				if (j == 0 || j == 2 || j ==5)
 				{
 					<div class="tag_min-box color-green text-center ">
 						@Html.DisplayFor(m => m.basicCompanyInfoVMlist[i].CompanyTagList[j].Name)

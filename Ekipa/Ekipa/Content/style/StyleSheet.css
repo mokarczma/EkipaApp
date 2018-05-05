@@ -124,14 +124,15 @@ img {
 
 }
 .tag_min-box {
-	margin-left: 1.2%;
+	margin-left: 10%;
 	color: black;
 	text-transform: uppercase;
 	font-size: 18px;
 	bottom: 1%;
 	border-radius: 8px;
-	width:50%;
+	width:80%;
 	margin-bottom: 5%;
+	
 }
 .white {
 	color: white !important;
@@ -163,7 +164,7 @@ img {
 .descript {
 	outline: none;
 	font-family: Georgia;
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 150%;
 }
 .checked {

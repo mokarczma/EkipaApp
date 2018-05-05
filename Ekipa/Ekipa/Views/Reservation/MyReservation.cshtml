@@ -10,119 +10,117 @@
 			   alert("@TempData["alertMessage"]");
 	</script>
 }
-
-@if (ViewBag.UserRole == 3)
+@if (Model.Count() == 0)
 {
-	<table class="table">
+	<div>Brak rezerwacji</div>
+}
+else
+{
 
-		<div class="row font-irregularis">
-			<div class="col-md-4 position-relative padding-column">
-				<h4>Twoje rezerwacje</h4>
-			</div>
-			<div class="col-md-4 position-relative padding-column">
-				<h4>Twoj opis</h4>
-			</div>
-			<div class="col-md-4 position-relative padding-column">
-				<h4>Odpowiedz firmy</h4>
-			</div>
-		</div>
-
-
-
-		@for (int i = 0; i < Model.Count(); i++)
-		{
-			<hr />
+	if (ViewBag.UserRole == 3)
+	{
+		<table class="table">
 
 			<div class="row font-irregularis">
 				<div class="col-md-4 position-relative padding-column">
-					<h4>@Html.DisplayFor(model => model[i].CompanyName)</h4>
-					<div class="font20">
-						Termin:
-						<b>@Html.DisplayFor(model => model[i].DateStart) -
-						@Html.DisplayFor(model => model[i].DateStop)</b>
+					<h4>Twoje rezerwacje</h4>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<h4>Twoj opis</h4>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<h4>Odpowiedz firmy</h4>
+				</div>
+			</div>
+			@for (int i = 0; i < Model.Count(); i++)
+			{
+				<hr />
 
-						@if (Model[i].OpinionAdded == true)
-						{
-							<div>Dodałeś już opinię</div>
-							<div>
-								Firma: @Html.DisplayFor(model => model[i].CompanyName) dziękuje za dodanie opini
-							</div>
+				<div class="row font-irregularis">
+					<div class="col-md-4 position-relative padding-column">
+						<h4>@Html.DisplayFor(model => model[i].CompanyName)</h4>
+						<div class="font20">
+							Termin:
+							<b>@Html.DisplayFor(model => model[i].DateStart) -
+							@Html.DisplayFor(model => model[i].DateStop)</b>
 
-							@Html.ActionLink(linkText: "Zobacz", actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new { id = Model[i].CompanyId }, htmlAttributes: null)
+							@if (Model[i].OpinionAdded == true)
+							{
+								<div>Dodałeś już opinię</div>
+								<div>
+									Firma: @Html.DisplayFor(model => model[i].CompanyName) dziękuje za dodanie opini
+								</div>
 
-						}
-						else if (Model[i].CompanyAccept == true)
-						{
-							<div>@Html.ActionLink("Dodaj opinię", "AddOpinion", new { idTerm = Model[i].TermId })</div>
+								@Html.ActionLink(linkText: "Zobacz", actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new { id = Model[i].CompanyId }, htmlAttributes: null)
 
-						}
-						else
-						{
-							<div>Termin nie został jeszcze zaakceptowany przez firmę</div>
-							@Html.ActionLink(linkText: "Skontaktuj się z firmą", actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new { id = Model[i].CompanyId }, htmlAttributes: null)
+							}
+							else if (Model[i].CompanyAccept == true)
+							{
+								<div>@Html.ActionLink("Dodaj opinię", "AddOpinion", new { idTerm = Model[i].TermId })</div>
 
-						}
+							}
+							else
+							{
+								<div>Termin nie został jeszcze zaakceptowany przez firmę</div>
+								@Html.ActionLink(linkText: "Skontaktuj się z firmą", actionName: "InfoAboutCompany", controllerName: "PublicCompany", routeValues: new { id = Model[i].CompanyId }, htmlAttributes: null)
+
+							}
+						</div>
+					</div>
+					<div class="col-md-4 position-relative padding-column font20">
+						<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
+					</div>
+					<div class="col-md-4 position-relative padding-column font20">
+						<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
 					</div>
 				</div>
-				<div class="col-md-4 position-relative padding-column font20">
-					<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
-				</div>
-				<div class="col-md-4 position-relative padding-column font20">
-					<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
-				</div>
-			</div>
-		}
-	</table>
+			}
+		</table>
 
-}
-@if (ViewBag.UserRole == 4)
-{
-
-	<table class="table">
-
-		<div class="row font-irregularis">
-			<div class="col-md-4 position-relative padding-column">
-				<h4>Twoje rezerwacje</h4>
-			</div>
-			<div class="col-md-4 position-relative padding-column">
-				<h4>Opis klienta</h4>
-			</div>
-			<div class="col-md-4 position-relative padding-column">
-				<h4>Twoja odpowiedź</h4>
-			</div>
-		</div>
-
-
-
-		@for (int i = 0; i < Model.Count(); i++)
-		{
-			<hr />
-
+	}
+	if (ViewBag.UserRole == 4)
+	{
+		<table class="table">
 			<div class="row font-irregularis">
 				<div class="col-md-4 position-relative padding-column">
-					<h4>@Html.DisplayFor(model => model[i].CustomerName)</h4>
-					<div>
-						Termin:
-						@Html.DisplayFor(model => model[i].DateStart) -
-						@Html.DisplayFor(model => model[i].DateStop)
+					<h4>Twoje rezerwacje</h4>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<h4>Opis klienta</h4>
+				</div>
+				<div class="col-md-4 position-relative padding-column">
+					<h4>Twoja odpowiedź</h4>
+				</div>
+			</div>
+			@for (int i = 0; i < Model.Count(); i++)
+			{
+				<hr />
+
+				<div class="row font-irregularis">
+					<div class="col-md-4 position-relative padding-column">
+						<h4>@Html.DisplayFor(model => model[i].CustomerName)</h4>
+						<div>
+							Termin:
+							@Html.DisplayFor(model => model[i].DateStart) -
+							@Html.DisplayFor(model => model[i].DateStop)
 
 						
+						</div>
+					</div>
+					<div class="col-md-4 position-relative padding-column">
+						<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
+					</div>
+					<div class="col-md-4 position-relative padding-column">
+						<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
 					</div>
 				</div>
-				<div class="col-md-4 position-relative padding-column">
-					<div>@Html.DisplayFor(model => model[i].DescriptionCustomer)</div>
-				</div>
-				<div class="col-md-4 position-relative padding-column">
-					<div>@Html.DisplayFor(model => model[i].DescriptionCompany)</div>
-				</div>
-			</div>
+			}
+		</table>
 		}
-	</table>
-
-
 }
 
 <style>
-	.font20{
+	.font20 {
 		font-size: 20px;
+	}
 </style>

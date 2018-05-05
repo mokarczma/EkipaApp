@@ -21,8 +21,8 @@
 			<hr />
 			@:<div class="row">
 			}
-				  <div class="col-md-4 pos">
-				  	<img class="img-responsive" src="@Url.Content(Model.ImageList[i].Link)"/>
+				  <div class="col-md-4 position-relative">
+				  	<img class="img-responsive companyImage" src="@Url.Content(Model.ImageList[i].Link)"/>
 				  	<div class="description-box">@Html.EditorFor(m => m.ImageList[i].Description, "", new { htmlAttributes = new { @class = "form-control select" } })</div>
 				  <div class="description-box"> Ustaw jako zdjęcie głowne: @Html.RadioButtonFor(m => m.MainPictureID, Model.ImageList[i].Id.ToString())</div>
 				  <a href='@Url.Action("DeleteImage", "Image", new RouteValueDictionary(new { id = Model.ImageList[i].Id}))'>
@@ -37,3 +37,11 @@
 	</div>
 	<button class="search-button btn my-2 my-sm-0" type="submit">Zapisz</button>
 }
+
+	<style>
+
+		.companyImage {
+			width: 350px !important;
+			height: 250px !important;
+		}
+	</style>

@@ -34,27 +34,33 @@
 		}
 		
 	</div>
-
-
-
 				<dl class="dl-horizontal">
 					<dt>
 						@Html.DisplayNameFor(model => model.Speciality)
 					</dt>
 					<dd>
-						@Html.DisplayFor(model => model.Speciality)
+						@if (Model.Speciality != null)
+						{
+						  @Html.Raw(Model.Speciality.Replace("\r\n", "<br />"))
+						}
 					</dd>
 					<dt>
 						@Html.DisplayNameFor(model => model.Services)
 					</dt>
 					<dd>
-						@Html.DisplayFor(model => model.Services)
+						@if (Model.Services != null)
+						{
+						 @Html.Raw(Model.Services.Replace("\r\n", "<br />"))
+						}
 					</dd>
 					<dt>
 						@Html.DisplayNameFor(model => model.Pricing)
 					</dt>
 					<dd>
-						@Html.DisplayFor(model => model.Pricing)
+						@if (Model.Pricing != null)
+						{
+					     @Html.Raw(Model.Pricing.Replace("\r\n", "<br />"))
+						}
 					</dd>
 					<dt>
 						@Html.DisplayNameFor(model => model.CityName)

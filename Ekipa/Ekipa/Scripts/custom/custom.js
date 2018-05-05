@@ -19,4 +19,4 @@ $('.single-item').slick();
 				$('#modalWrapper').html(data); // This should be an empty div where you can inject your new html (the partial view)
 			}
 		});
-	}
+}

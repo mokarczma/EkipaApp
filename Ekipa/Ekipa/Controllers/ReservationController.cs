@@ -43,13 +43,16 @@ namespace Ekipa.Controllers
                     foreach (var item in termList)
                     {
                         var reservationDB = db.Reservations.FirstOrDefault(r => r.TermId == item.Id && r.IsDelete == false);
-                        var opinion = db.Opinions.FirstOrDefault(o => o.ReservationId == reservationDB.Id);
-                        bool opinionAdded = false;
-                        if (opinion != null)
+                        if (reservationDB != null)
                         {
-                            opinionAdded = true;
-                        }
-                   
+                            ViewBag.NoRes = 1;
+                            var opinion = db.Opinions.FirstOrDefault(o => o.ReservationId == reservationDB.Id);
+                            bool opinionAdded = false;
+                            if (opinion != null)
+                            {
+                                opinionAdded = true;
+                            }
+
                             var companyDB = db.Companies.FirstOrDefault(c => c.Id == item.CompanyId);
                             var customerDB = db.Customers.FirstOrDefault(c => c.ID == item.CustomerId);
                             ReservationVM reservationVM = new ReservationVM()
@@ -67,6 +70,7 @@ namespace Ekipa.Controllers
                                 OpinionAdded = opinionAdded
                             };
                             resList.Add(reservationVM);
+                        }
                     }
                 }
                 return View(resList);

@@ -51,8 +51,8 @@ namespace Ekipa.Controllers
                 model.CompanyTags = ctVMList;
 
                 List<SelectListItem> allTags = new List<SelectListItem>();
-                allTags = (from t in db.Tags
-                           select new SelectListItem
+                allTags = (from t in db.Tags orderby t.Name
+                           select new SelectListItem 
                            {
                                Text = t.Name,
                                Value = t.Id.ToString()

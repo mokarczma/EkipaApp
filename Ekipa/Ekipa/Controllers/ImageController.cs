@@ -97,7 +97,7 @@ namespace Ekipa.Controllers
                     }
                     db.SaveChanges();
                 }
-                return RedirectToAction("IndexCompany", "Account");
+                return RedirectToAction("Index", "Home");
             }
         }
 

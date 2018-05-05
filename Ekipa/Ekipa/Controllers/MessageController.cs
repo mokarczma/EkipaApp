@@ -81,6 +81,13 @@ namespace Ekipa.Controllers
                 {
                     var comp = db.Companies.FirstOrDefault(u => u.Id.Equals(idCompany));
                     var cust = db.Customers.FirstOrDefault(u => u.Login.Equals(login));
+
+                    if (cust == null)
+                    {
+                        TempData["alertMessage"] = "Wiadomość do firmy możesz wysłać tylko jako kient";
+                        return RedirectToAction("Index", "Home");
+                    }
+
                     message.SenderName = cust.Name + " " + cust.Surname;
                     message.SenderEmail = cust.Email;
                     message.AddresseeName = comp.CompanyName;
