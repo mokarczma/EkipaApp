@@ -20,23 +20,18 @@
 		<div class="form-group">
 			@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
 				@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
 			</div>
 		</div>
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.GradeValue, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
 				<label  class="btn color-red ">1 @Html.RadioButtonFor(x => x.GradeValue, 1, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
 				<label  class="btn color-yellow">2 @Html.RadioButtonFor(x => x.GradeValue, 2, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
 				<label  class="btn btn-warning">3 @Html.RadioButtonFor(x => x.GradeValue, 3, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
 				<label  class="btn color-light-green">4 @Html.RadioButtonFor(x => x.GradeValue, 4, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
 				<label  class="btn color-green">5 @Html.RadioButtonFor(x => x.GradeValue, 5, new { id = "", @class = "badgebox" })<span class="badge">&check;</span></label>
-
-
-
-
 			</div>
 
 
@@ -58,22 +53,28 @@
 		}
 
 			.badgebox + .badge {
-				/* Move the check mark away when unchecked */
 				text-indent: -999999px;
-				/* Makes the badge's width stay the same checked and unchecked */
 				width: 27px;
 			}
 
 			.badgebox:focus + .badge {
-				/* Set something to make the badge looks focused */
-				/* This really depends on the application, in my case it was: */
-				/* Adding a light border */
+
 				box-shadow: inset 0px 0px 5px;
-				/* Taking the difference out of the padding */
 			}
 
 			.badgebox:checked + .badge {
-				/* Move the check mark back when checked */
 				text-indent: 0;
 			}
+
+		#Description {
+			min-height: 200px;
+			max-height: 200px;
+			min-width: 100%;
+			max-width: 100%;
+			outline: none;
+			font-family: Georgia;
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+	</style>
 	</style>

@@ -75,96 +75,97 @@
 	<div class="col-md-4">
 		<h4>Specjalność</h4>
 		<div class="descript">
-		@if (Model.Speciality != null)
-		{
-		 @Html.Raw(Model.Speciality.Replace("\r\n", "<br />"))
-		}
+			@if (Model.Speciality != null)
+			{
+				@Html.Raw(Model.Speciality.Replace("\r\n", "<br />"))
+			}
 		</div>
 	</div>
 	<div class="col-md-4">
 		<h4>Zakres usług</h4>
 		<div class="descript">
-		@if (Model.Services != null)
-		{
-		 @Html.Raw(Model.Services.Replace("\r\n", "<br />"))
-		}		
+			@if (Model.Services != null)
+			{
+				@Html.Raw(Model.Services.Replace("\r\n", "<br />"))
+			}
 		</div>
 	</div>
 	<div class="col-md-4">
 		<h4>Wyceny</h4>
-		@if (Model.Pricing != null)
-		{
-		 @Html.Raw(Model.Pricing.Replace("\r\n", "<br />"))
-		}
+		<div class="descript">
+			@if (Model.Pricing != null)
+			{
+				@Html.Raw(Model.Pricing.Replace("\r\n", "<br />"))
+			}
+		</div>
 	</div>
 </div>
-<hr class="line" />
+	<hr class="line" />
 
 	@Html.Partial("~/Views/Partial/_Slider.cshtml", Model.CompanyImageList)
 
-<h4>Ocena kientów</h4>
+	<h4>Ocena kientów</h4>
 
-<a class="stars">
-	Ogólna ocena:
-	@for (int i = 0; i < Model.AverageRating; i++)
+	<a class="stars">
+		Ogólna ocena:
+		@for (int i = 0; i < Model.AverageRating; i++)
+		{
+			<span class="fa fa-star checked"></span>
+		}
+		@for (int i = 0; i < (5 - Model.AverageRating); i++)
+		{
+			<span class="fa fa-star"></span>
+		}
+		@Model.AverageRating/5
+
+	</a>
+	<hr />
+
+	@if (Model.CompanyOpinionList.Count() == 0)
 	{
-		<span class="fa fa-star checked"></span>
+		<div>Brak opini</div>
 	}
-	@for (int i = 0; i < (5 - Model.AverageRating); i++)
+
+	@for (int i = 0; i < Model.CompanyOpinionList.Count(); i++)
 	{
-		<span class="fa fa-star"></span>
-	}
-	@Model.AverageRating/5
-
-</a>
-<hr class="line" />
-
-@if (Model.CompanyOpinionList.Count() == 0)
-{
-	<div>Brak opini</div>
-}
-
-@for (int i = 0; i < Model.CompanyOpinionList.Count(); i++)
-{
-	<div class="row row-margin">
 		@Html.Partial("~/Views/Partial/_Opinion.cshtml", Model.CompanyOpinionList[i])
-	</div>
-}
-
-
-<style>
-	h4 {
-		text-transform: uppercase;
-		font-size: 30px;
-	}
-
-	h3 {
-		font-size: 40px;
-	}
-
-	.stars {
-		font-size: 20px;
 	}
 
 
-	.line {
-		margin: 30px 0px;
-	}
+	<style>
+		h4 {
+			text-transform: uppercase;
+			font-size: 30px;
+		}
 
-	.row-margin {
-		margin-top: 20px;
-	}
+		h3 {
+			font-size: 40px;
+		}
 
-	.tag-box {
-		border-radius: 6px;
-		padding: 4px;
-		box-sizing: border-box;
-		margin: 0 10px;
-		padding: 10px 20px;
-	}
-	.multiline {
-		padding: 20px;
-		white-space: pre-wrap;
-	}
-</style>
+		.stars {
+			font-size: 20px;
+		}
+
+
+		.line {
+			margin: 30px 0px;
+		}
+
+		.row-margin {
+			margin-top: 20px;
+		}
+
+		.tag-box {
+			border-radius: 6px;
+			padding: 4px;
+			box-sizing: border-box;
+			margin: 0 10px;
+			padding: 10px 20px;
+		}
+
+		.multiline {
+			padding: 20px;
+			white-space: pre-wrap;
+		}
+	</style>
 

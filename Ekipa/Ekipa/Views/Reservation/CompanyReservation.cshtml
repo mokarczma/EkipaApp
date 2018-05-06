@@ -3,24 +3,24 @@
 @{
 	ViewBag.Title = "CompanyReservation";
 }
-
-<h1>
-	Rezerwacja:
-	<a class="term">@Model.DateStart - @Model.DateStop</a>
-	<a class="acc">Zaakceptuj @Html.EditorFor(model => model.CompanyAccept)</a>
-</h1>
-<h4>
-	@Model.CustomerName <a class="mess">(Tel: @Model.CustomerNumber)</a>
-</h4>	
-<div>
-	<a class="color-green white mess" href='@Url.Action("MessageFromCompany", "Message", new RouteValueDictionary(  new { idCustomer = Model.CustomerId}))'>
-		Wyślij e-mail
-	</a>
-</div>
-<hr />
-
 @using (Html.BeginForm())
 {
+
+	<h1>
+		Rezerwacja:
+		<a class="term">@Model.DateStart - @Model.DateStop</a>
+		<a class="acc">Zaakceptuj @Html.EditorFor(model => model.CompanyAccept)</a>
+	</h1>
+	<h4>
+		@Model.CustomerName <a class="mess">(Tel: @Model.CustomerNumber)</a>
+	</h4>
+	<div>
+		<a class="color-green white mess" href='@Url.Action("MessageFromCompany", "Message", new RouteValueDictionary(  new { idCustomer = Model.CustomerId}))'>
+			Wyślij e-mail
+		</a>
+	</div>
+	<hr />
+
 	@Html.AntiForgeryToken()
 	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 	@Html.HiddenFor(model => model.Id)
@@ -65,7 +65,7 @@
 		outline: none;
 		font-family: Georgia;
 		font-size: 18px;
-		margin-bottom:10px;
+		margin-bottom: 10px;
 	}
 
 	.DescriptionCustomer {
@@ -78,17 +78,19 @@
 		margin-top: 10px;
 		margin-bottom: 10px;
 	}
+
 	.term {
 		margin-left: 10px;
 		font-size: 30px;
 	}
+
 	.acc {
 		margin-left: 20px;
 		font-size: 22px;
 	}
+
 	.mess {
 		padding: 10px;
 		font-size: 16px;
 	}
-
 </style>

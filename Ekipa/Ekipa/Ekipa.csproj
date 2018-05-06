@@ -223,7 +223,6 @@
     <Compile Include="Models\DB\Company.cs" />
     <Compile Include="Models\DB\CompanyTag.cs" />
     <Compile Include="Models\DB\Opinion.cs" />
-    <Compile Include="Models\DB\PublicHoliday.cs" />
     <Compile Include="Models\DB\Term.cs" />
     <Compile Include="Models\DB\Customer.cs" />
     <Compile Include="Models\DB\Image.cs" />

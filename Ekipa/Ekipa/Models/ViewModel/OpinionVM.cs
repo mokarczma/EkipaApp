@@ -13,7 +13,7 @@ namespace Ekipa.Models.ViewModel
         [StringLength(1500)]
         [Display(Name = "Treść opini")]
         [Required(ErrorMessage = "Treść opini jest wymagana", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~`]{2,1500}$", ErrorMessage = "Zbyt mało znaków")]
+        [RegularExpression(@"^[A-Z-a-ząóęćłśńżźĄÓĘĆŁŚŃŻŹ!@#$%^&*()_+-=1234567890,.?~\s`]{2,1500}$", ErrorMessage = "Zbyt mało znaków")]
         public string Description { get; set; }
 
         public int GradeValue { get; set; }
