@@ -27,7 +27,6 @@
 	<div class="col-md-2">
 		<div class="color-green term text-center white"> Wolne terminy</div>
 	</div>
-	<a href="~/Reservation/MyReservation" class="red">Wszystkie rezerwacje</a>
 </div>
 <hr />
 
@@ -55,42 +54,39 @@ else
 					{
 						if (Model.CompanyTermsList[i].Accepted == true)
 						{
-							<div class="color-red term text-center white">
-								@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
-								@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
-								<a class="white" href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+								<a class="btn term-red text-center " href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+									<div>@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
+									@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)</div>
 									Zobacz
 								</a>
-							</div>
+
 							counter++;
 						}
 						else
 						{
-							<div class="color-yellow term text-center white">
-								@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
-								@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
-								<a class="white" href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+							<a class="btn term-yellow text-center " href='@Url.Action("CompanyReservation", "Reservation", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+									<div>@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
+									@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)</div>
 									Zaakceptuj
-								</a>
-							</div>
+							</a>
 							counter++;
 						}
 					}
 					else
 					{
-						<div class="color-green term text-center white">
-							@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
-							@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)
-							<a class="white" href='@Url.Action("DeleteTerm", "Company", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
-								Usuń
+							<a class="btn term-green text-center" href='@Url.Action("DeleteTerm", "Company", new RouteValueDictionary(  new { id = Model.CompanyTermsList[i].ID}), null)'>
+								<div>@Html.DisplayFor(model => model.CompanyTermsList[i].Start) -
+								@Html.DisplayFor(model => model.CompanyTermsList[i].Stop)</div>
+						     	Usuń
 							</a>
-						</div>
 						counter++;
 					}
 				</div>
 			}
 		}
 	</div>
+		<a href="~/Reservation/MyReservation" class="btn  search-button my-2 allRes">Zobacz wszystkie Twoje rezerwacje</a>
+
 	<hr />
 	@Html.Partial("~/Views/Term/_TermCreate.cshtml", createTerm)
 }
@@ -98,10 +94,51 @@ else
 
 <style>
 
-	.term {
+	.term-red {
 		border-radius: 6px;
 		padding: 4px;
 		box-sizing: border-box;
-		width: 90%;
+		width: 95%;
+		height:65px;
+		color: white;
+		background-color: #ae281c;
+	}
+
+	.term-red:hover {
+		background: transparent;
+		border: 1px solid #ae281c;
+		color: black;
+	}
+	.term-yellow {
+		border-radius: 6px;
+		padding: 4px;
+		box-sizing: border-box;
+		width: 95%;
+		height: 65px;
+		color: white;
+		background-color: #f19f17;
+	}
+
+	.term-yellow:hover {
+		background: transparent;
+		border: 1px solid #f19f17;
+		color: black;
+	}
+	.term-green {
+		border-radius: 6px;
+		padding: 4px;
+		box-sizing: border-box;
+		width: 95%;
+		height: 65px;
+		color: white;
+		background-color: #76af24;
+	}
+	.term-green:hover {
+		background: transparent;
+		border: 1px solid #76af24;
+		color: black;
+	}
+	.allRes {
+		width: 99.5%;
 	}
 </style>

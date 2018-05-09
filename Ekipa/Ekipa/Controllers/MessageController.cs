@@ -21,7 +21,11 @@ namespace Ekipa.Controllers
         [HttpGet]
         public ActionResult Message(MessageVm model)
         {
-            return View(model);
+                var user = User as MPrincipal;
+                var login = user.UserDetails.Login;
+                ViewBag.UserName = user.UserDetails.Login;
+                ViewBag.UserRole = model.UserRoleId;
+                return View(model);
         }
 
 
@@ -49,13 +53,17 @@ namespace Ekipa.Controllers
                     message.From = new MailAddress(model.SenderEmail);
 
                     message.Subject = "ZnajdzEkipe.pl - wiadomość od uzytownika:" + model.SenderName;
-                    message.Body = model.Description + Environment.NewLine + "adres emailowy użytkownika " + model.SenderName + ": " + model.SenderEmail;
+                    message.Body = model.Description + "<br/> <br/> Adres emailowy użytkownika " + model.SenderName + ": " + model.SenderEmail;
 
                     message.IsBodyHtml = true;
                     client.Send(message);
+                    TempData["alertMessage"] = "Wiadomość została wysłana";
                 }
             }
-            TempData["alertMessage"] = "Wiadomość została wysłana";
+            else
+            {
+                TempData["alertMessage"] = "Wiadomość zawiera nieodpowiednie znaki";
+            }
             if (model.CompanyId > 0)
             {
                 return RedirectToAction("InfoAboutCompany", "PublicCompany", new { id = model.CompanyId });
@@ -93,6 +101,7 @@ namespace Ekipa.Controllers
                     message.AddresseeName = comp.CompanyName;
                     message.AddresseeEmail = comp.Email;
                     message.CompanyId = idCompany;
+                    message.UserRoleId = cust.RoleId;
                 }
             }
             return RedirectToAction("Message",message);
@@ -113,6 +122,8 @@ namespace Ekipa.Controllers
                     message.AddresseeEmail = cust.Email;
                     message.SenderName = comp.CompanyName;
                     message.SenderEmail = comp.Email;
+                    message.UserRoleId = comp.RoleId;
+                   
                 }
             }
             return RedirectToAction("Message", message);

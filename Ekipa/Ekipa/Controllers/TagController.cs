@@ -113,12 +113,16 @@ namespace Ekipa.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("Tag", "Etykieta o takiej nazwie już istnieje");
+                        TempData["alertMessage"] = "Etykieta o takiej nazwie już istnieje";
+
                     }
                 }
                 return RedirectToAction("CompanyTagsList");
+
             }
-            return View(model);
+            TempData["alertMessage"] = "Niepoprawna nazwa etykiety";
+            return RedirectToAction("CompanyTagsList");
+
         }
         //GET: Tag/Delete/5
         public ActionResult TagDelete(int id)

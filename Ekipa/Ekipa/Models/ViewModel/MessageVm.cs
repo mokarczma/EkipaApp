@@ -19,7 +19,6 @@ namespace Ekipa.Models.ViewModel
         public string AddresseeEmail { get; set; }
         public int CompanyId { get; set; }
         public int CustomerId { get; set; }
-
-
+        public int UserRoleId { get; set; }
     }
 }

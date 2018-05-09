@@ -60,6 +60,7 @@ img {
 	right: 20px;
 	border-radius: 6px;
 }
+
 .term-box {
 	width: 80%;
 	font-size: 25px;
@@ -67,6 +68,10 @@ img {
 	border-radius: 6px;
 	color: #fff;
 }
+	.term-box:hover {
+		background: #76af24;
+		color: #fff;
+	}
 .color-green {
 	background-color: #76af24;
 }

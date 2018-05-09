@@ -502,6 +502,7 @@
     <Content Include="Views\Reservation\CustomerReservation.cshtml" />
     <Content Include="Views\Term\_TermCreate.cshtml" />
     <Content Include="Views\Account\NewPassword.cshtml" />
+    <Content Include="Views\Tag\_AddCompanyTag.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -562,7 +563,7 @@
     <Content Include="Views\Account\EditCustomer.cshtml" />
     <Content Include="Views\Company\EditCompanyDetails.cshtml" />
     <Content Include="Views\Company\CompanyDetails.cshtml" />
-    <Content Include="Views\Tag\CreateTag.cshtml" />
+    <Content Include="Views\Tag\_CreateTag.cshtml" />
     <Content Include="Views\Tag\CompanyTagsList.cshtml" />
     <Content Include="Views\Image\CompanyImagesList.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
